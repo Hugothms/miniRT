@@ -6,48 +6,59 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/08 10:55:57 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/08 11:40:47 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minirt.h"
 #include <stdio.h>
 
-void ft_print(void *mlx_ptr, void *win_ptr)
+t_rgb	ft_t_rgb(int r, int g, int b)
 {
 	t_rgb	rgb;
-	int x;
-	int y;
-	int color;
-	int cible;
 
-	x = 20;
-	y = 30;
+ 	rgb.r =  r;
+ 	rgb.g =  g;
+ 	rgb.b =  b;
+	return (rgb);
+}
 
-	rgb.r = 0;
-	rgb.g = 012;
-	rgb.b = 0;
-	mlx_pixel_put(mlx_ptr,win_ptr, x, y, 255 );
+int		ft_rgb(t_rgb rgb)
+{
+	int	color;
 
 	color = 0;
  	color += 2097152 * rgb.r;
  	color += 4096 * rgb.g;
  	color += 8 * rgb.b;
-	cible = 00000120000;
-	printf("color:\t%d\ncible:\t%d\ncible2:\t%d\n\n",color, cible, 0000120000);
-
-	 mlx_string_put(mlx_ptr,win_ptr, x + 100, y + 100, 02552552550,			"Bonne Annee" );
- 	mlx_string_put(mlx_ptr,win_ptr, x + 100, y + 150, color,		"Bonne Annee" );
- 	mlx_string_put(mlx_ptr,win_ptr, x + 100, y + 200, cible, 		"Bonne Annee" );
-	mlx_string_put(mlx_ptr,win_ptr, x + 100, y + 250, 02550000000, 		"Bonne Annee" );
-	mlx_string_put(mlx_ptr,win_ptr, x + 100, y + 300, 00010000000,		"Bonne Annee" );
-	mlx_string_put(mlx_ptr,win_ptr, x + 100, y + 350, 02552552550,		"Bonne Annee" );
+	return (color);
 }
 
-int main(int argc, char const *argv[])
+void 	ft_print(void *mlx_ptr, void *win_ptr)
 {
-	void *mlx_ptr;
-	void *win_ptr;
+	t_rgb	rgb;
+	int		x;
+	int		y;
+	int		color;
+
+	rgb = ft_t_rgb(0120, 0120, 0120);
+	color = ft_rgb(rgb);
+
+	mlx_string_put(mlx_ptr,win_ptr, 100, 150, 01201201200,		"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 200, color,			"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 250, 07770000000,		"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 300, 00007770000,		"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 350, 00000007770,		"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 400, 07770007770,		"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 450, 00007777770,		"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 500, 07777770000,		"Bonne Annee" );
+	mlx_string_put(mlx_ptr,win_ptr, 100, 550, 07777777770,		"Bonne Annee" );
+}
+
+int 	main(int argc, char const *argv[])
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
 
 	if(!(mlx_ptr = mlx_init()))
 		return (-1);
