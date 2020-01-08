@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/07 17:49:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/08 14:17:15 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 
 # include "../libft/libft.h"
 # include <mlx.h>
+
+typedef struct		s_pixel
+{
+	int				x;
+	int				y;
+}					t_pixel;
+
+typedef struct		s_mlx
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+}					t_mlx;
 
 typedef struct		s_rgb
 {
@@ -92,6 +104,8 @@ typedef struct		s_triangle
 
 typedef struct		s_params
 {
+	struct s_mlx			mlx;
+	struct s_pixel			pixel;
 	struct s_rgb			rgb;
 	struct s_pos			pos;
 	struct s_ambient_light	ambient_light;

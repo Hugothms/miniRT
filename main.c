@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/08 11:40:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/08 14:19:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ int		ft_rgb(t_rgb rgb)
 	return (color);
 }
 
+int	ft_function(int keycode, t_params *params)
+{
+	if(keycode == 53)
+	{
+			printf("ok\n");
+			mlx_clear_window(params->mlx.mlx_ptr, params->mlx.win_ptr);
+			printf("ok\n");
+			mlx_destroy_window (params->mlx.mlx_ptr, params->mlx.win_ptr);
+		return (0);
+	}
+	printf("%i\n", keycode);
+	return (0);
+}
+
 void 	ft_print(void *mlx_ptr, void *win_ptr)
 {
 	t_rgb	rgb;
@@ -57,16 +71,33 @@ void 	ft_print(void *mlx_ptr, void *win_ptr)
 
 int 	main(int argc, char const *argv[])
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_mlx		mlx;
+	t_params	params;
 
+	printf("ok\n");
 	if(!(mlx_ptr = mlx_init()))
 		return (-1);
-	if(!(win_ptr = mlx_new_window(mlx_ptr, 500, 1000, "title window")))
+	printf("ok\n");
+	mlx.mlx_ptr = mlx_ptr;
+	params.mlx = mlx;
+	printf("ok\n");
+	if(!(win_ptr = mlx_new_window(params.mlx.mlx_ptr, 500, 1000, "title window")))
 		return (-1);
-	ft_print(mlx_ptr, win_ptr);
-	mlx_loop(mlx_ptr);
-	mlx_clear_window (mlx_ptr, win_ptr );
-	mlx_destroy_window (mlx_ptr, win_ptr );
+	printf("ok\n");
+	mlx.win_ptr = win_ptr;
+	params.mlx = mlx;
+	ft_print(params.mlx.mlx_ptr, params.mlx.win_ptr);
+
+	printf("ok\n");
+	mlx_key_hook(params.mlx.win_ptr, ft_function, &params);
+	mlx_key_hook(params.mlx.win_ptr, ft_function, &params);
+	printf("ok\n");
+	if(mlx_loop(params.mlx.mlx_ptr) == 0)
+		return (0);
+	printf("ok\n");
+	mlx_clear_window(params.mlx.mlx_ptr, params.mlx.win_ptr);
+	mlx_destroy_window (params.mlx.mlx_ptr, params.mlx.win_ptr);
 	return (0);
 }
