@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 13:49:26 by hthomas          ###   ########.fr       */
+/*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
+/*   Updated: 2020/01/09 12:21:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#include "../includes/minirt.h"
 
-# include"elements.h"
-
-typedef struct		s_scene
+t_rgb	ft_t_rgb(int r, int g, int b)
 {
-	t_couple			resolution;
-	t_ambient_light	ambient_light;
-	t_list			*cameras;
-	t_list			*lights;
-	t_list			*spheres;
-	t_list			*planes;
-	t_list			*squares;
-	t_list			*cylinders;
-	t_list			*triangles;
-}					t_scene;
+	t_rgb	rgb;
 
-#endif
+ 	rgb.r =  r;
+ 	rgb.g =  g;
+ 	rgb.b =  b;
+	return (rgb);
+}
+
+int		ft_rgb(t_rgb rgb)
+{
+	int	color;
+
+	color = 0;
+ 	color += 2097152 * rgb.r;
+ 	color += 4096 * rgb.g;
+ 	color += 8 * rgb.b;
+	return (color);
+}

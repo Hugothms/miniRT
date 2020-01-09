@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nsplit.c                                        :+:      :+:    :+:   */
+/*   ft_split_set.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 08:16:10 by hthomas           #+#    #+#             */
-/*   Updated: 2019/12/02 18:26:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 12:44:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		fill_tab(char ***tab, int *words_len, const char *str, char *charset)
 	return (1);
 }
 
-char	**ft_nsplit(const char *str, char *charset)
+char	**ft_split_set(const char *str, char *charset)
 {
 	char	**tab;
 	int		words_count;

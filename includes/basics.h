@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 09:59:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 13:34:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 # include <unistd.h>
 
-typedef struct		s_pixel
+typedef struct		s_couple
 {
 	int				x;
 	int				y;
-}					t_pixel;
+}					t_couple;
 
 typedef struct		s_mlx
 {
@@ -45,5 +45,8 @@ typedef struct		s_pos
 	float			y;
 	float			z;
 }					t_pos;
+
+t_rgb	ft_t_rgb(int r, int g, int b);
+int		ft_rgb(t_rgb rgb);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 11:19:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 12:44:17 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					in_charset(char c, char const *charset);
 char				**ft_split(char const *s, char c1);
-char				**ft_nsplit(const char *str, char *charset);
+char				**ft_split_set(const char *str, char *charset);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_sep(int size, char **strs, char *sep);
-char				*ft_strtrim(char const *s1, char const *set);
+char				*ft_strtrim(char const *str, char const *set);
 void				*ft_calloc(size_t count, size_t size);
 void				ft_bzero(void *b, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
