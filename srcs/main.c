@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 10:12:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 12:00:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,36 @@ void 	ft_print(void *mlx_ptr, void *win_ptr)
 	mlx_string_put(mlx_ptr,win_ptr, 100, 500, 07777770000,		"Bonne Annee" );
 	mlx_string_put(mlx_ptr,win_ptr, 100, 550, 07777777770,		"Bonne Annee" );
 }
+
 t_scene	parse(int fd)
 {
 	t_scene	scene;
+	char	*line;
+	int		ret;
 
-
+	while((ret = get_next_line(fd, &line)) == 1)
+	{
+		printf("\nret: %d line = |%s|\n", ret, line);
+		if(line[0] == 'R' && (line[1] == ' ' || line[1] == '\t'))
+			scene.resolution = get_resolution(line);
+		if(line[0] == 'A' && (line[1] == ' ' || line[1] == '\t'))
+			scene.ambient_light = get_ambient_light(line);
+		if(line[0] == 'c' && (line[1] == ' ' || line[1] == '\t'))
+			scene.cameras = get_cameras(line);
+		if(line[0] == 'l' && (line[1] == ' ' || line[1] == '\t'))
+			scene.lights = get_lights(line);
+		if(line[0] == 'p' && line[1] == 'l' && (line[2] == ' ' || line[2] == '\t'))
+			scene.planes = get_planes(line);
+		if(line[0] == 's' && line[1] == 'p' && (line[2] == ' ' || line[2] == '\t'))
+			scene.spheres = get_spheres(line);
+		if(line[0] == 's' && line[1] == 'q' && (line[2] == ' ' || line[2] == '\t'))
+			scene.squares = get_squares(line);
+		if(line[0] == 'c' && line[1] == 'y' && (line[2] == ' ' || line[2] == '\t'))
+			scene.cylinders = get_cylinders(line);
+		if(line[0] == 't' && line[1] == 'r' && (line[2] == ' ' || line[2] == '\t'))
+			scene.triangles = get_triangles(line);
+		free(line);
+	}
 	return (scene);
 }
 
@@ -80,17 +105,18 @@ int 	main(int argc, char *argv[])
 	t_mlx		mlx;
 	t_scene		scene;
 
-	// if(argc < 2 || argc > 3)
-	// 	return (-1);
+	if(argc < 2 || argc > 3)
+		return (-1);
 
 
 
-	// if ((fd = open(argv[1], O_RDONLY)) == -1)
-	// 	return (OPEN_EROR);
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+		return (OPEN_ERROR);
 	// if(!(scene = parse(fd)))
 	// 	return (PARSE_ERROR);
-	// if (close(fd) == -1)
-	// 	return (CLOSE_ERROR);
+	parse(fd);
+	if (close(fd) == -1)
+		return (CLOSE_ERROR);
 
 
 

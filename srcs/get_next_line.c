@@ -6,11 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 10:30:17 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 10:31:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 11:05:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../includes/minirt.h"
 
 size_t	find_pos_eol(const char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 10:32:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 10:52:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "basics.h"
 # include "elements.h"
 # include "scene.h"
+# include "get_next_line.h"
 
 # define OPEN_ERROR -1
 # define CLOSE_ERROR -2

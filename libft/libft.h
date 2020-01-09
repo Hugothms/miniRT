@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2019/12/12 16:21:25 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 11:19:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ typedef struct		s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+char				*fill_positivenbr_base(long nbr, char *base, char *res, int i);
+char				*fill_nbr_base(char *res, long nbr, char *base, int sign);
+char				*ft_strrev_minus_1(char *res);
 
 int					ft_atoi(const char *str);
 int					check_base(char *base);

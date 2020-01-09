@@ -6,41 +6,48 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 16:30:13 by hthomas           #+#    #+#             */
-/*   Updated: 2019/12/02 18:26:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 12:17:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_size(char const *s1, char const *set)
+static int	count_size(char const *str, char const *set)
 {
 	int	blanks;
 	int	i;
 
-	if (!*s1)
+	if (!*str)
 		return (0);
 	blanks = 0;
 	i = 0;
-	while (in_charset(s1[i++], set))
+	while (in_charset(str[i++], set))
 		blanks++;
-	if (!(ft_strlen(s1) - blanks))
+	if (!(ft_strlen(str) - blanks))
 		return (0);
-	i = ft_strlen(s1) - 1;
-	while (in_charset(s1[i--], set))
+	i = ft_strlen(str) - 1;
+	while (in_charset(str[i--], set))
 		blanks++;
-	return (ft_strlen(s1) - blanks);
+	return (ft_strlen(str) - blanks);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+/*
+** remove the chars in set from str
+** @param str	string that will be trimed
+** @param set	set of char to remove from str
+** @return		the str trimed
+*/
+
+char		*ft_strtrim(char const *str, char const *set)
 {
 	int		i;
 	int		start;
 	int		size;
 	char	*new;
 
-	if (!s1)
+	if (!str)
 		return (NULL);
-	size = count_size(s1, set);
+	size = count_size(str, set);
 	if (!(new = malloc((size + 1) * sizeof(char))))
 		return (NULL);
 	if (!size)
@@ -49,11 +56,11 @@ char		*ft_strtrim(char const *s1, char const *set)
 		return (new);
 	}
 	start = 0;
-	while (in_charset(s1[start], set))
+	while (in_charset(str[start], set))
 		start++;
 	i = -1;
 	while (++i < size)
-		new[i] = s1[start + i];
+		new[i] = str[start + i];
 	new[i] = '\0';
 	return (new);
 }
