@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 13:34:22 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 14:52:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 # define BASICS_H
 
 # include "../libft/libft.h"
-# include <mlx.h>
-# include <fcntl.h>
-# include <stdlib.h>
-
-# include <unistd.h>
 
 typedef struct		s_couple
 {
@@ -34,17 +29,17 @@ typedef struct		s_mlx
 
 typedef struct		s_rgb
 {
-	int				r;
-	int				g;
-	int				b;
+	char			r;
+	char			g;
+	char			b;
 }					t_rgb;
 
-typedef struct		s_pos
+typedef struct		s_triple
 {
 	float			x;
 	float			y;
 	float			z;
-}					t_pos;
+}					t_triple;
 
 t_rgb	ft_t_rgb(int r, int g, int b);
 int		ft_rgb(t_rgb rgb);

@@ -6,55 +6,105 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 13:51:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:20:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_couple		get_resolution(char *str)
+t_triple		set_triple(float x, float y, float z)
 {
+	t_triple	triple;
 
+	triple.x = ft_atof(x);
+	triple.y = ft_atof(y);
+	triple.z = ft_atof(z);
+	retrun (triple);
 }
 
-t_ambient_light	get_ambient_light(char *str)
+t_couple		get_resolution(char **strs)
 {
+	t_couple	res;
 
+	res.x = ft_atoi(strs[1]);
+	res.y = ft_atoi(strs[2]);
+	return (res);
 }
 
-t_list			get_camera(char *str)
+t_ambient_light	get_ambient_light(char **strs)
 {
+	t_ambient_light	res;
+	char			**rgb;
 
+	res.ratio = ft_atof(strs[1]);
+	rgb = ft_split(strs[2], ',');
+	res.rgb = set_color(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	res.z = ft_atof(strs[3]);
+	return (res);
 }
 
-t_list			get_light(char *str)
+t_camera			*get_camera(char **strs)
 {
+	t_camera	res;
 
+	res.pov = ;
+	res. = ft_atoi(strs);
+	return (res);
 }
 
-t_list			get_plane(char *str)
+t_light			*get_light(char **strs)
 {
+	t_light	res;
 
+	res. = ft_atoi(strs);
+	res. = ft_atoi(strs);
+	return (res);
 }
 
-t_list			get_sphere(char *str)
+t_plane			*get_plane(char **strs)
 {
+	t_plane	res;
 
+	res. = ft_atoi(strs);
+	res. = ft_atoi(strs);
+	return (res);
 }
 
-t_list			get_square(char *str)
+t_sphere			*get_sphere(char **strs)
 {
+	t_sphere	res;
 
+	res. = ft_atoi(strs);
+	res. = ft_atoi(strs);
+	return (res);
 }
 
-t_list			get_cylinder(char *str)
+t_square			*get_square(char **strs)
 {
+	t_square	res;
 
+	res. = ft_atoi(strs);
+	res. = ft_atoi(strs);
+	return (res);
 }
 
-t_list			get_triangle(char *str)
+	t_cylinder	res;
+t_list			*get_cylinder(char **strs)
 {
+	t_cylinder	res;
 
+	res. = ft_atoi(strs);
+	res. = ft_atoi(strs);
+	return (res);
+}
+
+t_list			*get_triangle(char **strs)
+{
+	t_list	res;
+
+	res. = ft_atoi(strs);
+	res. = ft_atoi(strs);
+	return (res);
 }
 
 t_scene			parse(int fd)
@@ -62,28 +112,33 @@ t_scene			parse(int fd)
 	t_scene	scene;
 	char	*line;
 	int		ret;
+	char	*set;
 
+	set = " \t";
 	while((ret = get_next_line(fd, &line)) == 1)
 	{
 		printf("\nret: %d line = |%s|\n", ret, line);
-		if(line[0] == 'R' && (line[1] == ' ' || line[1] == '\t'))
-			scene.resolution = get_resolution(line);
-		if(line[0] == 'A' && (line[1] == ' ' || line[1] == '\t'))
-			scene.ambient_light = get_ambient_light(line);
-		if(line[0] == 'c' && (line[1] == ' ' || line[1] == '\t'))
-			scene.cameras = get_camera(line);
-		if(line[0] == 'l' && (line[1] == ' ' || line[1] == '\t'))
-			scene.lights = get_light(line);
-		if(line[0] == 'p' && line[1] == 'l' && (line[2] == ' ' || line[2] == '\t'))
-			scene.planes = get_plane(line);
-		if(line[0] == 's' && line[1] == 'p' && (line[2] == ' ' || line[2] == '\t'))
-			scene.spheres = get_sphere(line);
-		if(line[0] == 's' && line[1] == 'q' && (line[2] == ' ' || line[2] == '\t'))
-			scene.squares = get_square(line);
-		if(line[0] == 'c' && line[1] == 'y' && (line[2] == ' ' || line[2] == '\t'))
-			scene.cylinders = get_cylinder(line);
-		if(line[0] == 't' && line[1] == 'r' && (line[2] == ' ' || line[2] == '\t'))
-			scene.triangles = get_triangle(line);
+
+		if(ft_strcmp(line, "R" && in_charset(line[2], set)))
+			scene.resolution = get_resolution(ft_split_set(line, set));
+		else if(ft_strcmp(line, "A" && in_charset(line[2], set)))
+			scene.ambient_light = get_ambient_light(ft_split_set(line, set));
+		else if(ft_strcmp(line, "c" && in_charset(line[2], set)))
+			ft_lstadd_back(scene.cameras, get_camera(ft_split_set(line, set)));
+		else if(ft_strcmp(line, "l" && in_charset(line[2], set)))
+			ft_lstadd_back(scene.lights, get_light(ft_split_set(line, set)));
+		else if(ft_strcmp(line, "pl") && in_charset(line[3], set))
+			ft_lstadd_back(scene.planes, get_plane(ft_split_set(line, set)));
+		else if(ft_strcmp(line, "sp") && in_charset(line[3], set))
+			ft_lstadd_back(scene.spheres, get_sphere(ft_split_set(line, set)));
+		else if(ft_strcmp(line, "sq") && in_charset(line[3], set))
+			ft_lstadd_back(scene.squares, get_square(ft_split_set(line, set)));
+		else if(ft_strcmp(line, "cy") && in_charset(line[3], set))
+			ft_lstadd_back(scene.cylinders, get_cylinder(ft_split_set(line, set)));
+		else if(ft_strcmp(line, "tr") && in_charset(line[3], set))
+			ft_lstadd_back(scene.triangles, get_triangle(ft_split_set(line, set)));
+		else if (!ft_split_set(line, set))
+			retrun (NULL);
 		free(line);
 	}
 	return (scene);

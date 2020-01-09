@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 14:23:06 by hthomas          ###   ########.fr       */
+/*   Created: 2020/01/09 14:30:22 by hthomas           #+#    #+#             */
+/*   Updated: 2020/01/09 14:44:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../includes/minirt.h"
 
-# include <mlx.h>
-# include <fcntl.h>
-# include <stdlib.h>
+float	ft_atof(char *str)
+{
+	int		pos_point;
+	int		decimal_size;
+	float	nb;
 
-# include <unistd.h>
-
-# include "../libft/libft.h"
-# include "basics.h"
-# include "elements.h"
-# include "scene.h"
-# include "get_next_line.h"
-
-# define OPEN_ERROR -1
-# define CLOSE_ERROR -2
-# define PARSE_ERROR -3
-
-#endif
+	pos_point = 0;
+	while (str[pos_point] && str[pos_point] != '.')
+		pos_point++;
+	decimal_size = 0;
+	while (str[pos_point + 1 + decimal_size])
+		decimal_size++;
+	nb = (float)ft_atoi(&str[pos_point]) / (10 ^ decimal_size);
+	nb += ft_atoi(str);
+	return (nb);
+}
