@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 14:46:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:48:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct		s_ambient_light
 typedef struct		s_camera
 {
 	t_triple		pov;
-	t_triple		vect_or;
+	t_triple		orientation;
 	float			fov;
 }					t_camera;
 

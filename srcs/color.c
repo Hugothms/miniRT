@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 15:08:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 16:02:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_rgb(t_rgb rgb)
 	return (color);
 }
 
-t_rgb	set_color(char r, char g, char b)
+t_rgb	set_rgb(char r, char g, char b)
 {
 	t_rgb	rgb;
 

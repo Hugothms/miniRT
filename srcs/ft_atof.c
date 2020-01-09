@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:30:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 14:44:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:51:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ float	ft_atof(char *str)
 	decimal_size = 0;
 	while (str[pos_point + 1 + decimal_size])
 		decimal_size++;
-	nb = (float)ft_atoi(&str[pos_point]) / (10 ^ decimal_size);
+	nb = 0;
+	if(pos_point)
+		nb += (float)ft_atoi(&str[pos_point]) / (10 ^ decimal_size);
 	nb += ft_atoi(str);
 	return (nb);
 }
