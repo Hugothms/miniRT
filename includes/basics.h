@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 14:52:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 16:40:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ typedef struct		s_triple
 
 t_rgb	ft_t_rgb(int r, int g, int b);
 int		ft_rgb(t_rgb rgb);
+t_rgb	set_rgb(char r, char g, char b);
 
 #endif
