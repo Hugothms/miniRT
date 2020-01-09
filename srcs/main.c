@@ -6,11 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/08 14:19:51 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 10:12:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minirt.h"
+#include "../includes/minirt.h"
 #include <stdio.h>
 
 t_rgb	ft_t_rgb(int r, int g, int b)
@@ -34,17 +34,15 @@ int		ft_rgb(t_rgb rgb)
 	return (color);
 }
 
-int	ft_function(int keycode, t_params *params)
+int	ft_function(int keycode, t_mlx *mlx)
 {
+	printf("%i\n", keycode);
 	if(keycode == 53)
 	{
-			printf("ok\n");
-			mlx_clear_window(params->mlx.mlx_ptr, params->mlx.win_ptr);
-			printf("ok\n");
-			mlx_destroy_window (params->mlx.mlx_ptr, params->mlx.win_ptr);
-		return (0);
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+		mlx_destroy_window (mlx->mlx_ptr, mlx->win_ptr);
+		exit (0);
 	}
-	printf("%i\n", keycode);
 	return (0);
 }
 
@@ -68,36 +66,43 @@ void 	ft_print(void *mlx_ptr, void *win_ptr)
 	mlx_string_put(mlx_ptr,win_ptr, 100, 500, 07777770000,		"Bonne Annee" );
 	mlx_string_put(mlx_ptr,win_ptr, 100, 550, 07777777770,		"Bonne Annee" );
 }
-
-int 	main(int argc, char const *argv[])
+t_scene	parse(int fd)
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
+	t_scene	scene;
+
+
+	return (scene);
+}
+
+int 	main(int argc, char *argv[])
+{
+	int			fd;
 	t_mlx		mlx;
-	t_params	params;
+	t_scene		scene;
 
-	printf("ok\n");
-	if(!(mlx_ptr = mlx_init()))
-		return (-1);
-	printf("ok\n");
-	mlx.mlx_ptr = mlx_ptr;
-	params.mlx = mlx;
-	printf("ok\n");
-	if(!(win_ptr = mlx_new_window(params.mlx.mlx_ptr, 500, 1000, "title window")))
-		return (-1);
-	printf("ok\n");
-	mlx.win_ptr = win_ptr;
-	params.mlx = mlx;
-	ft_print(params.mlx.mlx_ptr, params.mlx.win_ptr);
+	// if(argc < 2 || argc > 3)
+	// 	return (-1);
 
-	printf("ok\n");
-	mlx_key_hook(params.mlx.win_ptr, ft_function, &params);
-	mlx_key_hook(params.mlx.win_ptr, ft_function, &params);
-	printf("ok\n");
-	if(mlx_loop(params.mlx.mlx_ptr) == 0)
-		return (0);
-	printf("ok\n");
-	mlx_clear_window(params.mlx.mlx_ptr, params.mlx.win_ptr);
-	mlx_destroy_window (params.mlx.mlx_ptr, params.mlx.win_ptr);
+
+
+	// if ((fd = open(argv[1], O_RDONLY)) == -1)
+	// 	return (OPEN_EROR);
+	// if(!(scene = parse(fd)))
+	// 	return (PARSE_ERROR);
+	// if (close(fd) == -1)
+	// 	return (CLOSE_ERROR);
+
+
+
+	if(!(mlx.mlx_ptr = mlx_init()))
+		return (-1);
+	if(!(mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 500, 1000, "title window")))
+		return (-1);
+
+	//mlx_new_image(mlx_ptr, int width, int height);
+	ft_print(mlx.mlx_ptr, mlx.win_ptr);
+
+	mlx_key_hook(mlx.win_ptr, ft_function, &mlx);
+	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
