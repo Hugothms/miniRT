@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 16:49:44 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 17:52:47 by hthomas          ###   ########.fr       */
+/*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
+/*   Updated: 2020/01/10 19:01:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minirt.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	print_err_and_exit(char *str, int err)
 {
-	t_list	*pt;
-
-	if (!*alst)
-	{
-		*alst = new;
-		return ;
-	}
-	pt = *alst;
-	while (pt->next)
-		pt = pt->next;
-	pt->next = new;
+	write(STDERR_FILENO, "Error: ", 7);
+	while(*str)
+		write(STDERR_FILENO, str++, 1);
+	write(STDERR_FILENO, "\n", 1);
+	exit(err);
 }
