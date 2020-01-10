@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 16:06:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 17:12:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-char				*fill_positivenbr_base(long nbr, char *base, char *res, int i);
+char				*fill_positivenbr_base(long nbr, char *base,
+					char *res, int i);
 char				*fill_nbr_base(char *res, long nbr, char *base, int sign);
 char				*ft_strrev_minus_1(char *res);
 
 int					ft_atoi(const char *str);
 long				ft_atol(const char *nptr);
+float				ft_atof(const char *str);
 int					check_base(char *base);
 int					ft_atoi_base(char *str, char *base);
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to);
@@ -82,6 +84,7 @@ char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					in_charset(char c, char const *charset);
+int					ft_is_from_charset(const char *str, const char *charset);
 char				**ft_split(char const *s, char c1);
 char				**ft_split_set(const char *str, char *charset);
 char				*ft_strjoin(char const *s1, char const *s2);

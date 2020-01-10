@@ -6,11 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:30:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 15:40:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 16:59:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "libft.h"
 
 float	ft_atof(const char *str)
 {
