@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 17:20:19 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 16:06:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <math.h>
 
 # include <unistd.h>
 
@@ -30,7 +31,6 @@
 # define PARSE_ERROR -3
 
 t_scene			*parse(int fd);
-float			ft_atof(char *str);
-
+float			ft_atof(const char *str);
 
 #endif

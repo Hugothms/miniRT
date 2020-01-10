@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 17:20:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 16:07:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_rgb		str_to_rgb(char *str)
 	char	**tab;
 
 	tab = ft_split(str, ',');
-	return(set_rgb(tab[0], tab[1], tab[2]));
+	return(set_rgb("tab[0]", "tab[1]", "tab[2]"));
 }
 
 
@@ -62,6 +62,7 @@ t_couple		get_resolution(char **strs)
 {
 	t_couple	resolution;
 
+	printf("get res\n");
 	resolution.x = ft_atoi(strs[1]);
 	resolution.y = ft_atoi(strs[2]);
 	return (resolution);
@@ -69,15 +70,13 @@ t_couple		get_resolution(char **strs)
 
 t_ambient_light	get_ambient_light(char **strs)
 {
-	t_ambient_light	ambiant_light;
+	t_ambient_light	ambient_light;
 
-	ambiant_light.ratio = ft_atof(strs[1]);
-	ambiant_light.rgb = str_to_rgb(strs[2]);
-	ambiant_light.z = ft_atof(strs[3]);
-	return (ambiant_light);
+	printf("get ambient\n");
+	ambient_light.ratio = ft_atof(strs[1]);
+	ambient_light.rgb = str_to_rgb(strs[2]);
+	return (ambient_light);
 }
-
-
 
 
 
@@ -184,9 +183,35 @@ t_triangle		*get_triangle(char **strs)
 
 
 
+/*
+** check if str is only made of char in charset
+** @param str	string that will be checked
+** @param set	set of chars
+** @return		1 if there are only chars from charset in str, 0 otherwise
+*/
 
+int				is_from_charset(const char *str, const char *charset)
+{
+	int	i;
+	int	j;
+	int	ok;
 
-
+	i = 0;
+	while (str[i])
+	{
+		ok = 0;
+		j = 0;
+		while (charset[j])
+		{
+			if (str[i] == charset[j++])
+				ok = 1;
+		}
+		if (!ok)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 
 
@@ -200,31 +225,35 @@ t_scene			*parse(int fd)
 
 	set = " \t";
 	if(!(scene = malloc(sizeof(*scene))))
-	return (NULL);
+		return (NULL);
 	while((ret = get_next_line(fd, &line)) == 1)
 	{
-		printf("\nret: %d line = |%s|\n", ret, line);
-
-		if(ft_strcmp(line, "R") && in_charset(line[2], set))
+		printf("\n|%s|\n", line);
+		if(!ft_strncmp(line, "R", 1) && in_charset(line[1], set))
 			scene->resolution = get_resolution(ft_split_set(line, set));
-		else if(ft_strcmp(line, "A") && in_charset(line[2], set))
+		else if(!ft_strncmp(line, "A", 1) && in_charset(line[1], set))
 			scene->ambient_light = get_ambient_light(ft_split_set(line, set));
-		else if(ft_strcmp(line, "c") && in_charset(line[2], set))
-			ft_lstadd_back(&scene->cameras, ft_lstnew(get_camera(ft_split_set(line, set))));
-		else if(ft_strcmp(line, "l") && in_charset(line[2], set))
+		else if(!ft_strncmp(line, "c", 1) && in_charset(line[1], set))
+			ft_lstadd_back(&(scene->cameras), ft_lstnew(get_camera(ft_split_set(line, set))));
+		else if(!ft_strncmp(line, "l", 1) && in_charset(line[1], set))
 			ft_lstadd_back(&scene->lights, ft_lstnew(get_light(ft_split_set(line, set))));
-		else if(ft_strcmp(line, "sp") && in_charset(line[3], set))
+		else if(!ft_strncmp(line, "sp", 2) && in_charset(line[2], set))
 			ft_lstadd_back(&scene->spheres, ft_lstnew(get_sphere(ft_split_set(line, set))));
-		else if(ft_strcmp(line, "pl") && in_charset(line[3], set))
+		else if(!ft_strncmp(line, "pl", 2) && in_charset(line[2], set))
 			ft_lstadd_back(&scene->planes, ft_lstnew(get_plane(ft_split_set(line, set))));
-		else if(ft_strcmp(line, "sq") && in_charset(line[3], set))
+		else if(!ft_strncmp(line, "sq", 2) && in_charset(line[2], set))
 			ft_lstadd_back(&scene->squares, ft_lstnew(get_square(ft_split_set(line, set))));
-		else if(ft_strcmp(line, "cy") && in_charset(line[3], set))
+		else if(!ft_strncmp(line, "cy", 2) && in_charset(line[2], set))
 			ft_lstadd_back(&scene->cylinders, ft_lstnew(get_cylinder(ft_split_set(line, set))));
-		else if(ft_strcmp(line, "tr") && in_charset(line[3], set))
+		else if(!ft_strncmp(line, "tr", 2) && in_charset(line[2], set))
 			ft_lstadd_back(&scene->triangles, ft_lstnew(get_triangle(ft_split_set(line, set))));
-		else if (!ft_split_set(line, set))
+		else if (!is_from_charset(line, set))
+		{
+			free(line);
+			ft_putstr("Error\n");
+			printf("ret: %d line = |%s|\n", ret, line);
 			return (NULL);
+		}
 		free(line);
 	}
 	return (scene);

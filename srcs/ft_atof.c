@@ -6,27 +6,37 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:30:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 15:51:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:40:11 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-float	ft_atof(char *str)
+float	ft_atof(const char *str)
 {
-	int		pos_point;
 	int		decimal_size;
 	float	nb;
+	int		sign;
 
-	pos_point = 0;
-	while (str[pos_point] && str[pos_point] != '.')
-		pos_point++;
-	decimal_size = 0;
-	while (str[pos_point + 1 + decimal_size])
-		decimal_size++;
+	while (in_charset(*str, "\t "))
+		str++;
+	sign = 1;
+	if (in_charset(*str, "-+"))
+		sign *= (*str++ == '-' ? -1 : 1);
 	nb = 0;
-	if(pos_point)
-		nb += (float)ft_atoi(&str[pos_point]) / (10 ^ decimal_size);
-	nb += ft_atoi(str);
-	return (nb);
+	nb += ft_atol(str);
+	while (*str && in_charset(*str, "0123456789"))
+		str++;
+	if (*str == '.')
+		str++;
+	else
+		return (nb);
+	decimal_size = 0;
+	while (in_charset(str[decimal_size], "0123456789"))
+		decimal_size++;
+	if (decimal_size)
+		nb += ft_atol(str) / (pow(10, decimal_size));
+	else
+		return (nb);
+	return (nb * sign);
 }

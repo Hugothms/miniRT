@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 16:06:15 by hthomas          ###   ########.fr       */
+/*   Created: 2020/01/10 14:32:34 by hthomas           #+#    #+#             */
+/*   Updated: 2020/01/10 14:33:01 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#include "libft.h"
 
-# include"minirt.h"
-
-typedef struct		s_scene
+long	ft_atol(const char *nptr)
 {
-	t_couple			resolution;
-	t_ambient_light	ambient_light;
-	t_list			*cameras;
-	t_list			*lights;
-	t_list			*spheres;
-	t_list			*planes;
-	t_list			*squares;
-	t_list			*cylinders;
-	t_list			*triangles;
-}					t_scene;
+	long	res;
+	int		sign;
 
-#endif
+	res = 0;
+	sign = 1;
+	while ((*nptr >= '\t' && *nptr <= '\r') || *nptr == ' ')
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+		sign *= (*nptr++ == '-' ? -1 : 1);
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		res *= 10;
+		res += *nptr++ - '0';
+	}
+	return (res * sign);
+}

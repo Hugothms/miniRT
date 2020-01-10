@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/01/09 16:51:59 by hthomas          ###   ########.fr        #
+#    Updated: 2020/01/10 13:26:00 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ re:		fclean all
 .c.o:
 	@${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
 
-.PHONY:	$(NAME) $(EXEC_precise)
+.PHONY: $(EXEC_precise)
 
 
 
@@ -117,9 +117,9 @@ test_test: $(EXEC_test)
 $(EXEC_test): $(NAME) main_test.c
 	$(C) $(LDFLAGS) -o $@ main_test.c -L./ -lftprintf
 
-test_example:
-	@./$(NAME) example.rt
+test_example:	$(NAME)
+	./$< example.rt
 
 $(EXEC_precise):	$(NAME) main_precise.c
-	@#clear
-	@$(C) $(CFLAGS) -o $@ main_precise.c $(LIBLINK)
+	#clear
+	$(C) $(CFLAGS) -o $@ main_precise.c $(LIBLINK)

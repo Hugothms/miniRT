@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 16:29:33 by hthomas           #+#    #+#             */
-/*   Updated: 2019/11/06 16:29:35 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 13:36:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	free_tab(char **tab, int d1)
 	return (0);
 }
 
-static int	*count_lengths(int *words_len, const char *s, char c1)
+static int	*count_lengths(int *words_len, const char *s, char c)
 {
 	int	i_length;
 	int	i_s;
@@ -31,13 +31,13 @@ static int	*count_lengths(int *words_len, const char *s, char c1)
 	{
 		while (s[i_s])
 		{
-			if (s[i_s] != c1)
+			if (s[i_s] != c)
 				break ;
 			i_s++;
 		}
 		while (s[i_s])
 		{
-			if (s[i_s] == c1)
+			if (s[i_s] == c)
 				break ;
 			i_s++;
 			words_len[i_length]++;
@@ -47,7 +47,7 @@ static int	*count_lengths(int *words_len, const char *s, char c1)
 	return (words_len);
 }
 
-static int	count_words(const char *s, char c1)
+static int	count_words(const char *s, char c)
 {
 	int	count;
 	int	i_s;
@@ -58,7 +58,7 @@ static int	count_words(const char *s, char c1)
 	{
 		while (s[i_s])
 		{
-			if (s[i_s] != c1)
+			if (s[i_s] != c)
 			{
 				count++;
 				break ;
@@ -67,14 +67,14 @@ static int	count_words(const char *s, char c1)
 		}
 		while (s[i_s])
 		{
-			if (s[i_s++] == c1)
+			if (s[i_s++] == c)
 				break ;
 		}
 	}
 	return (count);
 }
 
-static int	fill_tab(char ***tab, int *words_len, const char *s, char c1)
+static int	fill_tab(char ***tab, int *words_len, const char *s, char c)
 {
 	int		d1;
 	int		d2;
@@ -83,15 +83,15 @@ static int	fill_tab(char ***tab, int *words_len, const char *s, char c1)
 
 	d1 = 0;
 	i_s = 0;
-	words_count = count_words(s, c1);
+	words_count = count_words(s, c);
 	while (d1 < words_count && s[i_s])
 	{
 		if (!((*tab)[d1] = malloc((words_len[d1] + 1) * sizeof(char))))
 			return (free_tab(*tab, d1));
-		while (s[i_s] == c1)
+		while (s[i_s] == c)
 			i_s++;
 		d2 = 0;
-		while (s[i_s] && s[i_s] != c1)
+		while (s[i_s] && s[i_s] != c)
 			(*tab)[d1][d2++] = s[i_s++];
 		(*tab)[d1++][d2] = '\0';
 	}
@@ -99,7 +99,14 @@ static int	fill_tab(char ***tab, int *words_len, const char *s, char c1)
 	return (1);
 }
 
-char		**ft_split(char const *s, char c1)
+/*
+** split str into a char** each time there is c
+** @param str	"sentence" that will be splited
+** @param c		"delimiter" that will delimits the "words"
+** @return		a tab of "words"
+*/
+
+char		**ft_split(char const *s, char c)
 {
 	char	**tab;
 	int		words_count;
@@ -109,16 +116,16 @@ char		**ft_split(char const *s, char c1)
 
 	if (!s)
 		return (NULL);
-	if (!(words_len = malloc((count_words(s, c1)) * sizeof(int))))
+	if (!(words_len = malloc((count_words(s, c)) * sizeof(int))))
 		return (NULL);
-	words_count = count_words(s, c1);
+	words_count = count_words(s, c);
 	if (!(tab = malloc((words_count + 1) * sizeof(char*))))
 		return (NULL);
 	i = 0;
 	while (i < words_count)
 		words_len[i++] = 0;
-	count_lengths(words_len, s, c1);
-	allgood = fill_tab(&tab, words_len, s, c1);
+	count_lengths(words_len, s, c);
+	allgood = fill_tab(&tab, words_len, s, c);
 	free(words_len);
 	if (allgood)
 		return (tab);

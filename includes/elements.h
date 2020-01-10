@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 15:48:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 15:43:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct		s_ambient_light
 {
 	float			ratio;
 	t_rgb			rgb;
-	float			z;
 }					t_ambient_light;
 
 typedef struct		s_camera
