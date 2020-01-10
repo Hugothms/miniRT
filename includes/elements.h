@@ -6,14 +6,14 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 15:43:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/10 17:10:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ELEMENTS_H
 # define ELEMENTS_H
 
-# include"basics.h"
+# include "basics.h"
 
 typedef struct		s_ambient_light
 {
