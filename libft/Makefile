@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2019/12/06 15:33:52 by hthomas          ###   ########.fr        #
+#    Updated: 2020/01/09 16:43:14 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ SRCS 		=	ft_memset.c				\
 				ft_strstr.c				\
 				ft_strcat.c				\
 				ft_strmap.c				\
-				ft_nsplit.c				\
+				ft_split_set.c			\
 				ft_strjoin_sep.c
 
 

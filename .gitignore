@@ -1,3 +1,8 @@
-miniRT.code-workspace
+*.DS_Store
+.vscode/*
 a.out*
-.DS_Store
+*.txt
+*.o
+*.a
+*.code-workspace
+*.out*

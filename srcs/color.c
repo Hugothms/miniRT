@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 16:02:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 16:59:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int		ft_rgb(t_rgb rgb)
 	return (color);
 }
 
-t_rgb	set_rgb(char r, char g, char b)
+t_rgb	set_rgb(char *r, char *g, char *b)
 {
 	t_rgb	rgb;
 
 	rgb.r = ft_atoi(r);
 	rgb.g = ft_atoi(g);
 	rgb.b = ft_atoi(b);
-	retrun (rgb);
+	return (rgb);
 }

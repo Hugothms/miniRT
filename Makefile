@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/01/09 11:21:20 by hthomas          ###   ########.fr        #
+#    Updated: 2020/01/09 16:51:59 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ CFLAGS += -Wall -Werror -Wextra
 LDFLAGS += -g3 -fsanitize=address
 
 SRCS = 	srcs/main.c				\
+		srcs/color.c			\
+		srcs/ft_atof.c			\
+		srcs/parse.c			\
 		srcs/get_next_line.c
 
 OBJS = $(SRCS:.c=.o)

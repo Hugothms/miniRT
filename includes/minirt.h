@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 14:23:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/09 17:20:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@
 # define OPEN_ERROR -1
 # define CLOSE_ERROR -2
 # define PARSE_ERROR -3
+
+t_scene			*parse(int fd);
+float			ft_atof(char *str);
+
 
 #endif
