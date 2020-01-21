@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 17:06:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/21 17:09:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_rgb	ft_t_rgb(int r, int g, int b)
+t_rgb	int_to_rgb(int r, int g, int b)
 {
 	t_rgb	rgb;
 
@@ -22,7 +22,7 @@ t_rgb	ft_t_rgb(int r, int g, int b)
 	return (rgb);
 }
 
-int		ft_rgb(t_rgb rgb)
+int		rgb_to_int(t_rgb rgb)
 {
 	int	color;
 
@@ -33,7 +33,7 @@ int		ft_rgb(t_rgb rgb)
 	return (color);
 }
 
-t_rgb	set_rgb(char *r, char *g, char *b)
+t_rgb	char_to_rgb(char *r, char *g, char *b)
 {
 	t_rgb	rgb;
 

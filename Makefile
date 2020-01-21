@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/01/10 13:26:00 by hthomas          ###   ########.fr        #
+#    Updated: 2020/01/21 17:46:45 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,13 @@ LDFLAGS += -g3 -fsanitize=address
 
 SRCS = 	srcs/main.c				\
 		srcs/color.c			\
-		srcs/ft_atof.c			\
+		srcs/error.c			\
+		srcs/get_next_line.c	\
 		srcs/parse.c			\
-		srcs/get_next_line.c
+		srcs/print.c			\
+		srcs/set_elements.c		\
+		srcs/set_elements2.c
+
 
 OBJS = $(SRCS:.c=.o)
 OBJSLIBFT =$(LIBFTDIR)*.o
@@ -68,8 +72,8 @@ all : complib $(NAME)
 $(OBJS) : %.o: %.c $(HEADER)
 	@$(CC) -I $(INCL) -c $< -o $@
 
-$(NAME) : $(OBJS)
-	@$(CC) -o $@ $(MLX_INCLUDE) $(OBJS) $(OBJSLIBFT)
+$(NAME) : $(OBJS) $(OBJSLIBFT)
+	@$(CC) -o $@ $(MLX_INCLUDE) $^
 
 complib :
 	@$(MAKE) -C libft all

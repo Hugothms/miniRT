@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 17:09:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/21 17:31:11 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct		s_mlx
 
 typedef struct		s_rgb
 {
-	char			r;
-	char			g;
-	char			b;
+	int				r;
+	int				g;
+	int				b;
 }					t_rgb;
 
 typedef struct		s_triple
@@ -41,8 +41,15 @@ typedef struct		s_triple
 	float			z;
 }					t_triple;
 
-t_rgb				ft_t_rgb(int r, int g, int b);
-int					ft_rgb(t_rgb rgb);
-t_rgb				set_rgb(char *r, char *g, char *b);
+typedef struct		s_ray
+{
+	t_triple		pos;
+	t_triple		dir;
+}					t_ray;
+
+t_rgb				int_to_rgb(int r, int g, int b);
+int					rgb_to_int(t_rgb rgb);
+t_rgb				char_to_rgb(char *r, char *g, char *b);
+t_ray				new_ray(t_triple position, t_triple direction);
 
 #endif

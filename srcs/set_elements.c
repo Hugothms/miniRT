@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 20:45:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/21 17:15:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		set_resolution(t_scene *scene, char **data)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	resolution->x = ft_atoi(data[1]);
 	resolution->y = ft_atoi(data[2]);
-	scene->resolution = resolution;
+	scene->resolution = *resolution;
 }
 
 void		set_ambient_light(t_scene *scene, char **data)
@@ -42,7 +42,7 @@ void		set_ambient_light(t_scene *scene, char **data)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ambient_light->ratio = ft_atof(data[1]);
 	ambient_light->rgb = str_to_rgb(data[2]);
-	scene->ambient_light = ambient_light;
+	scene->ambient_light = *ambient_light;
 }
 
 void	set_camera(t_scene *scene, char **data)
@@ -52,7 +52,7 @@ void	set_camera(t_scene *scene, char **data)
 	printf("set camera\n");
 	if (!(camera = malloc(sizeof(*camera))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	camera->pov = str_to_triple(data[1]);
+	camera->pos = str_to_triple(data[1]);
 	camera->orientation = str_to_triple(data[2]);
 	camera->fov = ft_atof(data[3]);
 	ft_lstadd_back(&(scene->cameras), ft_lstnew(camera));

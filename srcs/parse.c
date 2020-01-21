@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 20:41:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/21 17:44:34 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,17 @@ t_rgb		str_to_rgb(char *str)
 	char	**tab;
 
 	tab = ft_split(str, ',');
-	return (set_rgb(tab[0], tab[1], tab[2]));
+	return (char_to_rgb(tab[0], tab[1], tab[2]));
 }
 
 void	init_scene(t_scene *scene)
 {
-	scene->resolution = NULL;
-	scene->ambient_light = NULL;
+	scene->resolution.x = 0;
+	scene->resolution.y = 0;
+	scene->ambient_light.ratio = 0;
+	scene->ambient_light.rgb.r = 0;
+	scene->ambient_light.rgb.g = 0;
+	scene->ambient_light.rgb.b = 0;
 	scene->cameras = ft_lstnew(NULL);
 	scene->lights = ft_lstnew(NULL);
 	scene->spheres = ft_lstnew(NULL);
@@ -65,11 +69,11 @@ t_scene			*parse(int fd)
 	init_scene(scene);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		printf("\n|%s|\n", line);
+		//printf("\n|%s|\n", line);
 		data = ft_split_set((*line ? line : "iamcheating"), set);
-		if (!ft_strcmp(data[0], "R") && !scene->resolution)
+		if (!ft_strcmp(data[0], "R") && in_charset(line[1], set) && !scene->resolution.x)
 			set_resolution(scene, data);
-		else if (!ft_strcmp(data[0], "A") && in_charset(line[1], set))
+		else if (!ft_strcmp(data[0], "A") && in_charset(line[1], set) && !scene->ambient_light.ratio)
 			set_ambient_light(scene, data);
 		else if (!ft_strcmp(data[0], "c") && in_charset(line[1], set))
 			set_camera(scene, data);

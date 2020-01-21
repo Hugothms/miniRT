@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 20:32:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/21 18:07:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ t_triple		str_to_triple(char *str);
 t_triple		set_triple(char *x, char *y, char *z);
 
 void			print_err_and_exit(char *str, int err);
+
+
+void			print_img(void *mlx_ptr, void *win_ptr,t_scene *scene);
 
 #endif

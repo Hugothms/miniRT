@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 19:39:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/21 18:06:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,12 @@ int		key_function(int keycode, t_mlx *mlx)
 	{
 		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+		//free(mlx);
 		exit(0);
 	}
+	else if (keycode == 123)
+		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
 	return (0);
-}
-
-void	print_img(void *mlx_ptr, void *win_ptr)
-{
-	t_rgb	rgb;
-	int		x;
-	int		y;
-	int		color;
-
-	rgb = ft_t_rgb(0120, 0120, 0120);
-	color = ft_rgb(rgb);
-	mlx_string_put(mlx_ptr, win_ptr, 100, 150, 01201201200, 	"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 200, color, 			"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 250, 07770000000, 	"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 300, 00007770000, 	"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 350, 00000007770, 	"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 400, 07770007770, 	"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 450, 00007777770, 	"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 500, 07777770000, 	"Bonne Annee");
-	mlx_string_put(mlx_ptr, win_ptr, 100, 550, 07777777770, 	"Bonne Annee");
 }
 
 t_scene	*get_scene(int argc, char *argv[])
@@ -62,7 +45,7 @@ t_scene	*get_scene(int argc, char *argv[])
 	return (scene);
 }
 
-t_mlx 	*init_win_img(t_couple *resolution)
+t_mlx 	*init_win_img(t_couple resolution)
 {
 	t_mlx		*mlx;
 
@@ -70,9 +53,9 @@ t_mlx 	*init_win_img(t_couple *resolution)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(mlx->mlx_ptr = mlx_init()))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, resolution->x, resolution->y, "title window")))
+	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, resolution.x, resolution.y, "title window")))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	mlx_new_image(mlx->mlx_ptr, resolution->x, resolution->y);
+	//mlx_new_image(mlx->mlx_ptr, resolution.x, resolution.y);
 	return (mlx);
 }
 
@@ -89,7 +72,7 @@ int		main(int argc, char *argv[])
 
 	scene = get_scene(argc, argv);
 	mlx = init_win_img(scene->resolution);
-	print_img(mlx->mlx_ptr, mlx->win_ptr);
+	print_img(mlx->mlx_ptr, mlx->win_ptr, scene);
 	get_controls_loop(mlx);
 	return (0);
 }
