@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/21 18:06:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/22 18:00:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		main(int argc, char *argv[])
 	t_mlx		*mlx;
 
 	scene = get_scene(argc, argv);
+	printf("ici%fici\n", (scene->cameras->next));
 	mlx = init_win_img(scene->resolution);
 	print_img(mlx->mlx_ptr, mlx->win_ptr, scene);
 	get_controls_loop(mlx);

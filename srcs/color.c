@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/21 17:09:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/22 17:52:01 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_rgb	int_to_rgb(int r, int g, int b)
+t_rgb	float_to_rgb(float r, float g, float b)
 {
 	t_rgb	rgb;
 

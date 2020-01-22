@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/22 17:42:41 by hthomas          ###   ########.fr       */
+/*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
+/*   Updated: 2020/01/22 17:53:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#include "../includes/minirt.h"
 
-# include "minirt.h"
-
-typedef struct		s_scene
+t_ray		new_ray(t_triple position, t_triple direction)
 {
-	t_couple		resolution;
-	t_ambient_light	ambient_light;
-	t_list			*cameras;
-	t_list			*lights;
-	t_list			*spheres;
-	t_list			*planes;
-	t_list			*squares;
-	t_list			*cylinders;
-	t_list			*triangles;
-}					t_scene;
+	t_ray	ray;
 
-#endif
+	ray.pos = position;
+	ray.dir = direction;
+	return ray;
+}

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/21 17:46:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/22 17:58:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 		while (++x < scene->resolution.x)
 		{
 			//Final color = 0;
-			color = rgb_to_int(int_to_rgb(x/4, y/8, (x+y)/12));
+			color = rgb_to_int(float_to_rgb(x/4, y/8, (x+y)/12));
 			//Ray = { starting point, direction };
-			//ray = new_ray(scene->cameras->content.pos, scene->cameras->content.dir);
+			ray = new_ray(((t_camera*)(scene->cameras->content))->pos, ((t_camera*)(scene->cameras->content))->orientation);
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			{
 				//5
