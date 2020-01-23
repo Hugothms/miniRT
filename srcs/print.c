@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/22 17:58:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/23 14:21:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 {
 	// t_rgb	rgb;
-	int		x;
-	int		y;
+	int		j;
+	int		i;
 	int		color;
+	t_vect	vect_dir;
 	t_ray	ray;
+
 	// rgb = ft_t_rgb(0120, 0120, 0120);
 	// color = ft_rgb(rgb);
 	// mlx_string_put(mlx_ptr, win_ptr, 100, 50,  07777777770, 	"Bonne Annee");
@@ -31,17 +33,21 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 	// mlx_string_put(mlx_ptr, win_ptr, 100, 400, 07770007770, 	"Bonne Annee");
 	// mlx_string_put(mlx_ptr, win_ptr, 100, 450, 00007777770, 	"Bonne Annee");
 
-	y = -1;
+	i = -1;
 	// for each pixel of the screen
-	while (++y < scene->resolution.y)
+	while (++i < scene->resolution.h)
 	{
-		x = -1;
-		while (++x < scene->resolution.x)
+		j = -1;
+		while (++j < scene->resolution.w)
 		{
 			//Final color = 0;
-			color = rgb_to_int(float_to_rgb(x/4, y/8, (x+y)/12));
+			color = rgb_to_int(float_to_rgb(j/4, i/8, (j+i)/12));
 			//Ray = { starting point, direction };
-			ray = new_ray(((t_camera*)(scene->cameras->content))->pos, ((t_camera*)(scene->cameras->content))->orientation);
+			vect_dir = ((t_camera*)(scene->cameras->next->content))->orientation;
+			vect_dir.x += j - scene->resolution.w / 2.;
+			vect_dir.y += i - scene->resolution.h / 2.;
+			vect_dir.z += 0;
+			ray = new_ray(((t_camera*)(scene->cameras->next))->pos, vect_dir);
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			{
 				//5
@@ -63,7 +69,7 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 				//reflection factor = reflection factor * surface reflection property;
 				//increment depth;
 
-				mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
+				mlx_pixel_put(mlx_ptr, win_ptr, j, i, color);
 			}
 		}
 	}

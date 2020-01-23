@@ -6,15 +6,15 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/21 17:44:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/23 14:17:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_triple		set_triple(char *x, char *y, char *z)
+t_vect		set_triple(char *x, char *y, char *z)
 {
-	t_triple	triple;
+	t_vect	triple;
 
 	triple.x = ft_atof(x);
 	triple.y = ft_atof(y);
@@ -22,7 +22,7 @@ t_triple		set_triple(char *x, char *y, char *z)
 	return (triple);
 }
 
-t_triple		str_to_triple(char *str)
+t_vect		str_to_triple(char *str)
 {
 	char	**tab;
 
@@ -40,8 +40,8 @@ t_rgb		str_to_rgb(char *str)
 
 void	init_scene(t_scene *scene)
 {
-	scene->resolution.x = 0;
-	scene->resolution.y = 0;
+	scene->resolution.w = 0;
+	scene->resolution.h = 0;
 	scene->ambient_light.ratio = 0;
 	scene->ambient_light.rgb.r = 0;
 	scene->ambient_light.rgb.g = 0;
@@ -71,7 +71,7 @@ t_scene			*parse(int fd)
 	{
 		//printf("\n|%s|\n", line);
 		data = ft_split_set((*line ? line : "iamcheating"), set);
-		if (!ft_strcmp(data[0], "R") && in_charset(line[1], set) && !scene->resolution.x)
+		if (!ft_strcmp(data[0], "R") && in_charset(line[1], set) && !scene->resolution.w)
 			set_resolution(scene, data);
 		else if (!ft_strcmp(data[0], "A") && in_charset(line[1], set) && !scene->ambient_light.ratio)
 			set_ambient_light(scene, data);

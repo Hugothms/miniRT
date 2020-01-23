@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/21 18:07:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/23 14:12:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void			set_triangle(t_scene *scene, char **strs);
 
 
 t_rgb			str_to_rgb(char *str);
-t_triple		str_to_triple(char *str);
-t_triple		set_triple(char *x, char *y, char *z);
+t_vect		str_to_triple(char *str);
+t_vect		set_triple(char *x, char *y, char *z);
 
 void			print_err_and_exit(char *str, int err);
 

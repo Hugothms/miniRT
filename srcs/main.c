@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/22 18:00:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/23 14:17:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_mlx 	*init_win_img(t_couple resolution)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(mlx->mlx_ptr = mlx_init()))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, resolution.x, resolution.y, "title window")))
+	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, resolution.w, resolution.h, "title window")))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	//mlx_new_image(mlx->mlx_ptr, resolution.x, resolution.y);
 	return (mlx);
@@ -71,7 +71,6 @@ int		main(int argc, char *argv[])
 	t_mlx		*mlx;
 
 	scene = get_scene(argc, argv);
-	printf("ici%fici\n", (scene->cameras->next));
 	mlx = init_win_img(scene->resolution);
 	print_img(mlx->mlx_ptr, mlx->win_ptr, scene);
 	get_controls_loop(mlx);

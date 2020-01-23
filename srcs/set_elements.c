@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/21 17:15:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/23 14:17:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void		set_resolution(t_scene *scene, char **data)
 		print_err_and_exit("resolution (R) must be 2 positive numbers", 20);
 	if (!(resolution = malloc(sizeof(*resolution))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	resolution->x = ft_atoi(data[1]);
-	resolution->y = ft_atoi(data[2]);
+	resolution->w = ft_atoi(data[1]);
+	resolution->h = ft_atoi(data[2]);
 	scene->resolution = *resolution;
 }
 
@@ -55,7 +55,12 @@ void	set_camera(t_scene *scene, char **data)
 	camera->pos = str_to_triple(data[1]);
 	camera->orientation = str_to_triple(data[2]);
 	camera->fov = ft_atof(data[3]);
+	printf("cam\t%d\n", (camera));
 	ft_lstadd_back(&(scene->cameras), ft_lstnew(camera));
+	printf("*scam\t%d\n", (*scene->cameras));
+	printf("scam\t%d\n", (scene->cameras));
+	printf("content\t%d\n", (scene->cameras->content));
+	printf("next\t%d\n", (scene->cameras->next));
 }
 
 void		set_light(t_scene *scene, char **data)
