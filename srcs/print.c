@@ -6,35 +6,77 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/24 10:54:56 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/24 18:38:48 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
+t_vect *mult_mat(float mat[3][3], t_vect *vect)
+{
+	float	x;
+	float	y;
+	float	z;
+
+	x = mat[0][0] * vect->x + mat[0][1] * vect->x + mat[0][2] * vect->x;
+	y = mat[1][0] * vect->y + mat[1][1] * vect->y + mat[1][2] * vect->y;
+	z = mat[2][0] * vect->z + mat[2][1] * vect->z + mat[2][2] * vect->z;
+	vect->x = x;
+	vect->y = y;
+	vect->z = z;
+	return (vect);
+}
+
+t_vect	*rot_vect(t_vect *vect, float angle, char axe)
+{
+	//float	mat[3][3];
+	float	alpha;
+
+	alpha = (angle / 2) * (M_PI / 180);
+	if (axe == 'x')
+	{
+		float mat[3][3] = {{1, 0, 0}, {0, cos(alpha), -sin(alpha)}, {0, sin(alpha), -cos(alpha)}};
+		return(mult_mat(mat, vect));
+	}
+	else if (axe == 'y')
+	{
+		float mat[3][3] = {{cos(alpha), 0, sin(alpha)}, {0, 1, 0}, {-sin(alpha), 0, cos(alpha)}};
+		return(mult_mat(mat, vect));
+	}
+	else if (axe == 'z')
+	{
+		float mat[3][3] = {{cos(alpha), sin(alpha), 0}, {sin(alpha), cos(alpha), 0}, {0, 0, 1}};
+		return(mult_mat(mat, vect));
+	}
+	return (NULL);
+}
+
+t_vect	set_orientation_cam(t_camera *camera, t_couple resolution, int i, int j)
+{
+	t_vect	vect_dir;
+
+	vect_dir = camera->orientation;
+
+	float a = j - (resolution.w - 1) / 2.;
+	float b = i - (resolution.h - 1) / 2.;
+	float c = resolution.w / (2 * tan((camera->fov / 2) * (M_PI / 180)));
+
+	vect_dir.x = 1 * a + 0 * b + 0 * c;
+	vect_dir.y = 0 * a + 1 * b + 0 * c;
+	vect_dir.z = 0 * a + 0 * b + 1 * c;
+
+	return (vect_dir);
+}
+
 void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 {
-	// t_rgb	rgb;
 	int		j;
 	int		i;
 	int		color;
 	t_vect	vect_dir;
 	t_ray	ray;
 
-	// rgb = ft_t_rgb(0120, 0120, 0120);
-	// color = ft_rgb(rgb);
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 50,  07777777770, 	"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 100, 07777770000, 	"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 150, 01201201200, 	"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 200, color, 		"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 250, 07770000000, 	"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 300, 00007770000, 	"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 350, 00000007770, 	"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 400, 07770007770, 	"Bonne Annee");
-	// mlx_string_put(mlx_ptr, win_ptr, 100, 450, 00007777770, 	"Bonne Annee");
-
 	i = -1;
-	// for each pixel of the screen
 	while (++i < scene->resolution.h)
 	{
 		j = -1;
@@ -43,17 +85,16 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 			//Final color = 0;
 			color = rgb_to_int(float_to_rgb(j/4, i/8, (j+i)/12));
 			//Ray = { starting point, direction };
-			vect_dir = ((t_camera*)scene->cameras->next->content)->orientation;
-			vect_dir.x += j - (scene->resolution.w - 1) / 2.;
-			vect_dir.y += i - (scene->resolution.h - 1) / 2.;
-			vect_dir.z += scene->resolution.w / (2 * tan((((t_camera*)scene->cameras->next->content)->fov / 2) * (M_PI / 180)));
-			printf("position:\t(%.1f,\t%.1f,\t%.1f)\ndirection:%s\t(%.1f, \t%.1f, \t %.1f)\n\n",
-													((t_camera*)scene->cameras->next->content)->pos.x,
-													((t_camera*)scene->cameras->next->content)->pos.y,
-													((t_camera*)scene->cameras->next->content)->pos.z,
-													i  == scene->resolution.h /2 && j == scene->resolution.w /2? "middle\n\n" : "",
-													vect_dir.x,
-													vect_dir.y,
+			vect_dir = set_orientation_cam(((t_camera*)scene->cameras->next->content) , scene->resolution, i, j);
+			//printf("position:\t(%.2f,\t%.2f,\t%.2f)\n",\
+													((t_camera*)scene->cameras->next->content)->pos.x,\
+													((t_camera*)scene->cameras->next->content)->pos.y,\
+													((t_camera*)scene->cameras->next->content)->pos.z);
+			printf("direction:%s\t(%.2f,\t%.2f,\t %.2f)\n\n",\
+													i  == scene->resolution.h / 2 \
+													&& j == scene->resolution.w / 2 ? "\tmiddle\n\n" : "",\
+													vect_dir.x,\
+													vect_dir.y,\
 													vect_dir.z);
 			ray = new_ray(((t_camera*)(scene->cameras->next))->pos, vect_dir);
 			//Repeat until reflection factor is 0 or maximum depth is reached;
@@ -82,3 +123,5 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 		}
 	}
 }
+
+

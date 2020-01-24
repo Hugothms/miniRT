@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 20:44:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/24 11:08:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		set_sphere(t_scene *scene, char **strs)
 {
 	t_sphere	*sphere;
 
-	printf("set sphere\n");
 	if (!(sphere = malloc(sizeof(*sphere))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	sphere->pos = str_to_triple(strs[1]);
@@ -29,7 +28,6 @@ void		set_plane(t_scene *scene, char **strs)
 {
 	t_plane		*plane;
 
-	printf("set plane\n");
 	if (!(plane = malloc(sizeof(*plane))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	plane->pos = str_to_triple(strs[1]);
@@ -42,7 +40,6 @@ void		set_square(t_scene *scene, char **strs)
 {
 	t_square	*square;
 
-	printf("set square\n");
 	if (!(square = malloc(sizeof(*square))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	square->pos = str_to_triple(strs[1]);
@@ -56,7 +53,6 @@ void		set_cylinder(t_scene *scene, char **strs)
 {
 	t_cylinder	*cylinder;
 
-	printf("set cylinder\n");
 	if (!(cylinder = malloc(sizeof(*cylinder))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	cylinder->pos = str_to_triple(strs[1]);
@@ -71,7 +67,6 @@ void		set_triangle(t_scene *scene, char **strs)
 {
 	t_triangle	*triangle;
 
-	printf("set triangle\n");
 	if (!(triangle = malloc(sizeof(*triangle))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	triangle->p1 = str_to_triple(strs[1]);
