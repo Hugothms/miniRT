@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 14:21:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/24 10:54:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,18 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 			//Final color = 0;
 			color = rgb_to_int(float_to_rgb(j/4, i/8, (j+i)/12));
 			//Ray = { starting point, direction };
-			vect_dir = ((t_camera*)(scene->cameras->next->content))->orientation;
-			vect_dir.x += j - scene->resolution.w / 2.;
-			vect_dir.y += i - scene->resolution.h / 2.;
-			vect_dir.z += 0;
+			vect_dir = ((t_camera*)scene->cameras->next->content)->orientation;
+			vect_dir.x += j - (scene->resolution.w - 1) / 2.;
+			vect_dir.y += i - (scene->resolution.h - 1) / 2.;
+			vect_dir.z += scene->resolution.w / (2 * tan((((t_camera*)scene->cameras->next->content)->fov / 2) * (M_PI / 180)));
+			printf("position:\t(%.1f,\t%.1f,\t%.1f)\ndirection:%s\t(%.1f, \t%.1f, \t %.1f)\n\n",
+													((t_camera*)scene->cameras->next->content)->pos.x,
+													((t_camera*)scene->cameras->next->content)->pos.y,
+													((t_camera*)scene->cameras->next->content)->pos.z,
+													i  == scene->resolution.h /2 && j == scene->resolution.w /2? "middle\n\n" : "",
+													vect_dir.x,
+													vect_dir.y,
+													vect_dir.z);
 			ray = new_ray(((t_camera*)(scene->cameras->next))->pos, vect_dir);
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			{

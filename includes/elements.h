@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 14:12:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/23 15:01:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,44 +23,44 @@ typedef struct		s_ambient_light
 
 typedef struct		s_camera
 {
-	t_vect		pos;
-	t_vect		orientation;
+	t_vect			pos;
+	t_vect			orientation;
 	float			fov;
 }					t_camera;
 
 typedef struct		s_light
 {
-	t_vect		pos;
+	t_vect			pos;
 	float			ratio;
 	t_rgb			color;
 }					t_light;
 
 typedef struct		s_sphere
 {
-	t_vect		pos;
+	t_vect			pos;
 	float			diameter;
 	t_rgb			color;
 }					t_sphere;
 
 typedef struct		s_plane
 {
-	t_vect		pos;
-	t_vect		vect;
+	t_vect			pos;
+	t_vect			vect;
 	t_rgb			color;
 }					t_plane;
 
 typedef struct		s_square
 {
-	t_vect		pos;
-	t_vect		vect;
+	t_vect			pos;
+	t_vect			vect;
 	float			height;
 	t_rgb			color;
 }					t_square;
 
 typedef struct		s_cylinder
 {
-	t_vect		pos;
-	t_vect		vect;
+	t_vect			pos;
+	t_vect			vect;
 	float			diameter;
 	float			height;
 	t_rgb			color;
@@ -68,9 +68,9 @@ typedef struct		s_cylinder
 
 typedef struct		s_triangle
 {
-	t_vect		p1;
-	t_vect		p2;
-	t_vect		p3;
+	t_vect			p1;
+	t_vect			p2;
+	t_vect			p3;
 	t_rgb			color;
 }					t_triangle;
 
