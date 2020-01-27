@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 14:12:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/27 18:09:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ void			set_triangle(t_scene *scene, char **strs);
 
 
 t_rgb			str_to_rgb(char *str);
-t_vect		str_to_triple(char *str);
-t_vect		set_triple(char *x, char *y, char *z);
+t_vect			str_to_triple(char *str);
+t_vect			set_triple(char *x, char *y, char *z);
 
 void			print_err_and_exit(char *str, int err);
 
+t_vect			new_vect(float x, float y, float z);
+t_vect			set_vect_dir_cam(t_camera *camera, t_couple resolution, int i, int j);
+int				intersect(t_ray ray, t_sphere sphere);
 
 void			print_img(void *mlx_ptr, void *win_ptr,t_scene *scene);
 

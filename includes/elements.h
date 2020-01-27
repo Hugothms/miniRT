@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 15:01:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/27 17:44:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_camera
 {
 	t_vect			pos;
 	t_vect			orientation;
+	t_vect			up;
 	float			fov;
 }					t_camera;
 
@@ -38,7 +39,7 @@ typedef struct		s_light
 typedef struct		s_sphere
 {
 	t_vect			pos;
-	float			diameter;
+	float			radius;
 	t_rgb			color;
 }					t_sphere;
 
