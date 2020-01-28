@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 14:21:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:06:36 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char				*fill_positivenbr_base(long nbr, char *base,
 					char *res, int i);
 char				*fill_nbr_base(char *res, long nbr, char *base, int sign);
 char				*ft_strrev_minus_1(char *res);
-
+void				ft_swap(void *a, void *b);
 int					ft_atoi(const char *str);
 long				ft_atol(const char *nptr);
 float				ft_atof(const char *str);

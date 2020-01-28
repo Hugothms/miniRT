@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/01/10 17:28:29 by hthomas          ###   ########.fr        #
+#    Updated: 2020/01/28 13:58:04 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ OBJS		=	${SRCS:.c=.o}
 INCLUDES	=	libft.h
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-SRCS 		=	ft_memset.c				\
+SRCS 		=	ft_swap.c				\
+				ft_memset.c				\
 				ft_bzero.c				\
 				ft_memcpy.c				\
 				ft_memccpy.c			\
