@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 15:04:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 15:56:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	set_camera(t_scene *scene, char **data)
 	if (!(camera = malloc(sizeof(*camera))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	camera->pos = str_to_triple(data[1]);
-	camera->orientation = str_to_triple(data[2]);
+	camera->orientation = normalize(str_to_triple(data[2]));
 	camera->up = new_vect(0, 1, 0);
 	camera->fov = ft_atof(data[3]);
 	ft_lstadd_front(&(scene->cameras), ft_lstnew(camera));

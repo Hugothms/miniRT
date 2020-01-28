@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 14:05:19 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 17:29:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_vect		new_vect(float x, float y, float z)
+t_vect		new_vect(const float x, const float y, const float z)
 {
 	t_vect	new;
 
@@ -33,7 +33,7 @@ t_vect		normalize(t_vect vect)
 	return (vect);
 }
 
-t_vect		mult_mat(float mat[3][3], t_vect vect)
+t_vect		mult_mat(const float mat[3][3], t_vect vect)
 {
 	float	x;
 	float	y;
@@ -47,7 +47,7 @@ t_vect		mult_mat(float mat[3][3], t_vect vect)
 }
 
 
-t_vect		rot_vect(t_vect vect, float angle, char axe)
+t_vect		rot_vect(t_vect vect, const float angle, const char axe)
 {
 	float	alpha;
 
@@ -61,7 +61,7 @@ t_vect		rot_vect(t_vect vect, float angle, char axe)
 	return (new_vect(0, 0, 0));
 }
 
-float		dot_product(t_vect vect1, t_vect vect2)
+float		dot_product(const t_vect vect1, const t_vect vect2)
 {
 	return (vect1.x * vect2.x + vect1.y * vect2.y + vect1.z *vect2.z);
 }

@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 14:54:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 17:25:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_ray		new_ray(t_vect position, t_vect direction)
+t_ray		new_ray(const t_vect position, const t_vect direction)
 {
 	t_ray	ray;
 
@@ -21,7 +21,7 @@ t_ray		new_ray(t_vect position, t_vect direction)
 	return ray;
 }
 
-t_vect		set_vect_dir_cam(t_camera *camera, t_couple resolution, int i, int j)
+t_vect		set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j)
 {
 	t_vect	vect_dir;
 

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 15:06:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 15:56:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		set_plane(t_scene *scene, char **strs)
 	if (!(plane = malloc(sizeof(*plane))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	plane->pos = str_to_triple(strs[1]);
-	plane->vect = str_to_triple(strs[2]);
+	plane->vect = normalize(str_to_triple(strs[2]));
 	plane->color = str_to_rgb(strs[3]);
 	ft_lstadd_front(&(scene->planes), ft_lstnew(plane));;
 }
@@ -43,7 +43,7 @@ void		set_square(t_scene *scene, char **strs)
 	if (!(square = malloc(sizeof(*square))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	square->pos = str_to_triple(strs[1]);
-	square->vect = str_to_triple(strs[2]);
+	square->vect = normalize(str_to_triple(strs[2]));
 	square->height = ft_atof(strs[3]);
 	square->color = str_to_rgb(strs[4]);
 	ft_lstadd_front(&(scene->squares), ft_lstnew(square));;
@@ -56,7 +56,7 @@ void		set_cylinder(t_scene *scene, char **strs)
 	if (!(cylinder = malloc(sizeof(*cylinder))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	cylinder->pos = str_to_triple(strs[1]);
-	cylinder->vect = str_to_triple(strs[2]);
+	cylinder->vect = normalize(str_to_triple(strs[2]));
 	cylinder->diameter = ft_atof(strs[3]);
 	cylinder->height = ft_atof(strs[4]);
 	cylinder->color = str_to_rgb(strs[5]);

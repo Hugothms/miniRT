@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 14:47:35 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 15:14:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		main(int argc, char *argv[])
 
 	scene = get_scene(argc, argv);
 	mlx = init_win_img(scene->resolution);
-	print_img(mlx->mlx_ptr, mlx->win_ptr, scene);
+	print_img(mlx, scene);
 	get_controls_loop(mlx);
 	return (0);
 }
