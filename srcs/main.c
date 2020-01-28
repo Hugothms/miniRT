@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 14:17:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 14:47:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_mlx 	*init_win_img(t_couple resolution)
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, resolution.w, resolution.h, "title window")))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	//mlx_new_image(mlx->mlx_ptr, resolution.x, resolution.y);
+	if (!(mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution.w, resolution.h)))
+		print_err_and_exit("Minilibx error", MLX_ERROR);
 	return (mlx);
 }
 

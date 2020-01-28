@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 14:37:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/28 15:06:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ t_ray		trace_ray(t_list* cameras, t_couple resolution, int i, int j)
 	t_vect	vect_dir;
 
 	//Ray = { starting point, direction };
-	vect_dir = set_vect_dir_cam(((t_camera*)cameras->next->content), resolution, i, j);
+	vect_dir = set_vect_dir_cam(((t_camera*)cameras->content), resolution, i, j);
 	//printf("position:\t(% .3f,\t% .3f,\t% .3f)\n",\
-											((t_camera*)cameras->next->content)->pos.x,\
-											((t_camera*)cameras->next->content)->pos.y,\
-											((t_camera*)cameras->next->content)->pos.z);
+											((t_camera*)cameras->content)->pos.x,\
+											((t_camera*)cameras->content)->pos.y,\
+											((t_camera*)cameras->content)->pos.z);
 	//printf("direction:%s\t(% .3f,\t% .3f,\t % .3f)\n\n",\
 											i  == resolution.h / 2 \
 											&& j == resolution.w / 2 ? "\tmiddle\n\n" : "",\
 											vect_dir.x,\
 											vect_dir.y,\
 											vect_dir.z);
-	return(new_ray(((t_camera*)(cameras->next))->pos, vect_dir));
+	return(new_ray(((t_camera*)(cameras))->pos, vect_dir));
 }
 
 void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
@@ -57,8 +57,8 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 						//determine closest ray object/intersection;
 					}
 					//if intersection exists
-					t_sphere shpere=  *(t_sphere*)(scene->spheres->next->content);
-					if (intersect(ray,shpere))
+					t_sphere shpere =  *(t_sphere*)(scene->spheres->content);
+					if (intersect(ray, shpere))
 					{
 						//for each light in the scene
 						{
@@ -76,5 +76,3 @@ void	print_img(void *mlx_ptr, void *win_ptr,t_scene *scene)
 		}
 	}
 }
-
-
