@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 17:26:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/29 15:07:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@ int solveQuadratic(const float a, const float b, const float c, float *x0, float
 	}
 	if (*x0 > *x1)
 		ft_swap(x0, x1);
-
 	return (1);
 }
 
+/***
+ * check si le ray intersect la sphere et
+ * retourne la distance entre le ray et le point de contact s'il y a contact
+ ***/
 int intersect_sphere(const t_ray ray, const t_sphere sphere)
 {
 	float	t0;

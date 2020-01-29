@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 17:28:35 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/29 14:59:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, con
 int				intersect_sphere(const t_ray ray, const t_sphere sphere);
 int				intersect_plane(const t_ray ray, const t_plane plane);
 int				hit_sphere(const t_ray ray, const t_sphere sphere);
+float			to_rad(float angle);
 
 void			print_img(const t_mlx *mlx, const t_scene *scene);
 

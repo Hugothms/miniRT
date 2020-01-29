@@ -6,12 +6,16 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 18:45:17 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/29 16:36:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
+/***
+ * cree un ray depuis la posision de la camera qui passe par le pixel demandé
+ * en prenant en compre la resolution de l'image et l'angle de vision de la camera
+ ***/
 t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pixel)
 {
 	t_vect vect_dir;
@@ -31,17 +35,25 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 	return (new_ray(((t_camera *)(cameras))->pos, vect_dir));
 }
 
-void 	*trace_ray(const t_ray ray, const t_scene *scene, float dist)
+/***
+ *
+ ***/
+void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **object)
 {
 	t_list		*spheres;
+	float		tmp;
 
 	spheres = scene->spheres;
 	//for each object in the scene
 	while(spheres)
 	{
 		//determine closest ray/object intersection;
-		if (intersect_sphere(ray, *(t_sphere*)(scene->spheres->content)) < dist)
-			return ((t_sphere*)(scene->spheres->content));
+		if ((tmp = intersect_sphere(ray, *(t_sphere*)(scene->spheres->content))) < *dist)
+		{
+			*dist = tmp;
+			*object = &(scene->spheres->content);
+			return ("sp");
+		}
 		spheres = spheres->next;
 	}
 	return (0);
@@ -56,6 +68,7 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 	float		reflection_factor;
 	int			depth;
 	float		dist;
+	char		*type;
 
 	pixel.h = -1;
 	while (++pixel.h < scene->resolution.h)
@@ -73,7 +86,7 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 			{
 				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
-				object = trace_ray(ray, scene, dist);
+				type = trace_ray(ray, scene, &dist, &object);
 				//if intersection exists
 				t_sphere sphere = *(t_sphere *)(scene->spheres->content);
 				if (object)
@@ -135,8 +148,11 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 			pixels[i][j] = object->color * light.brightness;
 		else
 			pixels[i][j] = 0;
+*/
 
 
+
+/*
 for each pixel do
 	compute viewing ray
 	set pixel color to background color
@@ -157,4 +173,51 @@ Here the statement “if ray hits an object...” can be implemented as a functi
 
 
 
-
+/*
+Procedure RenderPicture()
+  For each pixel on the screen,
+    Generate a ray R from the viewing position through the point on the view
+      plane corresponding to this pixel.
+    Call the procedure RayTrace() with the arguments R and 0
+    Plot the pixel in the colour value returned by RayTrace()
+  Next pixel
+End Procedure
+Procedure RayTrace(ray R, integer Depth) returns colour
+  Set the numerical variable Dis to a maximum value
+  Set the object pointer Obj to null
+  For each object in the scene
+    Calculate the distance (from the starting point of R) of the nearest
+      intersection of R with the object in the forward direction
+    If this distance is less than Dis
+      Update Dis to this distance
+      Set Obj to point to this object
+    End if
+  Next object
+  If Obj is not null
+    Set the position variable Pt to the nearest intersection point of R and Obj
+    Set the total colour C to black
+    For each light source in the scene
+      For each object in the scene
+        If this object blocks the light coming from the light source to Pt
+          Attenuate the intensity of the received light by the transmittivity
+            of the object
+        End if
+      Next object
+      Calculate the perceived colour of Obj at Pt due to this light source
+        using the value of the attenuated light intensity
+      Add this colour value to C
+    Next light source
+    If Depth is less than a maximum value
+      Generate two rays Refl and Refr in the reflected and refracted directions,
+        starting from Pt
+      Call RayTrace with arguments Refl and Depth + 1
+      Add (the return value * reflectivity of Obj) to C
+      Call RayTrace with arguments Refr and Depth + 1
+      Add (the return value * transmittivity of Obj) to C
+    End if
+  Else
+    Set the total colour C to the background colour
+  End if
+  Return C
+End Procedure
+*/

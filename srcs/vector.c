@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 17:29:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/29 14:59:15 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_vect		rot_vect(t_vect vect, const float angle, const char axe)
 {
 	float	alpha;
 
-	alpha = (angle * 0.5) * (M_PI / 180);
+	alpha = to_rad(angle * 0.5);
 	if (axe == 'x')
 		return(mult_mat((float[3][3]){{1, 0, 0}, {0, cos(alpha), -sin(alpha)}, {0, sin(alpha), -cos(alpha)}}, vect));
 	else if (axe == 'y')
