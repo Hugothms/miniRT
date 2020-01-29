@@ -31,7 +31,7 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 	return (new_ray(((t_camera *)(cameras))->pos, vect_dir));
 }
 
-void 	*trace_ray(const t_ray ray, const t_scene *scene)
+void 	*trace_ray(const t_ray ray, const t_scene *scene, float dist)
 {
 	t_list		*spheres;
 
@@ -40,7 +40,7 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene)
 	while(spheres)
 	{
 		//determine closest ray/object intersection;
-		if (intersect_sphere(ray, *(t_sphere*)(scene->spheres->content)))
+		if (intersect_sphere(ray, *(t_sphere*)(scene->spheres->content)) < dist)
 			return ((t_sphere*)(scene->spheres->content));
 		spheres = spheres->next;
 	}
@@ -55,6 +55,7 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 	void		*object;
 	float		reflection_factor;
 	int			depth;
+	float		dist;
 
 	pixel.h = -1;
 	while (++pixel.h < scene->resolution.h)
@@ -70,8 +71,9 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 			object = NULL;
 			while(reflection_factor > 1e-6 && depth--)
 			{
+				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
-				object = trace_ray(ray, scene);
+				object = trace_ray(ray, scene, dist);
 				//if intersection exists
 				t_sphere sphere = *(t_sphere *)(scene->spheres->content);
 				if (object)
