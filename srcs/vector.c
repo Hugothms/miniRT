@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/29 14:59:15 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/29 17:20:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_vect		new_vect(const float x, const float y, const float z)
 	t_vect	new;
 
 	new.x = x;
-	new.x = y;
-	new.x = z;
+	new.y = y;
+	new.z = z;
 	return (new);
 }
 
@@ -27,10 +27,7 @@ t_vect		normalize(t_vect vect)
 	float	length;
 
 	length = sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
-	vect.x = vect.x / length;
-	vect.y = vect.y / length;
-	vect.z = vect.z / length;
-	return (vect);
+	return (new_vect(vect.x / length, vect.y / length, vect.z / length));
 }
 
 t_vect		mult_mat(const float mat[3][3], t_vect vect)

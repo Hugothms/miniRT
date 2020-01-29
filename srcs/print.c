@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/29 16:36:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/01/29 17:34:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **obje
 
 	spheres = scene->spheres;
 	//for each object in the scene
-	while(spheres)
+	while(spheres->next->content)
 	{
 		//determine closest ray/object intersection;
 		if ((tmp = intersect_sphere(ray, *(t_sphere*)(scene->spheres->content))) < *dist)
