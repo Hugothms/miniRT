@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 15:03:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 15:43:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,22 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **obje
 {
 	t_list		*spheres;
 	float		tmp;
+	t_ray		*impact;
 
-	spheres = scene->spheres;
 	//for each object in the scene
+	spheres = scene->spheres;
 	while(spheres->next)
 	{
 		//determine closest ray/object intersection;
-		// printf("NEW LOOP\n");
-		// printf("spheres\t%p\n", spheres);
-		// printf("content\t%p\n", (spheres->content));
-		// printf("ray\t%p\n", &ray);
-		if ((tmp = intersect_sphere(ray, (t_sphere*)(spheres->content))) < *dist)
+		if ((tmp = intersect_sphere(ray, (t_sphere*)(spheres->content), impact)) < *dist)
 		{
 			*dist = tmp;
 			*object = spheres->content;
-			// printf("\t\t\t\tsphere found\n");
-			return ("sp");
 		}
-		// printf("next\t%p\n", spheres->next);
 		spheres = spheres->next;
 	}
-
+	if (*dist != INFINITY)
+		return ("sp");
 	return (0);
 }
 
@@ -95,6 +90,7 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
 				type = trace_ray(ray, scene, &dist, &object);
 				//if intersection exists
+				//get_obj(type, );
 				t_sphere sphere = *(t_sphere *)(scene->spheres->content);
 				if (object)
 				{
