@@ -6,39 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 15:44:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 18:10:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_vect		set_triple(char *x, char *y, char *z)
-{
-	t_vect	triple;
-
-	triple.x = ft_atof(x);
-	triple.y = ft_atof(y);
-	triple.z = ft_atof(z);
-	return (triple);
-}
-
-t_vect		str_to_triple(char *str)
-{
-	char	**tab;
-
-	tab = ft_split(str, ',');
-	return (set_triple(tab[0], tab[1], tab[2]));
-}
-
-t_rgb		str_to_rgb(char *str)
-{
-	char	**tab;
-
-	tab = ft_split(str, ',');
-	return (char_to_rgb(tab[0], tab[1], tab[2]));
-}
-
-void	init_scene(t_scene *scene)
+void		init_scene(t_scene *scene)
 {
 	scene->resolution.w = 0;
 	scene->resolution.h = 0;
@@ -55,7 +29,7 @@ void	init_scene(t_scene *scene)
 	scene->triangles = ft_lstnew(NULL);
 }
 
-t_scene			*parse(int fd)
+t_scene		*parse(int fd)
 {
 	t_scene	*scene;
 	char	*line;
@@ -97,5 +71,23 @@ t_scene			*parse(int fd)
 		}
 		free(line);
 	}
+	return (scene);
+}
+
+t_scene		*get_scene(int argc, char *argv[])
+{
+	int			fd;
+	t_scene		*scene;
+
+	if (argc < 2 || argc > 3)
+		print_err_and_exit("Wrong number of argument", 1);
+	if (argc == 3 && ft_strcmp(argv[2], "--save"))
+		print_err_and_exit("2nd argument must be '--save'", 1);
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+		print_err_and_exit(strerror(errno), errno);
+	if (!(scene = parse(fd)))
+		print_err_and_exit("Parsing error", PARSE_ERROR);
+	if (close(fd) == -1)
+		print_err_and_exit(strerror(errno), errno);
 	return (scene);
 }

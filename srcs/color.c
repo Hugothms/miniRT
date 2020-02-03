@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/22 17:52:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 15:57:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_rgb	float_to_rgb(float r, float g, float b)
+t_rgb	int_to_rgb(int r, int g, int b)
 {
 	t_rgb	rgb;
 
@@ -20,17 +20,6 @@ t_rgb	float_to_rgb(float r, float g, float b)
 	rgb.g = g;
 	rgb.b = b;
 	return (rgb);
-}
-
-int		rgb_to_int(t_rgb rgb)
-{
-	int	color;
-
-	color = 0;
-	color += 2097152 * rgb.r;
-	color += 4096 * rgb.g;
-	color += 8 * rgb.b;
-	return (color);
 }
 
 t_rgb	char_to_rgb(char *r, char *g, char *b)
@@ -41,4 +30,9 @@ t_rgb	char_to_rgb(char *r, char *g, char *b)
 	rgb.g = ft_atoi(g);
 	rgb.b = ft_atoi(b);
 	return (rgb);
+}
+
+int		rgb_to_int(t_rgb rgb)
+{
+	return( rgb.r << 16 |  rgb.g << 8 |  rgb.b);
 }

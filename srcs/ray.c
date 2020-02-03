@@ -6,11 +6,37 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/29 17:13:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 18:08:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+
+t_vect		set_triple(char *x, char *y, char *z)
+{
+	t_vect	triple;
+
+	triple.x = ft_atof(x);
+	triple.y = ft_atof(y);
+	triple.z = ft_atof(z);
+	return (triple);
+}
+
+t_vect		str_to_triple(char *str)
+{
+	char	**tab;
+
+	tab = ft_split(str, ',');
+	return (set_triple(tab[0], tab[1], tab[2]));
+}
+
+t_rgb		str_to_rgb(char *str)
+{
+	char	**tab;
+
+	tab = ft_split(str, ',');
+	return (char_to_rgb(tab[0], tab[1], tab[2]));
+}
 
 float	to_rad(float angle)
 {

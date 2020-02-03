@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 12:30:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 18:09:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,9 @@ int		key_function(int keycode, t_mlx *mlx)
 	return (0);
 }
 
-t_scene	*get_scene(int argc, char *argv[])
-{
-	int			fd;
-	t_scene		*scene;
-
-	if (argc < 2 || argc > 3)
-		print_err_and_exit("Wrong number of argument", 1);
-	if (argc == 3 && ft_strcmp(argv[2], "--save"))
-		print_err_and_exit("2nd argument must be '--save'", 1);
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		print_err_and_exit(strerror(errno), errno);
-	if (!(scene = parse(fd)))
-		print_err_and_exit("Parsing error", PARSE_ERROR);
-	if (close(fd) == -1)
-		print_err_and_exit(strerror(errno), errno);
-	return (scene);
-}
-
-t_mlx 	*init_win_img(t_couple resolution)
+t_mlx 	*init_win(t_couple resolution)
 {
 	t_mlx		*mlx;
-	t_img		*img;
 
 	if (!(mlx = malloc(sizeof(*mlx))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
@@ -56,9 +37,23 @@ t_mlx 	*init_win_img(t_couple resolution)
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, resolution.w, resolution.h, "title window")))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
+	return (mlx);
+}
+
+t_img	*init_img(t_mlx *mlx, t_couple resolution)
+{
+	t_img		*img;
+
+	if (!(img = malloc(sizeof(*img))))
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution.w, resolution.h)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	return (mlx);
+	// *(img->bits_per_pixel) = 3;
+	// *(img->size_line) = resolution.w;
+	// *(img->endian) = 1;
+	if(!(img->data = mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
+		print_err_and_exit("Minilibx error", MLX_ERROR);
+	return (img);
 }
 
 void	get_controls_loop(t_mlx *mlx)
@@ -71,9 +66,11 @@ int		main(int argc, char *argv[])
 {
 	t_scene		*scene;
 	t_mlx		*mlx;
+	t_img		*img;
 
 	scene = get_scene(argc, argv);
-	mlx = init_win_img(scene->resolution);
+	mlx = init_win(scene->resolution);
+	img = init_img(mlx, scene->resolution);
 	print_img(mlx, scene);
 	get_controls_loop(mlx);
 	return (0);

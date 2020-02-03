@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 15:43:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 15:55:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 		while (++pixel.w < scene->resolution.w)
 		{
 			//Final color = 0;
-			color = rgb_to_int(float_to_rgb(0, 0, 0));
+			color = rgb_to_int(int_to_rgb(0, 0, 0));
 			reflection_factor = 1;
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			depth = 1;

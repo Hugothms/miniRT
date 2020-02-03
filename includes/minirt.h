@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 15:43:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 18:10:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ float			to_rad(float angle);
 void			print_img(const t_mlx *mlx, const t_scene *scene);
 
 void        	ft_put_pixel(char *data, t_couple pixel, int color, int win_width);
+
+t_scene			*get_scene(int argc, char *argv[]);
 
 #endif
