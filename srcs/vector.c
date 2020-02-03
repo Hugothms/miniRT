@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/29 17:20:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 12:38:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_vect		mult_mat(const float mat[3][3], t_vect vect)
 	vect = new_vect(x, y, z);
 	return (vect);
 }
-
 
 t_vect		rot_vect(t_vect vect, const float angle, const char axe)
 {

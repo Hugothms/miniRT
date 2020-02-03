@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/29 17:34:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 12:40:21 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,22 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **obje
 
 	spheres = scene->spheres;
 	//for each object in the scene
-	while(spheres->next->content)
+	while(spheres)
 	{
 		//determine closest ray/object intersection;
-		if ((tmp = intersect_sphere(ray, *(t_sphere*)(scene->spheres->content))) < *dist)
+		printf("content\t%d\n", *(t_sphere*)(spheres->content));
+		printf("ray\t%d\n", ray);
+		if ((tmp = intersect_sphere(ray, *(t_sphere*)(spheres->content))) < *dist)
 		{
 			*dist = tmp;
-			*object = &(scene->spheres->content);
+			*object = &(spheres->content);
+			printf("\t\t\t\tsphere found\n");
 			return ("sp");
 		}
+		//printf("next\t%d\t%d\n", spheres, (t_sphere*)(spheres->content));
 		spheres = spheres->next;
 	}
+
 	return (0);
 }
 

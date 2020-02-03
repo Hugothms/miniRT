@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 14:46:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 12:30:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ typedef struct		s_mlx
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	void			*img_ptr;
 }					t_mlx;
+
+typedef struct		s_img
+{
+	void			*img_ptr;
+}					t_img;
 
 typedef struct		s_rgb
 {

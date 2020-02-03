@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 16:20:26 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 12:06:51 by hthomas          ###   ########.fr       */
+/*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
+/*   Updated: 2020/02/03 10:47:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minirt.h"
 
-t_list	*ft_lstnew(void *content)
+void        ft_put_pixel(char *data, t_couple pixel, int color, int win_width)
 {
-	t_list	*new;
+    int (*tab)[win_width][1]; // prepare the cast
 
-	if (!(new = malloc(sizeof(t_list))))
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+    tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
+    *tab[pixel.w][pixel.h] = color; // set the pixel at the coord x,y with the color value
 }

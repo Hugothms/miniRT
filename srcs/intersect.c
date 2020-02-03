@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/29 17:29:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 11:44:59 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ float	intersect_sphere(const t_ray ray, const t_sphere sphere)
 	float	t1;
 	t_vect	*vect;
 
-	printf("%f\n", sphere.pos.y);
+	//printf("pos:\t%.1f\t%.1f\n", sphere.pos.x, sphere.pos.y);
 	*vect = new_vect(ray.pos.x - sphere.pos.x, ray.pos.y - sphere.pos.y, ray.pos.z - sphere.pos.z);
 	if (!solveQuadratic(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, *vect), dot_product(*vect, *vect) - sphere.radius, &t0, &t1))
 		return (INFINITY);
