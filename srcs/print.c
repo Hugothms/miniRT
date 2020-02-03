@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 12:40:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 15:03:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,21 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **obje
 
 	spheres = scene->spheres;
 	//for each object in the scene
-	while(spheres)
+	while(spheres->next)
 	{
 		//determine closest ray/object intersection;
-		printf("content\t%d\n", *(t_sphere*)(spheres->content));
-		printf("ray\t%d\n", ray);
-		if ((tmp = intersect_sphere(ray, *(t_sphere*)(spheres->content))) < *dist)
+		// printf("NEW LOOP\n");
+		// printf("spheres\t%p\n", spheres);
+		// printf("content\t%p\n", (spheres->content));
+		// printf("ray\t%p\n", &ray);
+		if ((tmp = intersect_sphere(ray, (t_sphere*)(spheres->content))) < *dist)
 		{
 			*dist = tmp;
-			*object = &(spheres->content);
-			printf("\t\t\t\tsphere found\n");
+			*object = spheres->content;
+			// printf("\t\t\t\tsphere found\n");
 			return ("sp");
 		}
-		//printf("next\t%d\t%d\n", spheres, (t_sphere*)(spheres->content));
+		// printf("next\t%p\n", spheres->next);
 		spheres = spheres->next;
 	}
 

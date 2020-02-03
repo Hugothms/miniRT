@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 11:44:59 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/03 15:03:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,14 @@ int solveQuadratic(const float a, const float b, const float c, float *x0, float
  * check si le ray intersect la sphere et
  * retourne la distance entre le ray et le point de contact s'il y a contact
  ***/
-float	intersect_sphere(const t_ray ray, const t_sphere sphere)
+float	intersect_sphere(const t_ray ray, const t_sphere *sphere)
 {
 	float	t0;
 	float	t1;
-	t_vect	*vect;
+	t_vect	vect;
 
-	//printf("pos:\t%.1f\t%.1f\n", sphere.pos.x, sphere.pos.y);
-	*vect = new_vect(ray.pos.x - sphere.pos.x, ray.pos.y - sphere.pos.y, ray.pos.z - sphere.pos.z);
-	if (!solveQuadratic(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, *vect), dot_product(*vect, *vect) - sphere.radius, &t0, &t1))
+	vect = new_vect(ray.pos.x - sphere->pos.x, ray.pos.y - sphere->pos.y, ray.pos.z - sphere->pos.z);
+	if (!solveQuadratic(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, vect), dot_product(vect, vect) - sphere->radius, &t0, &t1))
 		return (INFINITY);
 	if (t0 > t1)
 		ft_swap(&t0, &t1);
@@ -62,9 +61,9 @@ float	intersect_sphere(const t_ray ray, const t_sphere sphere)
 		t0 = t1;
 		if (t0 < 0)
 			return (INFINITY);
-		return (distance(new_vect(0, 0, 0), *vect));
+		return (distance(new_vect(0, 0, 0), vect));
 	}
-	return (distance(new_vect(0, 0, 0), *vect));
+	return (distance(new_vect(0, 0, 0), vect));
 }
 
 /*int	hit_sphere(t_ray ray, t_sphere sphere)
