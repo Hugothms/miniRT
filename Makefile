@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/04 10:30:12 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/04 10:36:29 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,28 +108,9 @@ re:		fclean all
 
 
 
+
 test:	$(EXEC)
 	./$<
 
-$(EXEC):	$(NAME) main.c
-	$(C) $(CFLAGS) -o $@ main.c -L./ -lftprintf
-
-test_hardcore: $(EXEC_HARDCORE)
-	./$<
-
-$(EXEC_HARDCORE):	$(NAME) main_hardcore.c
-	$(C) -o  $@ main_hardcore.c $(SRCS) -L./ -lftprintf
-
-
-test_test: $(EXEC_test)
-	./$<
-
-$(EXEC_test): $(NAME) main_test.c
-	$(C) $(LDFLAGS) -o $@ main_test.c -L./ -lftprintf
-
 test_example:	$(NAME)
 	./$< example.rt
-
-$(EXEC_precise):	$(NAME) main_precise.c
-	#clear
-	$(C) $(CFLAGS) -o $@ main_precise.c $(LIBLINK)

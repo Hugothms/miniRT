@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 15:57:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 11:00:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ t_rgb	char_to_rgb(char *r, char *g, char *b)
 
 int		rgb_to_int(t_rgb rgb)
 {
-	return( rgb.r << 16 |  rgb.g << 8 |  rgb.b);
+	return (rgb.r << 16 | rgb.g << 8 | rgb.b);
 }

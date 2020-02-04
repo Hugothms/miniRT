@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 15:42:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 11:20:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ float	distance(t_vect p1, t_vect p2)
 	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
 }
 
-int solveQuadratic(const float a, const float b, const float c, float *x0, float *x1)
+int 	solveQuadratic(const float a, const float b, const float c, float *x0, float *x1)
 {
 	float	discr;
 	float	q;

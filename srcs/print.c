@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 08:45:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 11:10:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 }
 
 /***
- *
+ * trouve l'objet le plus proche dans la direction du ray
  ***/
 void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **object)
 {
@@ -46,7 +46,7 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **obje
 
 	//for each object in the scene
 	spheres = scene->spheres;
-	while(spheres->next)
+	while (spheres->next)
 	{
 		//determine closest ray/object intersection;
 		if ((tmp = intersect_sphere(ray, (t_sphere*)(spheres->content), impact)) < *dist)
@@ -84,7 +84,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			depth = 1;
 			object = NULL;
-			while(reflection_factor > 1e-6 && depth--)
+			while (reflection_factor > 1e-6 && depth--)
 			{
 				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);

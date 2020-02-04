@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 10:26:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 11:10:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		*str_width(int nb, int width)
 
 	if (!(res = malloc(sizeof(*res))))
 		return (NULL);
-	if(!(*res = malloc((width + 1) * sizeof(char))))
+	if (!(*res = malloc((width + 1) * sizeof(char))))
 		return (NULL);
 	diff = width - nbrlen(nb);
 	if (diff > 0)
@@ -39,7 +39,7 @@ char	*screenshot_datetime()
 
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
-	*res = ft_strdup("Screenshot 0000-00-00 00:00:00.bmp");
+	*res = ft_strdup("Screenshot YYYY-MM-DD hh:mm:ss.bmp");
 	ft_memcpy(*res + 11, str_width(tm.tm_year + 1900, 4), 4);
 	ft_memcpy(*res + 16, str_width(tm.tm_mon + 1, 2), 2);
 	ft_memcpy(*res + 19, str_width(tm.tm_mday, 2), 2);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 15:56:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 11:18:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		set_sphere(t_scene *scene, char **strs)
 	sphere->pos = str_to_triple(strs[1]);
 	sphere->radius = ft_atof(strs[2]);
 	sphere->color = str_to_rgb(strs[3]);
-	ft_lstadd_front(&(scene->spheres), ft_lstnew(sphere));;
+	ft_lstadd_front(&(scene->spheres), ft_lstnew(sphere));
 }
 
 void		set_plane(t_scene *scene, char **strs)
@@ -33,7 +33,7 @@ void		set_plane(t_scene *scene, char **strs)
 	plane->pos = str_to_triple(strs[1]);
 	plane->vect = normalize(str_to_triple(strs[2]));
 	plane->color = str_to_rgb(strs[3]);
-	ft_lstadd_front(&(scene->planes), ft_lstnew(plane));;
+	ft_lstadd_front(&(scene->planes), ft_lstnew(plane));
 }
 
 void		set_square(t_scene *scene, char **strs)
@@ -46,7 +46,7 @@ void		set_square(t_scene *scene, char **strs)
 	square->vect = normalize(str_to_triple(strs[2]));
 	square->height = ft_atof(strs[3]);
 	square->color = str_to_rgb(strs[4]);
-	ft_lstadd_front(&(scene->squares), ft_lstnew(square));;
+	ft_lstadd_front(&(scene->squares), ft_lstnew(square));
 }
 
 void		set_cylinder(t_scene *scene, char **strs)
@@ -60,7 +60,7 @@ void		set_cylinder(t_scene *scene, char **strs)
 	cylinder->diameter = ft_atof(strs[3]);
 	cylinder->height = ft_atof(strs[4]);
 	cylinder->color = str_to_rgb(strs[5]);
-	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cylinder));;
+	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cylinder));
 }
 
 void		set_triangle(t_scene *scene, char **strs)
@@ -73,5 +73,5 @@ void		set_triangle(t_scene *scene, char **strs)
 	triangle->p2 = str_to_triple(strs[2]);
 	triangle->p3 = str_to_triple(strs[3]);
 	triangle->color = str_to_rgb(strs[4]);
-	ft_lstadd_front(&(scene->triangles), ft_lstnew(triangle));;
+	ft_lstadd_front(&(scene->triangles), ft_lstnew(triangle));
 }
