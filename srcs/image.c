@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 18:03:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 19:09:01 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			save_img(const char *filename, const unsigned char *data, t_couple resolu
 	unsigned char	*bmpfileheader;
 	unsigned char	*bmpinfoheader;
 
-	ft_memcpy(bmppad, (char[]){0, 0, 0, 0}, 4);
+	ft_memcpy(bmppad, (char[]){0, 0, 0}, 3);
 	f = open(filename, O_WRONLY | O_APPEND | O_CREAT);
 	bmpfileheader = file_header_bmp(54 + 4 * resolution.w * resolution.h);
 	write(f, bmpfileheader, 14);
@@ -83,7 +83,5 @@ void			save_img(const char *filename, const unsigned char *data, t_couple resolu
 	write(f, bmpinfoheader, 40);
 	free(bmpinfoheader);
 	write_pixels(f, data, resolution, bmppad);
-	free(bmpfileheader);
-	free(bmpinfoheader);
 	close(f);
 }

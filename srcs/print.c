@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 18:09:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:51:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			depth = 1;
 			object = NULL;
-			while (reflection_factor > 1e-6 && depth--)
+			while (depth-- && reflection_factor > 1e-6)
 			{
 				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);

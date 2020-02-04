@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 17:44:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 19:02:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_img	*init_img(t_mlx *mlx, t_couple resolution)
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	if (!(img->data = (unsigned char*)mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	printf("%d'%d'%d\n",(img->bits_per_pixel), (img->size_line), (img->endian));
+	printf("%d,%d,%d\n",(img->bits_per_pixel), (img->size_line), (img->endian));
 	return (img);
 }
 
@@ -67,13 +67,33 @@ int		main(int argc, char *argv[])
 	t_mlx		*mlx;
 	t_img		*img;
 
+	clock_t start, end;
+	double cpu_time_used;
+	start = clock();
 	scene = get_scene(argc, argv);
+	end = clock();
+	printf("get_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	mlx = init_win(scene->resolution);
+	end = clock();
+	printf("init_win:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	img = init_img(mlx, scene->resolution);
+	end = clock();
+	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	print_img(mlx, img, scene);
+	end = clock();
+	printf("print_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
+	end = clock();
+	printf("put_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	if (argc == 3)
 		save_img(screenshot_datetime(), img->data, scene->resolution);
+	end = clock();
+	printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	get_controls_loop(mlx, img);
 	return (0);
 }
