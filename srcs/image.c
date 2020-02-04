@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 14:36:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:03:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
 	int (*tab)[win_width][1]; // prepare the cast
 
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
-	*tab[pixel.w][pixel.h] = color; // set the pixel at the coord x,y with the color value
+	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
 }
 
 unsigned char	*file_header_bmp(int filesize)

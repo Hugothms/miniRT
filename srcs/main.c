@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 14:30:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 17:44:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ t_img	*init_img(t_mlx *mlx, t_couple resolution)
 	return (img);
 }
 
-void	get_controls_loop(t_mlx *mlx)
+void	get_controls_loop(t_mlx *mlx, t_img *img)
 {
+	(void)img;
 	mlx_key_hook(mlx->win_ptr, key_function, mlx);
 	mlx_loop(mlx->mlx_ptr);
 }
@@ -73,6 +74,6 @@ int		main(int argc, char *argv[])
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
 	if (argc == 3)
 		save_img(screenshot_datetime(), img->data, scene->resolution);
-	get_controls_loop(mlx);
+	get_controls_loop(mlx, img);
 	return (0);
 }

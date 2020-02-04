@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 14:30:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 18:09:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 		while (++pixel.w < scene->resolution.w)
 		{
 			//Final color = 0;
-			color = rgb_to_int(int_to_rgb(255, 255, 255));
+			color = rgb_to_int(int_to_rgb(0, 0, 0));
 			reflection_factor = 1;
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			depth = 1;
@@ -89,9 +89,8 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
 				type = trace_ray(ray, scene, &dist, &object);
-				//if intersection exists
 				//get_obj(type, );
-				t_sphere sphere = *(t_sphere *)(scene->spheres->content);
+				//if intersection exists
 				if (object)
 				{
 					//for each light in the scene
@@ -100,7 +99,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 						{
 							//add this light contribution to computed color;
 						}
-						color = (rgb_to_int(sphere.color));
+						color = rgb_to_int(((t_sphere*)object)->color);
 					}
 				}
 				//Final color = Final color + computed color * previous reflection factor;
