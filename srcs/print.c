@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 11:10:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 14:30:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 		while (++pixel.w < scene->resolution.w)
 		{
 			//Final color = 0;
-			color = rgb_to_int(int_to_rgb(0, 0, 0));
+			color = rgb_to_int(int_to_rgb(255, 255, 255));
 			reflection_factor = 1;
 			//Repeat until reflection factor is 0 or maximum depth is reached;
 			depth = 1;
@@ -100,8 +100,8 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 						{
 							//add this light contribution to computed color;
 						}
+						color = (rgb_to_int(sphere.color));
 					}
-					color = (rgb_to_int(sphere.color));
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;

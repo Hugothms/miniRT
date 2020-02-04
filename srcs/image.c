@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 11:19:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 14:36:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,38 +52,38 @@ unsigned char	*info_header_bmp(t_couple resolution)
 	return (bmpinfoheader);
 }
 
-void			write_pixels(int f, const unsigned char *pixels, t_couple resolution, unsigned char bmppad[])
+void			write_pixels(int f, const unsigned char *data, t_couple resolution, unsigned char bmppad[])
 {
 	int i;
 	int filesize;
 
 	i = 0;
-	filesize = 54 + 3 * resolution.w * resolution.h;
+	filesize = 54 + 4 * resolution.w * resolution.h;
 	while (i < resolution.h)
 	{
-		write(f, pixels + (resolution.w * (resolution.h - i - 1) * 3), resolution.w);
+		write(f, data + (resolution.w * (resolution.h - i - 1) * 4), resolution.w);
 		write(f, bmppad, filesize - 54);
 		i++;
 	}
 }
 
-void			save_img(const char *filename, const unsigned char *pixels, t_couple resolution)
+void			save_img(const char *filename, const unsigned char *data, t_couple resolution)
 {
-	unsigned char	bmppad[3];
-	int				filesize;
+	unsigned char	bmppad[4];
 	int				f;
 	unsigned char	*bmpfileheader;
 	unsigned char	*bmpinfoheader;
 
-	ft_memcpy(bmppad, (char[]){0, 0, 0}, 3);
-	filesize = 54 + 3 * resolution.w * resolution.h;
+	ft_memcpy(bmppad, (char[]){0, 0, 0, 0}, 4);
 	f = open(filename, O_WRONLY | O_APPEND | O_CREAT);
-	bmpfileheader = file_header_bmp(filesize);
+	bmpfileheader = file_header_bmp(54 + 4 * resolution.w * resolution.h);
 	write(f, bmpfileheader, 14);
 	free(bmpfileheader);
 	bmpinfoheader = info_header_bmp(resolution);
 	write(f, bmpinfoheader, 40);
 	free(bmpinfoheader);
-	write_pixels(f, pixels, resolution, bmppad);
+	write_pixels(f, data, resolution, bmppad);
+	free(bmpfileheader);
+	free(bmpinfoheader);
 	close(f);
 }
