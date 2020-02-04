@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 18:51:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 19:34:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
 				type = trace_ray(ray, scene, &dist, &object);
-				//get_obj(type, );
+				//get_obj(type, object);
 				//if intersection exists
 				if (object)
 				{

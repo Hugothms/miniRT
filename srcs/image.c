@@ -6,29 +6,27 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 19:21:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 19:48:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../includes/minirt.h"
 
-void	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
+void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
 {
 	int (*tab)[win_width][1]; // prepare the cast
 
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
-	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
+	*tab[pixel.w][pixel.h] = color; // set the pixel at the coord x,y with the color value
 }
 
 unsigned char	*file_header_bmp(int filesize)
 {
 	unsigned char	*bmpfileheader;
 
-	if (!(bmpfileheader = malloc(14 * sizeof(unsigned char))))
+	if(!(bmpfileheader = malloc(14 * sizeof(unsigned char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	ft_memcpy(bmpfileheader, (char[]){'B', 'M', 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0}, 14);
+	ft_memcpy(bmpfileheader, (char[]){'B','M', 0,0,0,0, 0,0, 0,0, 54,0,0,0}, 14);
 	bmpfileheader[2] = (unsigned char)(filesize);
 	bmpfileheader[3] = (unsigned char)(filesize >> 8);
 	bmpfileheader[4] = (unsigned char)(filesize >> 16);
@@ -38,11 +36,11 @@ unsigned char	*file_header_bmp(int filesize)
 
 unsigned char	*info_header_bmp(t_couple resolution)
 {
-	unsigned char	*bmpinfoheader;
+		unsigned char	*bmpinfoheader;
 
-	if (!(bmpinfoheader = malloc(40 * sizeof(unsigned char))))
+	if(!(bmpinfoheader = malloc(40 * sizeof(unsigned char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	ft_memcpy(bmpinfoheader, (char[]){40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 24, 0}, 40);
+		ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 24,0}, 40);
 	bmpinfoheader[4] = (unsigned char)(resolution.w);
 	bmpinfoheader[5] = (unsigned char)(resolution.w >> 8);
 	bmpinfoheader[6] = (unsigned char)(resolution.w >> 16);
@@ -54,36 +52,36 @@ unsigned char	*info_header_bmp(t_couple resolution)
 	return (bmpinfoheader);
 }
 
-void			write_pixels(int f, const unsigned char *data, t_couple resolution, unsigned char bmppad[])
+void			write_data(int f, const unsigned char *data, t_couple resolution, unsigned char bmppad[])
 {
 	int i;
 	int filesize;
 
-	i = 0;
-	filesize = 54 + 4 * resolution.w * resolution.h;
-	while (i < resolution.h)
+	filesize = 54 + 3 * resolution.w * resolution.h;
+	i = -1;
+	while(++i < resolution.h)
 	{
-		write(f, data + (resolution.w * (resolution.h - i - 1) * 4), resolution.w);
+		write(f, data + (resolution.w * (resolution.h - i - 1) * 3), resolution.w);
 		write(f, bmppad, filesize - 54);
-		i++;
 	}
 }
 
 void			save_img(const char *filename, const unsigned char *data, t_couple resolution)
 {
-	unsigned char	bmppad[4];
+	unsigned char	bmppad[3];
+	int				filesize;
 	int				f;
 	unsigned char	*bmpfileheader;
 	unsigned char	*bmpinfoheader;
 
 	ft_memcpy(bmppad, (char[]){0, 0, 0}, 3);
+	filesize = 54 + 3 * resolution.w * resolution.h;
 	f = open(filename, O_WRONLY | O_APPEND | O_CREAT);
-	bmpfileheader = file_header_bmp(54 + 4 * resolution.w * resolution.h);
+	bmpfileheader = file_header_bmp(filesize);
 	write(f, bmpfileheader, 14);
 	free(bmpfileheader);
 	bmpinfoheader = info_header_bmp(resolution);
-	write(f, bmpinfoheader, 40);
 	free(bmpinfoheader);
-	write_pixels(f, data, resolution, bmppad);
+	write_data(f, data, resolution, bmppad);
 	close(f);
 }
