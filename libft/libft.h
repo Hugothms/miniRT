@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 14:06:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 09:48:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double				ft_pow(double nb, double pow);
 int					check_base(char *base);
 int					ft_atoi_base(char *str, char *base);
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to);
-int					ft_count_len_nbr(int n);
+int					nbrlen(int n);
 char				*ft_itoa(int nbr);
 char				*ft_uitoa(unsigned int n);
 char				*ft_ltoa(long n);

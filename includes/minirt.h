@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 18:10:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 09:07:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <errno.h>
+# include <time.h>
 
 # include <unistd.h>
 
@@ -68,10 +69,10 @@ int				intersect_plane(const t_ray ray, const t_plane plane);
 int				hit_sphere(const t_ray ray, const t_sphere sphere);
 float			to_rad(float angle);
 
-void			print_img(const t_mlx *mlx, const t_scene *scene);
-
-void        	ft_put_pixel(char *data, t_couple pixel, int color, int win_width);
-
+void			print_img(const t_mlx *mlx, t_img *img, const t_scene *scene);
+void			save_img(const char *filename, const unsigned char *pixels, t_couple resolution);
+void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width);
+char			*screenshot_datetime();
 t_scene			*get_scene(int argc, char *argv[]);
 
 #endif

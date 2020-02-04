@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 18:09:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 09:08:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ t_img	*init_img(t_mlx *mlx, t_couple resolution)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution.w, resolution.h)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	// *(img->bits_per_pixel) = 3;
-	// *(img->size_line) = resolution.w;
-	// *(img->endian) = 1;
-	if(!(img->data = mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
+	if(!(img->data = (unsigned char*) mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	return (img);
 }
@@ -71,7 +68,10 @@ int		main(int argc, char *argv[])
 	scene = get_scene(argc, argv);
 	mlx = init_win(scene->resolution);
 	img = init_img(mlx, scene->resolution);
-	print_img(mlx, scene);
+	print_img(mlx, img, scene);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
+	if (argc == 3)
+		save_img(screenshot_datetime(), img->data, scene->resolution);
 	get_controls_loop(mlx);
 	return (0);
 }

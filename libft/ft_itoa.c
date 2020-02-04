@@ -6,28 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 16:26:35 by hthomas           #+#    #+#             */
-/*   Updated: 2019/12/01 16:54:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 10:25:24 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int			ft_count_len_nbr(int n)
-{
-	int	res;
-
-	res = 0;
-	if (n < 0)
-		res++;
-	if (n == 0)
-		return (1);
-	while (n)
-	{
-		res++;
-		n /= 10;
-	}
-	return (res);
-}
 
 static char	*ft_strrev(char *str)
 {
@@ -77,7 +60,7 @@ char		*ft_itoa(int n)
 	int		nblen;
 
 	i = 0;
-	nblen = ft_count_len_nbr(n);
+	nblen = nbrlen(n);
 	if (!(str = malloc((nblen + 1) * sizeof(char))))
 		return (NULL);
 	if (n == -2147483648)

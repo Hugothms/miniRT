@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 18:06:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 08:55:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_img
  	int				bits_per_pixel;
 	int				size_line;
 	int				endian;
-	char 			*data;
+	unsigned char	*data;
 }					t_img;
 
 typedef struct		s_rgb

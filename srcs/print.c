@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 18:48:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 08:45:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **obje
 	return (0);
 }
 
-void	print_img(const t_mlx *mlx, const t_scene *scene)
+void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 {
 	t_couple	pixel;
 	int			color;
@@ -106,7 +106,7 @@ void	print_img(const t_mlx *mlx, const t_scene *scene)
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;
 			}
-			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, pixel.w, pixel.h, color);
+			ft_put_pixel(img->data, pixel, color, scene->resolution.w);
 		}
 	}
 }

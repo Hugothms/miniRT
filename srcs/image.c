@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 18:58:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 10:30:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void        	ft_put_pixel(char *data, t_couple pixel, int color, int win_width)
+void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
 {
 	int (*tab)[win_width][1]; // prepare the cast
 
@@ -75,7 +75,7 @@ void			save_img(const char *filename, const unsigned char *pixels, t_couple reso
 	unsigned char	*bmpfileheader;
 	unsigned char	*bmpinfoheader;
 
-	ft_memcpy(bmppad, (char[]){0,255,0}, 3);
+	ft_memcpy(bmppad, (char[]){0,0,0}, 3);
 	filesize = 54 + 3 * resolution.w * resolution.h;
 	f = open(filename, O_WRONLY | O_APPEND | O_CREAT);
 	bmpfileheader = file_header_bmp(filesize);

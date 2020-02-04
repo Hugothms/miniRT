@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/01/21 17:46:45 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/04 10:30:12 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,16 @@ SRCS = 	srcs/main.c				\
 		srcs/color.c			\
 		srcs/error.c			\
 		srcs/get_next_line.c	\
+		srcs/image.c			\
+		srcs/intersect.c		\
 		srcs/parse.c			\
 		srcs/print.c			\
+		srcs/ray.c				\
 		srcs/set_elements.c		\
-		srcs/set_elements2.c
+		srcs/set_elements2.c	\
+		srcs/utils.c			\
+		srcs/vector.c			\
+
 
 
 OBJS = $(SRCS:.c=.o)
@@ -70,28 +76,28 @@ CLEAR_COLOR =	\033[m
 all : complib $(NAME)
 
 $(OBJS) : %.o: %.c $(HEADER)
-	@$(CC) -I $(INCL) -c $< -o $@
+	$(CC) -I $(INCL) -c $< -o $@
 
 $(NAME) : $(OBJS) $(OBJSLIBFT)
-	@$(CC) -o $@ $(MLX_INCLUDE) $^
+	$(CC) -o $@ $(MLX_INCLUDE) $^
 
 complib :
-	@$(MAKE) -C libft all
+	$(MAKE) -C libft all
 
 clean:
-	@#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
-	@cd $(LIBFTDIR) && $(MAKE) clean
-	@rm -rf $(OBJS) $(LIBFT)
+	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
+	cd $(LIBFTDIR) && $(MAKE) clean
+	rm -rf $(OBJS) $(LIBFT)
 
 fclean:		clean
-	@#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
-	@cd $(LIBFTDIR) && $(MAKE) fclean
-	@rm -f $(NAME) $(EXEC) $(EXEC_HARDCORE) $(EXEC_test) $(EXEC_precise)
+	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
+	cd $(LIBFTDIR) && $(MAKE) fclean
+	rm -f $(NAME) $(EXEC) $(EXEC_HARDCORE) $(EXEC_test) $(EXEC_precise)
 
 re:		fclean all
 
 .c.o:
-	@${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
 
 .PHONY: $(EXEC_precise)
 
