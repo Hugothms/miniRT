@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 11:10:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:31:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-char		*str_width(int nb, int width)
+char	*str_width(int nb, int width)
 {
 	char	**res;
 	int		diff;
@@ -35,10 +35,12 @@ char		*str_width(int nb, int width)
 
 char	*screenshot_datetime()
 {
-	char	*res[35];
+	char		*res[35];
+	time_t		t;
+	struct tm	tm;
 
-	time_t t = time(NULL);
-	struct tm tm = *localtime(&t);
+	t = time(NULL);
+	tm = *localtime(&t);
 	*res = ft_strdup("Screenshot YYYY-MM-DD hh:mm:ss.bmp");
 	ft_memcpy(*res + 11, str_width(tm.tm_year + 1900, 4), 4);
 	ft_memcpy(*res + 16, str_width(tm.tm_mon + 1, 2), 2);

@@ -6,20 +6,20 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/28 15:56:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:31:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int			check_resolution(char **data)
+int		check_resolution(char **data)
 {
 	if (ft_atoi(data[1]) <= 0 || ft_atoi(data[2]) <= 0)
 		return (-1);
 	return (0);
 }
 
-void		set_resolution(t_scene *scene, char **data)
+void	set_resolution(t_scene *scene, char **data)
 {
 	t_couple	*resolution;
 
@@ -32,7 +32,7 @@ void		set_resolution(t_scene *scene, char **data)
 	scene->resolution = *resolution;
 }
 
-void		set_ambient_light(t_scene *scene, char **data)
+void	set_ambient_light(t_scene *scene, char **data)
 {
 	t_ambient_light	*ambient_light;
 
@@ -56,7 +56,7 @@ void	set_camera(t_scene *scene, char **data)
 	ft_lstadd_front(&(scene->cameras), ft_lstnew(camera));
 }
 
-void		set_light(t_scene *scene, char **data)
+void	set_light(t_scene *scene, char **data)
 {
 	t_light		*light;
 

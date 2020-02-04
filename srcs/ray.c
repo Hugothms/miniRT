@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/03 18:08:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:32:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,19 @@ t_ray		new_ray(const t_vect position, const t_vect direction)
 
 	ray.pos = position;
 	ray.dir = direction;
-	return ray;
+	return (ray);
 }
 
 t_vect		set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j)
 {
 	t_vect	vect_dir;
+	float	a;
+	float	b;
+	float	c;
 
-	float a = j + 0.5 - (resolution.w) * 0.5;
-	float b = i + 0.5 - (resolution.h) * 0.5;
-	float c = resolution.w / (2 * tan((to_rad(camera->fov)) / 180.0));
-
+	a = j + 0.5 - (resolution.w) * 0.5;
+	b = i + 0.5 - (resolution.h) * 0.5;
+	c = resolution.w / (2 * tan((to_rad(camera->fov)) / 180.0));
 	vect_dir.x = 1 * a + 0 * b + 0 * c;
 	vect_dir.y = 0 * a + 1 * b + 0 * c;
 	vect_dir.z = 0 * a + 0 * b + 1 * c;

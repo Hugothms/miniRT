@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 11:20:00 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:24:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ float	distance(t_vect p1, t_vect p2)
 	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
 }
 
-int 	solveQuadratic(const float a, const float b, const float c, float *x0, float *x1)
+int		solve_quadratic(const t_vect point, float *x0, float *x1)
 {
 	float	discr;
 	float	q;
 
-	discr = b * b - 4 * a * c;
+	discr = point.y * point.y - 4 * point.x * point.z;
 	if (discr < 0)
 		return (0);
 	else if (discr == 0)
 	{
-		*x0 = -0.5 * b / a;
-		*x1 = -0.5 * b / a;
+		*x0 = -0.5 * point.y / point.x;
+		*x1 = -0.5 * point.y / point.x;
 	}
 	else
 	{
-		q = (b > 0) ? -0.5 * (b + sqrt(discr)) : -0.5 * (b - sqrt(discr));
-		*x0 = q / a;
-		*x1 = c / q;
+		q = (point.y > 0) ? -0.5 * (point.y + sqrt(discr)) : -0.5 * (point.y - sqrt(discr));
+		*x0 = q / point.x;
+		*x1 = point.z / q;
 	}
 	if (*x0 > *x1)
 		ft_swap(x0, x1);
@@ -52,7 +52,7 @@ float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_ray *impact)
 	t_vect	vect;
 
 	vect = new_vect(ray.pos.x - sphere->pos.x, ray.pos.y - sphere->pos.y, ray.pos.z - sphere->pos.z);
-	if (!solveQuadratic(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, vect), dot_product(vect, vect) - sphere->radius, &t0, &t1))
+	if (!solve_quadratic(new_vect(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, vect), dot_product(vect, vect) - sphere->radius), &t0, &t1))
 		return (INFINITY);
 	if (t0 > t1)
 		ft_swap(&t0, &t1);

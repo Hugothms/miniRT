@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 08:54:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:27:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_scene		*parse(int fd)
 	init_scene(scene);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		//printf("\n|%s|\n", line);
 		data = ft_split_set((*line ? line : "iamcheating"), set);
 		if (!ft_strcmp(data[0], "R") && in_charset(line[1], set) && !scene->resolution.w)
 			set_resolution(scene, data);

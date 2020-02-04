@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 11:10:25 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/04 13:23:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		key_function(int keycode, t_mlx *mlx)
 	return (0);
 }
 
-t_mlx 	*init_win(t_couple resolution)
+t_mlx	*init_win(t_couple resolution)
 {
 	t_mlx		*mlx;
 
@@ -48,7 +48,7 @@ t_img	*init_img(t_mlx *mlx, t_couple resolution)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution.w, resolution.h)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	if (!(img->data = (unsigned char*) mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
+	if (!(img->data = (unsigned char*)mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	return (img);
 }

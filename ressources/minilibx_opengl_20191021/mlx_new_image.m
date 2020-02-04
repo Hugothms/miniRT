@@ -115,7 +115,7 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
   int		gY;
 
   if (!win_ptr->pixmgt)
-    return(0);
+    return (0);
 
 #ifdef STRINGPUTX11
   y -= (FONT_HEIGHT * 2)/3;
@@ -143,7 +143,7 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
     }
 
   win_ptr->nb_flush ++;
-  
+
   return (0);
 }
 
