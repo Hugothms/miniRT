@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 19:48:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/05 12:45:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
 {
-	int (*tab)[win_width][1]; // prepare the cast
+	int	(*tab)[win_width][1]; // prepare the cast
 
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
-	*tab[pixel.w][pixel.h] = color; // set the pixel at the coord x,y with the color value
+	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
+	printf("%08i\t", *tab[pixel.h][pixel.w]);
 }
 
 unsigned char	*file_header_bmp(int filesize)
@@ -52,36 +53,45 @@ unsigned char	*info_header_bmp(t_couple resolution)
 	return (bmpinfoheader);
 }
 
-void			write_data(int f, const unsigned char *data, t_couple resolution, unsigned char bmppad[])
+void			write_data(int f, const unsigned char *data, t_couple resolution)
 {
-	int i;
-	int filesize;
+	unsigned char	bmppad[3];
+	int 			filesize;
+	int 			line;
 
+
+	ft_memcpy(bmppad, (char[]){0, 0, 0}, 3);
 	filesize = 54 + 3 * resolution.w * resolution.h;
-	i = -1;
-	while(++i < resolution.h)
+	line = -1;
+	printf("data address: |%p|\n", data);
+	while(++line < resolution.h)
 	{
-		write(f, data + (resolution.w * (resolution.h - i - 1) * 3), resolution.w);
-		write(f, bmppad, filesize - 54);
+		printf("copy address: |%p|\n", data + (resolution.w * (resolution.h - line - 1) * 3));
+		printf("|%s|\n", data);
+		write(f, data + (resolution.w * (resolution.h - line - 1) * 3), 3);
+		//write(f, bmppad, (4 - (resolution.w * 3) % 4) % 4);
+		/*
+		fwrite(img+(w*(h-line-1)*3),3,w,f);
+    	fwrite(bmppad,1,(4-(w*3)%4)%4,f);
+		*/
 	}
 }
 
 void			save_img(const char *filename, const unsigned char *data, t_couple resolution)
 {
-	unsigned char	bmppad[3];
 	int				filesize;
 	int				f;
 	unsigned char	*bmpfileheader;
 	unsigned char	*bmpinfoheader;
 
-	ft_memcpy(bmppad, (char[]){0, 0, 0}, 3);
 	filesize = 54 + 3 * resolution.w * resolution.h;
 	f = open(filename, O_WRONLY | O_APPEND | O_CREAT);
 	bmpfileheader = file_header_bmp(filesize);
 	write(f, bmpfileheader, 14);
 	free(bmpfileheader);
 	bmpinfoheader = info_header_bmp(resolution);
+	write(f, bmpinfoheader, 40);
 	free(bmpinfoheader);
-	write_data(f, data, resolution, bmppad);
+	write_data(f, data, resolution);
 	close(f);
 }

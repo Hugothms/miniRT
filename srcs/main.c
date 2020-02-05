@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 19:02:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/05 12:32:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,13 @@ int		main(int argc, char *argv[])
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
 	end = clock();
 	printf("put_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	start = clock();
 	if (argc == 3)
+	{
+		start = clock();
 		save_img(screenshot_datetime(), img->data, scene->resolution);
-	end = clock();
-	printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+		end = clock();
+		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	}
 	get_controls_loop(mlx, img);
 	return (0);
 }

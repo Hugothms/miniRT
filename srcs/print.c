@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 19:34:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/05 12:44:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,18 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			}
 			ft_put_pixel(img->data, pixel, color, scene->resolution.w);
 		}
+	}
+	printf("\ndata|%s|\n", img->data);
+	pixel.w = 0;
+	pixel.h = 0;
+	while (++pixel.h < scene->resolution.h)
+	{
+		pixel.w = -1;
+		while (++pixel.w < scene->resolution.w)
+		{
+			printf("c%c", img->data[pixel.h * scene->resolution.w + pixel.w]);
+		}
+		printf("\n");
 	}
 }
 
