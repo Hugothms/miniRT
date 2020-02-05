@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/05 12:45:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/05 17:51:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int wi
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
 	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
 	printf("%08i\t", *tab[pixel.h][pixel.w]);
+	printf("\n tab pointer|%p|\n", tab);
+	printf("\n tab pointer|%p|\n", tab[1]);
+	printf("\n tab pointer|%p|\n", tab[win_width]);
 }
 
 unsigned char	*file_header_bmp(int filesize)
@@ -41,7 +44,7 @@ unsigned char	*info_header_bmp(t_couple resolution)
 
 	if(!(bmpinfoheader = malloc(40 * sizeof(unsigned char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-		ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 24,0}, 40);
+		ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 32,0}, 40);
 	bmpinfoheader[4] = (unsigned char)(resolution.w);
 	bmpinfoheader[5] = (unsigned char)(resolution.w >> 8);
 	bmpinfoheader[6] = (unsigned char)(resolution.w >> 16);
@@ -68,7 +71,8 @@ void			write_data(int f, const unsigned char *data, t_couple resolution)
 	{
 		printf("copy address: |%p|\n", data + (resolution.w * (resolution.h - line - 1) * 3));
 		printf("|%s|\n", data);
-		write(f, data + (resolution.w * (resolution.h - line - 1) * 3), 3);
+		write(f, data + resolution.w * line, (4 - (resolution.w * 3) % 4) % 4);
+		//write(f, data + (resolution.w * (resolution.h - line - 1) * 3), 3);
 		//write(f, bmppad, (4 - (resolution.w * 3) % 4) % 4);
 		/*
 		fwrite(img+(w*(h-line-1)*3),3,w,f);
