@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/06 15:57:45 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/06 17:28:14 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,17 +112,17 @@ CLEAR_COLOR = \033[m
 all:		$(NAME)
 
 $(NAME):	${OBJS}
-	@echo "Creating $(GREEN_FG)libft.a $(CLEAR_COLOR)"
-	@ar rc	$(NAME) ${OBJS}
-	@ranlib	$(NAME)
+	echo "Creating $(GREEN_FG)libft.a $(CLEAR_COLOR)"
+	ar rc	$(NAME) ${OBJS}
+	ranlib	$(NAME)
 
 .c.o:
-	@${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
 
 clean:
-	@rm -f $(OBJS)
+	rm -f $(OBJS)
 
 fclean:		clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re:			fclean all
