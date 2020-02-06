@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.c                                            :+:      :+:    :+:   */
+/*   save_bmp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 15:55:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 17:15:46 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			save_bmp(const char *filename, const unsigned char *data, t_couple resolu
 	unsigned char	*bmpinfoheader;
 
 	filesize = 54 + 3 * resolution.w * resolution.h;
-	f = open(filename, O_WRONLY | O_APPEND | O_CREAT);
+	f = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0755);
 	bmpfileheader = file_header_bmp(filesize);
 	write(f, bmpfileheader, 14);
 	free(bmpfileheader);
