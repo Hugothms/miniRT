@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/04 10:36:29 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/06 17:30:29 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ SRCS = 	srcs/main.c				\
 		srcs/color.c			\
 		srcs/error.c			\
 		srcs/get_next_line.c	\
-		srcs/image.c			\
 		srcs/intersect.c		\
 		srcs/parse.c			\
 		srcs/print.c			\
 		srcs/ray.c				\
+		srcs/save_bmp.c			\
 		srcs/set_elements.c		\
 		srcs/set_elements2.c	\
 		srcs/utils.c			\
@@ -78,8 +78,8 @@ all : complib $(NAME)
 $(OBJS) : %.o: %.c $(HEADER)
 	$(CC) -I $(INCL) -c $< -o $@
 
-$(NAME) : $(OBJS) $(OBJSLIBFT)
-	$(CC) -o $@ $(MLX_INCLUDE) $^
+$(NAME) : $(OBJS)
+	$(CC) -o $@ $(MLX_INCLUDE) $(OBJSLIBFT) $^
 
 complib :
 	$(MAKE) -C libft all
