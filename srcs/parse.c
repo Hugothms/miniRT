@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 13:27:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ t_scene		*parse(int fd)
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		data = ft_split_set((*line ? line : "iamcheating"), set);
-		if (!ft_strcmp(data[0], "R") && in_charset(line[1], set) && !scene->resolution.w)
+		if (!ft_strcmp(data[0], "R") && ft_in_charset(line[1], set) && !scene->resolution.w)
 			set_resolution(scene, data);
-		else if (!ft_strcmp(data[0], "A") && in_charset(line[1], set) && !scene->ambient_light.ratio)
+		else if (!ft_strcmp(data[0], "A") && ft_in_charset(line[1], set) && !scene->ambient_light.ratio)
 			set_ambient_light(scene, data);
-		else if (!ft_strcmp(data[0], "c") && in_charset(line[1], set))
+		else if (!ft_strcmp(data[0], "c") && ft_in_charset(line[1], set))
 			set_camera(scene, data);
-		else if (!ft_strcmp(data[0], "l") && in_charset(line[1], set))
+		else if (!ft_strcmp(data[0], "l") && ft_in_charset(line[1], set))
 			set_light(scene, data);
-		else if (!ft_strcmp(data[0], "sp") && in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "sp") && ft_in_charset(line[2], set))
 			set_sphere(scene, data);
-		else if (!ft_strcmp(data[0], "pl") && in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "pl") && ft_in_charset(line[2], set))
 			set_plane(scene, data);
-		else if (!ft_strcmp(data[0], "sq") && in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "sq") && ft_in_charset(line[2], set))
 			set_square(scene, data);
-		else if (!ft_strcmp(data[0], "cy") && in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "cy") && ft_in_charset(line[2], set))
 			set_cylinder(scene, data);
-		else if (!ft_strcmp(data[0], "tr") && in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "tr") && ft_in_charset(line[2], set))
 			set_triangle(scene, data);
 		else if (!ft_is_from_charset(line, set))
 		{

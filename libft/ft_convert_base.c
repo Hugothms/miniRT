@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 08:15:50 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 09:48:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:01:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char			*ft_convert_base(char *nbr, char *base_from, char *base_to)
 		nb *= -1;
 		sign = -1;
 	}
-	if (!(res = malloc((nbrlen(nb) + 1) * sizeof(char))))
+	if (!(res = malloc((ft_nbrlen(nb) + 1) * sizeof(char))))
 		return (0);
 	fill_nbr_base(res, nb, base_to, sign);
 	return (ft_strrev_minus_1(res));

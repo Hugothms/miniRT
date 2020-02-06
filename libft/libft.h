@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 09:48:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ double				ft_pow(double nb, double pow);
 int					check_base(char *base);
 int					ft_atoi_base(char *str, char *base);
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to);
-int					nbrlen(int n);
+int					ft_nbrlen(int n);
 char				*ft_itoa(int nbr);
 char				*ft_uitoa(unsigned int n);
 char				*ft_ltoa(long n);
@@ -84,7 +84,7 @@ char				*ft_strrchr(const char *s, int c);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-int					in_charset(char c, char const *charset);
+int					ft_in_charset(char c, char const *charset);
 int					ft_is_from_charset(const char *str, const char *charset);
 char				**ft_split(char const *s, char c1);
 char				**ft_split_set(const char *str, char *charset);
@@ -109,5 +109,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+char				*ft_itoa_width(int nb, int width);
+int					ft_nbrlen(int n);
 
 #endif

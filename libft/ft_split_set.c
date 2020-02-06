@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 08:16:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/10 13:36:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		in_charset(char c, char const *charset)
+int		ft_in_charset(char c, char const *charset)
 {
 	int	i_charset;
 
@@ -36,13 +36,13 @@ int		*count_lengths(int *words_len, const char *str, char *charset)
 	{
 		while (str[i_str])
 		{
-			if (!in_charset(str[i_str], charset))
+			if (!ft_in_charset(str[i_str], charset))
 				break ;
 			i_str++;
 		}
 		while (str[i_str])
 		{
-			if (in_charset(str[i_str], charset))
+			if (ft_in_charset(str[i_str], charset))
 				break ;
 			i_str++;
 			words_len[i_length]++;
@@ -63,7 +63,7 @@ int		count_words(const char *str, char *charset)
 	{
 		while (str[i_str])
 		{
-			if (!in_charset(str[i_str], charset))
+			if (!ft_in_charset(str[i_str], charset))
 			{
 				count++;
 				break ;
@@ -72,7 +72,7 @@ int		count_words(const char *str, char *charset)
 		}
 		while (str[i_str])
 		{
-			if (in_charset(str[i_str++], charset))
+			if (ft_in_charset(str[i_str++], charset))
 				break ;
 		}
 	}
@@ -93,10 +93,10 @@ int		fill_tab(char ***tab, int *words_len, const char *str, char *charset)
 	{
 		if (!((*tab)[d1] = malloc((words_len[d1] + 1) * sizeof(char))))
 			return (0);
-		while (in_charset(str[i_str], charset))
+		while (ft_in_charset(str[i_str], charset))
 			i_str++;
 		d2 = 0;
-		while (str[i_str] && !in_charset(str[i_str], charset))
+		while (str[i_str] && !ft_in_charset(str[i_str], charset))
 			(*tab)[d1][d2++] = str[i_str++];
 		(*tab)[d1][d2++] = '\0';
 		d1++;

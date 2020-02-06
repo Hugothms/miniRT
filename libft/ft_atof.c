@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:30:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/23 15:44:02 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ float	ft_atof(const char *str)
 	float	nb;
 	int		sign;
 
-	while (in_charset(*str, "\t "))
+	while (ft_in_charset(*str, "\t "))
 		str++;
 	sign = 1;
-	if (in_charset(*str, "-+"))
+	if (ft_in_charset(*str, "-+"))
 		sign *= (*str++ == '-' ? -1 : 1);
 	nb = 0;
 	nb += ft_atol(str);
-	while (*str && in_charset(*str, "0123456789"))
+	while (*str && ft_in_charset(*str, "0123456789"))
 		str++;
 	if (*str == '.')
 		str++;
 	else
 		return (nb * sign);
 	decimal_size = 0;
-	while (in_charset(str[decimal_size], "0123456789"))
+	while (ft_in_charset(str[decimal_size], "0123456789"))
 		decimal_size++;
 	if (decimal_size)
 		nb += ft_atol(str) / (ft_pow(10, decimal_size));

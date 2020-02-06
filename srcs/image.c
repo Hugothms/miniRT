@@ -6,19 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 15:44:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:55:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
-{
-	int	(*tab)[win_width][1]; // prepare the cast
-
-	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
-	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
-}
 
 unsigned char	*file_header_bmp(int filesize)
 {
@@ -63,7 +55,7 @@ void			write_data(int f, const unsigned char *data, t_couple resolution)
 		write(f, data + resolution.w * line * 4, resolution.w * 4);
 }
 
-void			save_img(const char *filename, const unsigned char *data, t_couple resolution)
+void			save_bmp(const char *filename, const unsigned char *data, t_couple resolution)
 {
 	int				filesize;
 	int				f;

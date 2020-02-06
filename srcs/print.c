@@ -6,11 +6,19 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 15:45:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:51:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+
+void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
+{
+	int	(*tab)[win_width][1]; // prepare the cast
+
+	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
+	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
+}
 
 /***
  * cree un ray depuis la posision de la camera qui passe par le pixel demandé

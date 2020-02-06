@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 16:30:13 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 12:36:09 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static int	count_size(char const *str, char const *set)
 		return (0);
 	blanks = 0;
 	i = 0;
-	while (in_charset(str[i++], set))
+	while (ft_in_charset(str[i++], set))
 		blanks++;
 	if (!(ft_strlen(str) - blanks))
 		return (0);
 	i = ft_strlen(str) - 1;
-	while (in_charset(str[i--], set))
+	while (ft_in_charset(str[i--], set))
 		blanks++;
 	return (ft_strlen(str) - blanks);
 }
@@ -56,7 +56,7 @@ char		*ft_strtrim(char const *str, char const *set)
 		return (new);
 	}
 	start = 0;
-	while (in_charset(str[start], set))
+	while (ft_in_charset(str[start], set))
 		start++;
 	i = -1;
 	while (++i < size)
