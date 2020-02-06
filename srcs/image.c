@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 12:22:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:31:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int wi
 
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
 	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
-	// printf("%08i\t", *tab[pixel.h][pixel.w]);
+	printf("%08i\t", tab[pixel.h][pixel.w]);
 	// printf("\n tab pointer|%i|\n", tab);
 	// printf("\n tab pointer|%i|\n", tab[1][0]);
 	// printf("\n tab pointer|%i|\n", tab[0][1]);
@@ -55,7 +55,7 @@ unsigned char	*info_header_bmp(t_couple resolution)
 	bmpinfoheader[11] = (unsigned char)(resolution.h >> 24);
 	return (bmpinfoheader);
 }
-mlx_
+
 void			write_data(int f, const unsigned char *data, t_couple resolution)
 {
 	unsigned char	bmppad[3];
@@ -65,16 +65,20 @@ void			write_data(int f, const unsigned char *data, t_couple resolution)
 
 	ft_memcpy(bmppad, (char[]){0, 0, 0}, 3);
 	filesize = 54 + 3 * resolution.w * resolution.h;
-	line = -1;
-	printf("data address: |%p|\n", data);
-	while(++line < resolution.w)
+	line = resolution.h;
+	printf("data address: |%i|\n", data);
+	while(--line + 1)
 	{
-		printf("copy address: |%p|\n", data + resolution.w * line * 4);
+		printf("copy address: |%i|\n", data + resolution.w * line * 4);
 		int i = -1;
-		while((++i) < resolution.h)
-			printf("|%i|\n", data + i + resolution.w * line * 4);
-		write(f, data + resolution.w * line * 4, resolution.h * 4);
+		while((++i) < resolution.w)
+		{
+			printf("|%i|\n", data + resolution.w * line * 4 + i * 4);
+			write(f, data + resolution.w * line * 4 + i * 4, 4);
+		}
 		//write(f, data + (resolution.w * (resolution.h - line - 1) * 3), 3);
+
+
 		//write(f, bmppad, (4 - (resolution.w * 3) % 4) % 4);
 		/*
 		fwrite(img+(w*(h-line-1)*3),3,w,f);

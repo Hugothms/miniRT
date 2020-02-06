@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/05 17:42:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 12:32:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		main(int argc, char *argv[])
 	t_img		*img;
 
 	clock_t start, end;
-	double cpu_time_used;
 	start = clock();
 	scene = get_scene(argc, argv);
 	end = clock();

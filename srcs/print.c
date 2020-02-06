@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 12:25:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:55:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 		}
 	}
 	printf("\ndata pointer|%i|\n", img->data);
-	printf("data point+1|%i|\n", &img->data[1 * 20]);
-	printf("data point+w|%i|\n", &img->data[scene->resolution.w * 20]);
+	printf("data p*  +1|%i|\n", &img->data[1 * scene->resolution.w * 4]);
+	printf("data    end|%i|\n", &img->data[scene->resolution.w * scene->resolution.h * 4]);
 	//printf("%08i\t", img->data[258]);
 	// pixel.w = 0;
 	// pixel.h = 0;
