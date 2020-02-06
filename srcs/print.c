@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/05 17:48:59 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/06 11:22:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,20 +108,21 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			ft_put_pixel(img->data, pixel, color, scene->resolution.w);
 		}
 	}
-	printf("\ndata pointer|%p|\n", img->data);
-	printf("data point+1|%p|\n", &img->data[1]);
-	printf("data point+w|%p|\n", &img->data[pixel.w]);
-	pixel.w = 0;
-	pixel.h = 0;
-	while (++pixel.h < scene->resolution.h)
-	{
-		pixel.w = -1;
-		while (++pixel.w < scene->resolution.w)
-		{
-			printf("%08i\t", img->data[pixel.h * scene->resolution.w + pixel.w]);
-		}
-		printf("\n");
-	}
+	printf("\ndata pointer|%i|\n", img->data);
+	printf("data point+1|%i|\n", &img->data[1 * 20]);
+	printf("data point+w|%i|\n", &img->data[scene->resolution.w * 20]);
+	//printf("%08i\t", img->data[258]);
+	// pixel.w = 0;
+	// pixel.h = 0;
+	// while (++pixel.h < scene->resolution.h)
+	// {
+	// 	pixel.w = -1;
+	// 	while (++pixel.w < scene->resolution.w)
+	// 	{
+	// 		printf("%08i\t", img->data[pixel.h * scene->resolution.w * 4 + (pixel.w * 4)]);
+	// 	}
+	// 	printf("\n");
+	// }
 }
 
 /*
