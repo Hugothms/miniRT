@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 15:41:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:26:30 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ t_vect			normalize(t_vect vect);
 t_vect			rot_vect(t_vect vect, const float angle, const char axe);
 t_vect			mult_mat(const float mat[3][3], t_vect vect);
 float			dot_product(const t_vect vect1, const t_vect vect2);
+t_vect			add_vect(const t_vect vect1, const t_vect vect2);
+t_vect			minus_vect(const t_vect vect);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
 float			intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 18:07:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:31:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 /***
  * trouve l'objet le plus proche dans la direction du ray
  ***/
-t_impact	*trace_ray(const t_ray ray, const t_scene *scene, void **object)
+t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 {
 	t_impact	*impact;
 
@@ -59,7 +59,34 @@ t_impact	*trace_ray(const t_ray ray, const t_scene *scene, void **object)
 	// ray_squares(ray, scene, impact, object);
 	// ray_cyinders(ray, scene, impact, object);
 	// ray_triangles(ray, scene, impact, object);
-	return (impact);
+	if (object)
+		return (impact);
+	return (NULL);
+}
+int		manage_light(const t_scene *scene, void *object, t_impact *impact)
+{
+	t_list		*lights;
+	t_light		*light;
+	int			color;
+	t_ray		to_light;
+	t_impact	*closest;
+
+	lights = scene->lights;
+	while (lights->next)
+	{
+		//if the light is not in shadow of another object
+		light = (t_light*)(lights->content);
+		to_light = new_ray(impact->pos, add_vect(impact->pos, minus_vect(light->pos)));
+		closest = closest_object(to_light, scene, &object);
+		if (object && closest->dist > distance(impact->pos, light->pos))
+		{
+			//add this light contribution to computed color;
+			return (rgb_to_int(((t_sphere*)object)->color));
+		}
+		//printf("%d,%d\n", pixel.w, pixel.h);
+		lights = lights->next;
+	}
+	return (0);
 }
 
 void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
@@ -78,29 +105,18 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 		pixel.w = -1;
 		while (++pixel.w < scene->resolution.w)
 		{
-			//Final color = 0;
 			color = rgb_to_int(int_to_rgb(0, 0, 0));
 			reflection_factor = 1;
 			depth = 1;
 			object = NULL; //peut etre a deplacer dans le while suivant
-			//Repeat until reflection factor is 0 or maximum depth is reached;
 			while (depth-- && reflection_factor > 1e-6)
 			{
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
-				impact = trace_ray(ray, scene, &object);
+				impact = closest_object(ray, scene, &object);
 				//get_obj(scene->type, object);
-				//if intersection exists
-				if (object)
+				if (impact)
 				{
-					//for each light in the scene
-					{
-						//if the light is not in shadow of another object
-						{
-							//add this light contribution to computed color;
-						}
-						//printf("%d,%d\n", pixel.w, pixel.h);
-						color = rgb_to_int(((t_sphere*)object)->color);
-					}
+					color = manage_light(scene, object, impact);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;

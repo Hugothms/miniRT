@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 18:49:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 18:52:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,7 @@ float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact
 	point = new_vect(ray.pos.x + x1 * ray.dir.x, ray.pos.y + x1 * ray.dir.y, ray.pos.z + x1 * ray.dir.z);
 	return (distance(new_vect(0, 0, 0), point));
 }
-/*
-float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact)
-{
-	float	a;
-	float	b;
-	float	delta;
-	float	numerator;
-	t_vect	vect;
 
-	vect = new_vect(ray.pos.x - sphere->pos.x, ray.pos.y - sphere->pos.y, ray.pos.z - sphere->pos.z);
-	a = dot_product(ray.dir, ray.dir);
-	b = 2.0 * dot_product(vect, ray.dir);
-	delta = b * b - 4 * a * dot_product(vect, vect) - sphere->radius * sphere->radius;
-	if (delta < 0.0)
-		return (INFINITY);
-	else
-	{
-		numerator = -b - sqrt(delta);
-		if (numerator > 0.0)
-			return (numerator / (2.0 * a));
-		else
-			return (INFINITY);
-	}
-}
-*/
 void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
 	t_list		*spheres;
@@ -87,17 +63,16 @@ void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void *
 
 int		intersect_plane(const t_ray ray, const t_plane plane)
 {
-    // assuming vectors are all normalized
-    float	denom;
-    t_vect	p0l0;
+	float	denom;
+	t_vect	p0l0;
 
 	denom = dot_product(plane.vect, ray.dir);
 	if (denom > 1e-6)
 	{
-        p0l0.x = plane.pos.x - ray.pos.x;
-        p0l0.y = plane.pos.y - ray.pos.y;
-        p0l0.z = plane.pos.z - ray.pos.z;
-        return (dot_product(p0l0, plane.vect) / denom > 0);
-    }
-    return (0);
+		p0l0.x = plane.pos.x - ray.pos.x;
+		p0l0.y = plane.pos.y - ray.pos.y;
+		p0l0.z = plane.pos.z - ray.pos.z;
+		return (dot_product(p0l0, plane.vect) / denom > 0);
+	}
+	return (0);
 }
