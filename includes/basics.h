@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 08:55:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 13:10:21 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct		s_vect
 
 typedef struct		s_ray
 {
-	t_vect		pos;
-	t_vect		dir;
+	t_vect			pos;
+	t_vect			dir;
 }					t_ray;
 
 t_rgb				int_to_rgb(int r, int g, int b);

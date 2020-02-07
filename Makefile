@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/07 12:35:28 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/07 13:20:20 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,11 +106,12 @@ CLEAR_COLOR =	\033[m
 ###########################
 
 
-test:	$(EXEC)
-	./$<
-
-test_example:	$(NAME)
+test: $(NAME)
 	./$< example.rt
+
+test_re: re $(NAME)
+	./$(NAME) example.rt
+
 
 
 # gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt --save

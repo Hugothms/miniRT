@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 15:51:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 13:26:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 /***
  * trouve l'objet le plus proche dans la direction du ray
  ***/
-void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **object)
+t_ray 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **object)
 {
 	t_list		*spheres;
 	float		tmp;
@@ -61,12 +61,11 @@ void 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **obje
 		{
 			*dist = tmp;
 			*object = spheres->content;
+			ft_memcpy(scene->type, "sp\0", 3);
 		}
 		spheres = spheres->next;
 	}
-	if (*dist != INFINITY)
-		return ("sp");
-	return (0);
+	return (impact);
 }
 
 void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
@@ -78,7 +77,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 	float		reflection_factor;
 	int			depth;
 	float		dist;
-	char		*type;
+	t_ray		*impact;
 
 	pixel.h = -1;
 	while (++pixel.h < scene->resolution.h)
@@ -96,7 +95,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			{
 				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
-				type = trace_ray(ray, scene, &dist, &object);
+				impact = trace_ray(ray, scene, &dist, &object);
 				//get_obj(type, object);
 				//if intersection exists
 				if (object)

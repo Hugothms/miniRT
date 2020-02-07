@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 13:01:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void		init_scene(t_scene *scene)
+void		*init_scene(t_scene *scene)
 {
 	scene->resolution.w = 0;
 	scene->resolution.h = 0;
@@ -27,6 +27,10 @@ void		init_scene(t_scene *scene)
 	scene->squares = ft_lstnew(NULL);
 	scene->cylinders = ft_lstnew(NULL);
 	scene->triangles = ft_lstnew(NULL);
+	if(!(scene->type = malloc(3 * sizeof(char))))
+		return (NULL);
+	ft_bzero(scene->type, 3);
+	return (scene);
 }
 
 t_scene		*parse(int fd)
@@ -40,7 +44,8 @@ t_scene		*parse(int fd)
 	set = " \t";
 	if (!(scene = malloc(sizeof(*scene))))
 		return (NULL);
-	init_scene(scene);
+	if(!(init_scene(scene)))
+		return(NULL);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		data = ft_split_set((*line ? line : "iamcheating"), set);
