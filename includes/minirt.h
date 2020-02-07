@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 14:59:00 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 15:41:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ float			to_rad(float angle);
 
 void			print_img(const t_mlx *mlx, t_img *img, const t_scene *scene);
 void			save_bmp(const char *filename, const unsigned char *pixels, t_couple resolution);
-void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width);
+void			ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width);
 char			*screenshot_datetime();
 t_scene			*get_scene(int argc, char *argv[]);
+
+float			distance(t_vect p1, t_vect p2);
+int				solve_quadratic(const t_vect point, float *x0, float *x1);
 
 #endif
