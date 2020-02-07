@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 17:15:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 18:13:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ unsigned char	*info_header_bmp(t_couple resolution)
 
 	if(!(bmpinfoheader = malloc(40 * sizeof(unsigned char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-		ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 32,0}, 40);
+	ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 32,0}, 40);
 	bmpinfoheader[4] = (unsigned char)(resolution.w);
 	bmpinfoheader[5] = (unsigned char)(resolution.w >> 8);
 	bmpinfoheader[6] = (unsigned char)(resolution.w >> 16);

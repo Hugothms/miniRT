@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/07 16:04:44 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/07 17:14:45 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,9 @@ test_save: $(NAME)
 
 test_re: re $(NAME)
 	./$(NAME) example.rt
+
+test_re_save: re $(NAME)
+	./$(NAME) example.rt --save
 
 
 

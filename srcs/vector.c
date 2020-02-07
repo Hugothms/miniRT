@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 13:29:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 17:34:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ t_vect		new_vect(const float x, const float y, const float z)
 	return (new);
 }
 
+float	distance(t_vect p1, t_vect p2)
+{
+	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
+}
+
 t_vect		normalize(t_vect vect)
 {
 	float	length;
 
-	length = sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
+	length = distance(new_vect(0,0,0), vect);
 	return (new_vect(vect.x / length, vect.y / length, vect.z / length));
 }
 

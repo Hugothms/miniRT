@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 15:20:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 18:07:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 /***
  * trouve l'objet le plus proche dans la direction du ray
  ***/
-void		trace_ray(const t_ray ray, const t_scene *scene, void **object)
+t_impact	*trace_ray(const t_ray ray, const t_scene *scene, void **object)
 {
 	t_impact	*impact;
 
@@ -59,6 +59,7 @@ void		trace_ray(const t_ray ray, const t_scene *scene, void **object)
 	// ray_squares(ray, scene, impact, object);
 	// ray_cyinders(ray, scene, impact, object);
 	// ray_triangles(ray, scene, impact, object);
+	return (impact);
 }
 
 void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
@@ -69,6 +70,7 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 	void		*object;
 	float		reflection_factor;
 	int			depth;
+	t_impact	*impact;
 
 	pixel.h = -1;
 	while (++pixel.h < scene->resolution.h)
@@ -85,7 +87,7 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			while (depth-- && reflection_factor > 1e-6)
 			{
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
-				trace_ray(ray, scene, &object);
+				impact = trace_ray(ray, scene, &object);
 				//get_obj(scene->type, object);
 				//if intersection exists
 				if (object)

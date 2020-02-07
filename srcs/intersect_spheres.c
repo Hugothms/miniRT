@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 15:31:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 18:49:48 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,50 +32,53 @@ float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact
 		x0 = x1;
 		if (x0 < 0)
 			return (INFINITY);
-		return (distance(new_vect(0, 0, 0), vect));
 	}
-	return (distance(new_vect(0, 0, 0), vect));
+	t_vect point;
+	point = new_vect(ray.pos.x + x1 * ray.dir.x, ray.pos.y + x1 * ray.dir.y, ray.pos.z + x1 * ray.dir.z);
+	return (distance(new_vect(0, 0, 0), point));
 }
-
-/*int	hit_sphere(t_ray ray, t_sphere sphere)
+/*
+float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact)
 {
 	float	a;
 	float	b;
 	float	delta;
 	float	numerator;
-	t_vect	dist;
+	t_vect	vect;
 
-	dist.x = ray.pos.x - sphere.pos.x;
-	dist.y = ray.pos.y - sphere.pos.y;
-	dist.z = ray.pos.z - sphere.pos.z;
+	vect = new_vect(ray.pos.x - sphere->pos.x, ray.pos.y - sphere->pos.y, ray.pos.z - sphere->pos.z);
 	a = dot_product(ray.dir, ray.dir);
-	b = 2.0 * dot_product(dist, ray.dir);
-	delta = b * b - 4 * a * dot_product(dist, dist) - sphere.radius * sphere.radius;
+	b = 2.0 * dot_product(vect, ray.dir);
+	delta = b * b - 4 * a * dot_product(vect, vect) - sphere->radius * sphere->radius;
 	if (delta < 0.0)
-		return 0;
+		return (INFINITY);
 	else
 	{
 		numerator = -b - sqrt(delta);
 		if (numerator > 0.0)
 			return (numerator / (2.0 * a));
 		else
-			return 0;
+			return (INFINITY);
 	}
-}*/
-
+}
+*/
 void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
 	t_list		*spheres;
+	t_sphere	*sphere;
 	float		tmp;
 
 	spheres = scene->spheres;
 	while (spheres->next)
 	{
 		//determine closest ray/object intersection;
-		if ((tmp = intersect_sphere(ray, (t_sphere*)(spheres->content), impact)) < impact->dist)
+		sphere = (t_sphere*)(spheres->content);
+		if ((tmp = intersect_sphere(ray, sphere, impact)) < impact->dist)
 		{
-			impact->dist = tmp;
 			*object = spheres->content;
+			impact->dist = tmp;
+			impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
+			impact->normal = normalize(new_vect(sphere->pos.x + impact->pos.x, sphere->pos.y + impact->pos.y, sphere->pos.z + impact->pos.z));
 			ft_memcpy(scene->type, "sp\0", 3);
 		}
 		spheres = spheres->next;
