@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 13:24:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:59:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ int		solve_quadratic(const t_vect point, float *x0, float *x1)
  * check si le ray intersect la sphere et
  * retourne la distance entre le ray et le point de contact s'il y a contact
  ***/
-float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_ray *impact)
+float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact)
 {
-	float	t0;
-	float	t1;
+	float	x0;
+	float	x1;
 	t_vect	vect;
 
 	vect = new_vect(ray.pos.x - sphere->pos.x, ray.pos.y - sphere->pos.y, ray.pos.z - sphere->pos.z);
-	if (!solve_quadratic(new_vect(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, vect), dot_product(vect, vect) - sphere->radius), &t0, &t1))
+	if (!solve_quadratic(new_vect(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, vect), dot_product(vect, vect) - sphere->radius), &x0, &x1))
 		return (INFINITY);
-	if (t0 > t1)
-		ft_swap(&t0, &t1);
-	if (t0 < 0)
+	if (x0 > x1)
+		ft_swap(&x0, &x1);
+	if (x0 < 0)
 	{
-		t0 = t1;
-		if (t0 < 0)
+		x0 = x1;
+		if (x0 < 0)
 			return (INFINITY);
 		return (distance(new_vect(0, 0, 0), vect));
 	}
@@ -91,6 +91,25 @@ float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_ray *impact)
 			return 0;
 	}
 }*/
+
+void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
+{
+	t_list		*spheres;
+	float		tmp;
+
+	spheres = scene->spheres;
+	while (spheres->next)
+	{
+		//determine closest ray/object intersection;
+		if ((tmp = intersect_sphere(ray, (t_sphere*)(spheres->content), impact)) < impact->dist)
+		{
+			impact->dist = tmp;
+			*object = spheres->content;
+			ft_memcpy(scene->type, "sp\0", 3);
+		}
+		spheres = spheres->next;
+	}
+}
 
 int		intersect_plane(const t_ray ray, const t_plane plane)
 {

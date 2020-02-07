@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 13:01:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:47:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		*init_scene(t_scene *scene)
 	scene->cylinders = ft_lstnew(NULL);
 	scene->triangles = ft_lstnew(NULL);
 	if(!(scene->type = malloc(3 * sizeof(char))))
-		return (NULL);
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ft_bzero(scene->type, 3);
 	return (scene);
 }
@@ -43,7 +43,7 @@ t_scene		*parse(int fd)
 
 	set = " \t";
 	if (!(scene = malloc(sizeof(*scene))))
-		return (NULL);
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if(!(init_scene(scene)))
 		return(NULL);
 	while ((ret = get_next_line(fd, &line)) == 1)

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 13:26:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/07 15:13:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,22 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 /***
  * trouve l'objet le plus proche dans la direction du ray
  ***/
-t_ray 	*trace_ray(const t_ray ray, const t_scene *scene, float *dist, void **object)
+void		trace_ray(const t_ray ray, const t_scene *scene, void **object)
 {
-	t_list		*spheres;
-	float		tmp;
-	t_ray		*impact;
+	t_impact	*impact;
 
 	//for each object in the scene
-	spheres = scene->spheres;
-	while (spheres->next)
-	{
-		//determine closest ray/object intersection;
-		if ((tmp = intersect_sphere(ray, (t_sphere*)(spheres->content), impact)) < *dist)
-		{
-			*dist = tmp;
-			*object = spheres->content;
-			ft_memcpy(scene->type, "sp\0", 3);
-		}
-		spheres = spheres->next;
-	}
-	return (impact);
+	if(!(impact = malloc(sizeof(*impact))))
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	impact->dist = INFINITY;
+	ray_spheres(ray, scene, impact, object);
+	// ray_planes(ray, scene, impact, object);
+	// ray_squares(ray, scene, impact, object);
+	// ray_cyinders(ray, scene, impact, object);
+	// ray_triangles(ray, scene, impact, object);
 }
 
-void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
+void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 {
 	t_couple	pixel;
 	int			color;
@@ -76,8 +69,6 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 	void		*object;
 	float		reflection_factor;
 	int			depth;
-	float		dist;
-	t_ray		*impact;
 
 	pixel.h = -1;
 	while (++pixel.h < scene->resolution.h)
@@ -88,15 +79,14 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			//Final color = 0;
 			color = rgb_to_int(int_to_rgb(0, 0, 0));
 			reflection_factor = 1;
-			//Repeat until reflection factor is 0 or maximum depth is reached;
 			depth = 1;
 			object = NULL;
+			//Repeat until reflection factor is 0 or maximum depth is reached;
 			while (depth-- && reflection_factor > 1e-6)
 			{
-				dist = INFINITY;
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
-				impact = trace_ray(ray, scene, &dist, &object);
-				//get_obj(type, object);
+				trace_ray(ray, scene, &object);
+				//get_obj(scene->type, object);
 				//if intersection exists
 				if (object)
 				{
@@ -106,6 +96,7 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 						{
 							//add this light contribution to computed color;
 						}
+						//printf("%d,%d\n", pixel.w, pixel.h);
 						color = rgb_to_int(((t_sphere*)object)->color);
 					}
 				}
@@ -116,6 +107,40 @@ void	print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 		// compute primary ray direction
