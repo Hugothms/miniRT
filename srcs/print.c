@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/17 15:09:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:10:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,13 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	if(!(impact = malloc(sizeof(*impact))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	impact->dist = INFINITY;
-	//printf("%p\n", object);
 	ray_spheres(ray, scene, impact, object);
-	//printf("%p\n", object);
 	// ray_planes(ray, scene, impact, object);
 	// ray_squares(ray, scene, impact, object);
 	// ray_cyinders(ray, scene, impact, object);
 	// ray_triangles(ray, scene, impact, object);
-	//printf("ok\n");
 	if (*object)
 		return (impact);
-	//printf("nothing\n");
 	return (NULL);
 }
 int		manage_light(const t_scene *scene, void *object, t_impact *impact)
