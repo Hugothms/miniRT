@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/07 17:14:45 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/17 13:31:26 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ $(OBJS) : %.o: %.c $(HEADER)
 	$(CC) -I $(INCL) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(OPTI) -o $@ $(OBJSLIBFT) $^ $(MLX_INCLUDE) $(LIBLINK)
+	$(CC) $(OPTI) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJSLIBFT) $^ $(MLX_INCLUDE) $(LIBLINK)
 
 complib :
 	$(MAKE) -C libft all

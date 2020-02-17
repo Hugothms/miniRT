@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 19:31:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/17 15:09:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,17 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	if(!(impact = malloc(sizeof(*impact))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	impact->dist = INFINITY;
+	//printf("%p\n", object);
 	ray_spheres(ray, scene, impact, object);
+	//printf("%p\n", object);
 	// ray_planes(ray, scene, impact, object);
 	// ray_squares(ray, scene, impact, object);
 	// ray_cyinders(ray, scene, impact, object);
 	// ray_triangles(ray, scene, impact, object);
-	if (object)
+	//printf("ok\n");
+	if (*object)
 		return (impact);
+	//printf("nothing\n");
 	return (NULL);
 }
 int		manage_light(const t_scene *scene, void *object, t_impact *impact)
@@ -108,7 +112,8 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 			color = rgb_to_int(int_to_rgb(0, 0, 0));
 			reflection_factor = 1;
 			depth = 1;
-			object = NULL; //peut etre a deplacer dans le while suivant
+			object = NULL; // peut etre a deplacer dans le while suivant
+			impact = NULL; // idem
 			while (depth-- && reflection_factor > 1e-6)
 			{
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
@@ -117,6 +122,7 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 				if (impact)
 				{
 					color = manage_light(scene, object, impact);
+					//color = rgb_to_int(((t_sphere*)object)->color);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;

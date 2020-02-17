@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 15:55:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:33:36 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		main(int argc, char *argv[])
 	start = clock();
 	scene = get_scene(argc, argv);
 	end = clock();
-	printf("get_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	printf("\nget_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	mlx = init_win(scene->resolution);
 	end = clock();
