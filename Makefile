@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/17 13:31:26 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/18 12:54:45 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,10 +56,10 @@ OPTI = -Ofast #-O3
 all : complib $(NAME)
 
 $(OBJS) : %.o: %.c $(HEADER)
-	$(CC) -I $(INCL) -c $< -o $@
+	$(C) -I $(INCL) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(OPTI) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJSLIBFT) $^ $(MLX_INCLUDE) $(LIBLINK)
+	$(C) $(CFLAGS) $(LDFLAGS) $(MLX_INCLUDE) -o $@ $(OBJSLIBFT) $^ $(LIBLINK)
 
 complib :
 	$(MAKE) -C libft all
@@ -110,17 +110,17 @@ test: $(NAME)
 	./$< example.rt
 
 test_save: $(NAME)
-	./$< example.rt --save
+	./$< example.rt -save
 
 test_re: re $(NAME)
 	./$(NAME) example.rt
 
 test_re_save: re $(NAME)
-	./$(NAME) example.rt --save
+	./$(NAME) example.rt -save
 
 
 
-# gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt --save
+# gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt -save
 #"sudo apt-get update" "sudo apt install gdb" "sudo apt install gcc"
 #https://stackoverflow.com/c/42network/questions/950/954#954
 

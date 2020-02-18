@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 17:38:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:20:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct		s_impact
 	t_vect			normal;
 }					t_impact;
 
-t_rgb				int_to_rgb(int r, int g, int b);
+t_rgb				*int_to_rgb(int r, int g, int b);
 int					rgb_to_int(t_rgb rgb);
 t_rgb				char_to_rgb(char *r, char *g, char *b);
 t_ray				new_ray(t_vect position, t_vect direction);

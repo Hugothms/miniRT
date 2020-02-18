@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/17 15:10:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/18 17:43:47 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,36 +63,36 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 		return (impact);
 	return (NULL);
 }
-int		manage_light(const t_scene *scene, void *object, t_impact *impact)
+t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact)
 {
 	t_list		*lights;
 	t_light		*light;
 	int			color;
 	t_ray		to_light;
-	t_impact	*closest;
+	t_impact	*impact_light;
 
 	lights = scene->lights;
 	while (lights->next)
 	{
-		//if the light is not in shadow of another object
 		light = (t_light*)(lights->content);
 		to_light = new_ray(impact->pos, add_vect(impact->pos, minus_vect(light->pos)));
-		closest = closest_object(to_light, scene, &object);
-		if (object && closest->dist > distance(impact->pos, light->pos))
+		impact_light = closest_object(to_light, scene, &object);
+		//if the light is not in shadow of another object
+		if (!object || (object && impact_light->dist > distance(impact->pos, light->pos)))
 		{
 			//add this light contribution to computed color;
-			return (rgb_to_int(((t_sphere*)object)->color));
+			return (&((t_sphere*)object)->color); // je return des que je trouve une light (a modifier)
 		}
 		//printf("%d,%d\n", pixel.w, pixel.h);
 		lights = lights->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 {
 	t_couple	pixel;
-	int			color;
+	t_rgb		*color;
 	t_ray		ray;
 	void		*object;
 	float		reflection_factor;
@@ -105,7 +105,7 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 		pixel.w = -1;
 		while (++pixel.w < scene->resolution.w)
 		{
-			color = rgb_to_int(int_to_rgb(0, 0, 0));
+			color = int_to_rgb(0, 0, 0);
 			reflection_factor = 1;
 			depth = 1;
 			object = NULL; // peut etre a deplacer dans le while suivant
@@ -117,28 +117,56 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 				//get_obj(scene->type, object);
 				if (impact)
 				{
-					color = manage_light(scene, object, impact);
-					//color = rgb_to_int(((t_sphere*)object)->color);
+					//color = manage_light(scene, object, impact);
+					printf("%d,%d\t%2f,%2f,%2f\t%2f,%2f,%2f\t %2f\n", pixel.h, pixel.w,impact->pos.x, impact->pos.y, impact->pos.z, impact->normal.x, impact->normal.y, impact->normal.z, impact->dist);
+					*color = ((t_sphere*)object)->color;
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;
 			}
-			ft_put_pixel(img->data, pixel, color, scene->resolution.w);
+			ft_put_pixel(img->data, pixel, rgb_to_int(*color), scene->resolution.w);
 		}
 	}
 }
 
 
 
+/*
+2,5     -0.975546,-4.877731,16.718691   -0.026105,-0.184044,0.982571     17.443010
+2,6     0.975546,-4.877731,16.718691    0.026105,-0.184044,0.982571      17.443010
 
 
+3,4     -2.933097,-2.933097,16.755585   -0.078845,-0.132607,0.988028     17.261395
+3,5     -0.915321,-2.745963,15.686564   -0.025417,-0.131787,0.990952     15.951377
+3,6     0.915321,-2.745963,15.686564    0.025417,-0.131787,0.990952      15.951377
+3,7     2.933097,-2.933097,16.755585    0.078845,-0.132607,0.988028      17.261395
 
 
+4,4     -2.938599,-0.979533,16.787018   -0.079370,-0.080475,0.993592     17.070408
+4,5     -0.919541,-0.919541,15.758881   -0.025621,-0.081348,0.996356     15.812447
+4,6     0.919541,-0.919541,15.758881    0.025621,-0.081348,0.996356      15.812447
+4,7     2.938599,-0.979533,16.787018    0.079370,-0.080475,0.993592      17.070408
 
+5,3     -4.787921,0.957584,16.410862    -0.195500,0.088190,0.976730      17.121845
+5,4     -2.759510,0.919837,15.763956    -0.144912,0.089541,0.985385      16.030075
+5,5     -0.936448,0.936448,16.048632    -0.094514,0.089839,0.991462      16.103182
+5,6     0.936448,0.936448,16.048632     0.094514,0.089839,0.991462       16.103182
+5,7     2.759510,0.919837,15.763956     0.144912,0.089541,0.985385       16.030075
+5,8     4.787921,0.957584,16.410862     0.195500,0.088190,0.976730       17.121845
 
+6,3     -4.710021,2.826012,16.143854    -0.193740,0.138547,0.971221      17.052704
+6,4     -2.722168,2.722168,15.550637    -0.143919,0.139233,0.979746      16.020073
+6,5     -0.924167,2.772500,15.838159    -0.094171,0.140328,0.985616      16.105530
+6,6     0.924167,2.772500,15.838159     0.094171,0.140328,0.985616       16.105530
+6,7     2.722168,2.722168,15.550637     0.143919,0.139233,0.979746       16.020073
+6,8     4.710021,2.826012,16.143854     0.193740,0.138547,0.971221       17.052704
 
-
-
+7,4     -2.844419,4.740698,16.249002    -0.143217,0.189477,0.971384      17.163771
+7,5     -0.970976,4.854882,16.640375    -0.092561,0.191601,0.977098      17.361301
+7,6     0.970976,4.854882,16.640375     0.092561,0.191601,0.977098       17.361301
+7,7     2.844419,4.740698,16.249002     0.143217,0.189477,0.971384       17.163771
+la dist nest pas en fonction de la lumiere
+*/
 
 
 

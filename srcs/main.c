@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/17 13:33:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/18 13:18:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_img	*init_img(t_mlx *mlx, t_couple resolution)
 void	get_controls_loop(t_mlx *mlx, t_img *img)
 {
 	(void)img;
+	//mlx_hook(vars.win, 2, 1L<<0, close, &vars);
 	mlx_key_hook(mlx->win_ptr, key_function, mlx);
 	mlx_loop(mlx->mlx_ptr);
 }

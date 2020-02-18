@@ -6,19 +6,20 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 14:27:17 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:21:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_rgb	int_to_rgb(int r, int g, int b)
+t_rgb	*int_to_rgb(int r, int g, int b)
 {
-	t_rgb	rgb;
+	t_rgb	*rgb;
 
-	rgb.r = r;
-	rgb.g = g;
-	rgb.b = b;
+	if(!(rgb = malloc(sizeof(*rgb))))
+	rgb->r = r;
+	rgb->g = g;
+	rgb->b = b;
 	return (rgb);
 }
 
