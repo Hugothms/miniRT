@@ -48,7 +48,7 @@ EXEC_HARDCORE = test_hardcore.out
 EXEC_test = test_test.out
 EXEC_precise = precise.out
 
-MLX_INCLUDE = -lmlx -framework OpenGL -framework AppKit
+MLX_INCLUDE = libmlx.a -framework OpenGL -framework AppKit
 
 OPTI = -Ofast #-O3
 
