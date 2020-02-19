@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 18:53:35 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 20:18:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,18 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 	{
 		obstacle = NULL;
 		light = (t_light*)(lights->content);
-		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-4), add_vect(light->pos, minus_vect(impact->pos)));
+		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-5), add_vect(light->pos, minus_vect(impact->pos)));
 		impact_light = closest_object(to_light, scene, &obstacle); // rapprochement du point d'impact vers la camera
-		// if(object == obstacle)
+		// if (object == obstacle)
 		// {
-		// 	*color = *mult_rgb(light->color, *int_to_rgb(50,50,50));
+		// 	*color = *mult_rgb(*mult_rgb(*color, light->color), *int_to_rgb(50,50,50));
 		// 	return (NULL);
 		// }
 		//if the light is not in shadow of another object
 		if (!obstacle)
 		{
 			//add this light contribution to computed color;
-			*color = *mult_rgb(((t_sphere*)object)->color, light->color); // (a modifier)
+			*color = *mult_rgb(*color, light->color); // (a modifier)
 		}
 		//printf("%d,%d\n", pixel.w, pixel.h);
 		lights = lights->next;
@@ -124,8 +124,8 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 				//get_obj(scene->type, object);
 				if (impact)
 				{
+					*color = ((t_sphere*)object)->color;
 					manage_light(scene, object, impact, color);
-					//*color = ((t_sphere*)object)->color;
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;
