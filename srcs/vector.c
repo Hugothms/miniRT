@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 19:25:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 16:45:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,9 @@ t_vect		minus_vect(const t_vect vect)
 {
 	return (new_vect(-vect.x, -vect.y, -vect.z));
 }
+
+t_vect		multi_vect(const t_vect vect, float x)
+{
+	return (new_vect(vect.x * x, vect.y * x, vect.z * x));
+}
+

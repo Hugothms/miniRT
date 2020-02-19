@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/18 17:43:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:40:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 {
 	t_impact	*impact;
 
-	//for each object in the scene
 	if(!(impact = malloc(sizeof(*impact))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	impact->dist = INFINITY;
+	//for each object in the scene
 	ray_spheres(ray, scene, impact, object);
 	// ray_planes(ray, scene, impact, object);
 	// ray_squares(ray, scene, impact, object);
@@ -63,25 +63,32 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 		return (impact);
 	return (NULL);
 }
-t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact)
+
+t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb *color)
 {
 	t_list		*lights;
 	t_light		*light;
-	int			color;
 	t_ray		to_light;
+	void		*obstacle;
 	t_impact	*impact_light;
 
 	lights = scene->lights;
 	while (lights->next)
 	{
+		obstacle = NULL;
 		light = (t_light*)(lights->content);
-		to_light = new_ray(impact->pos, add_vect(impact->pos, minus_vect(light->pos)));
-		impact_light = closest_object(to_light, scene, &object);
+		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-4), add_vect(light->pos, minus_vect(impact->pos)));
+		impact_light = closest_object(to_light, scene, &obstacle); // rapprochement du point d'impact vers la camera
+		// if(object == obstacle)
+		// {
+		// 	*color = *int_to_rgb(255, 255, 0);
+		// 	return (NULL);
+		// }
 		//if the light is not in shadow of another object
-		if (!object || (object && impact_light->dist > distance(impact->pos, light->pos)))
+		if (!obstacle)
 		{
 			//add this light contribution to computed color;
-			return (&((t_sphere*)object)->color); // je return des que je trouve une light (a modifier)
+			*color = ((t_sphere*)object)->color; // je return des que je trouve une light (a modifier)
 		}
 		//printf("%d,%d\n", pixel.w, pixel.h);
 		lights = lights->next;
@@ -95,7 +102,7 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 	t_rgb		*color;
 	t_ray		ray;
 	void		*object;
-	float		reflection_factor;
+	float		reflec;
 	int			depth;
 	t_impact	*impact;
 
@@ -106,20 +113,19 @@ void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 		while (++pixel.w < scene->resolution.w)
 		{
 			color = int_to_rgb(0, 0, 0);
-			reflection_factor = 1;
-			depth = 1;
+			reflec = REFLEC;
+			depth = DEPTH;
 			object = NULL; // peut etre a deplacer dans le while suivant
 			impact = NULL; // idem
-			while (depth-- && reflection_factor > 1e-6)
+			while (depth-- && reflec > 1e-6)
 			{
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
 				impact = closest_object(ray, scene, &object);
 				//get_obj(scene->type, object);
 				if (impact)
 				{
-					//color = manage_light(scene, object, impact);
-					printf("%d,%d\t%2f,%2f,%2f\t%2f,%2f,%2f\t %2f\n", pixel.h, pixel.w,impact->pos.x, impact->pos.y, impact->pos.z, impact->normal.x, impact->normal.y, impact->normal.z, impact->dist);
-					*color = ((t_sphere*)object)->color;
+					manage_light(scene, object, impact, color);
+					//*color = ((t_sphere*)object)->color;
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;

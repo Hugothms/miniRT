@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/18 12:54:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:44:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,21 @@
  * check si le ray intersect la sphere et
  * retourne la distance entre le ray et le point de contact s'il y a contact
  ***/
-float	intersect_sphere(const t_ray ray, const t_sphere *sphere)
+float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact)
 {
 	float	x0;
 	float	x1;
 	t_vect	vect;
 
 	vect = new_vect(ray.pos.x - sphere->pos.x, ray.pos.y - sphere->pos.y, ray.pos.z - sphere->pos.z);
-	if (!solve_quadratic(new_vect(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, vect), dot_product(vect, vect) - sphere->radius), &x0, &x1))
+	if (!solve_quadratic(new_vect(dot_product(ray.dir, ray.dir), 2 * dot_product(ray.dir, vect), dot_product(vect, vect) - sphere->radius2), &x0, &x1))
 		return (INFINITY);
 	if (x0 > x1)
 		ft_swap(&x0, &x1);
 	if (x0 < 0 && x1 < 0)
 		return (INFINITY);
-	t_vect point;
-	point = new_vect(ray.pos.x + x1 * ray.dir.x, ray.pos.y + x1 * ray.dir.y, ray.pos.z + x1 * ray.dir.z);
-	return (distance(new_vect(0, 0, 0), point));
+	impact->pos = new_vect(ray.pos.x + x1 * ray.dir.x, ray.pos.y + x1 * ray.dir.y, ray.pos.z + x1 * ray.dir.z);
+	return (distance(ray.pos, impact->pos));
 }
 
 void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
@@ -45,7 +44,7 @@ void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void *
 	{
 		//determine closest ray/object intersection;
 		sphere = (t_sphere*)(spheres->content);
-		if ((tmp = intersect_sphere(ray, sphere)) < impact->dist)
+		if ((tmp = intersect_sphere(ray, sphere, impact)) < impact->dist)
 		{
 			*object = spheres->content;
 			impact->dist = tmp;

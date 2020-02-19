@@ -7,3 +7,6 @@ a.out*
 *.code-workspace
 *.out*
 *.bmp
+ressources/**
+ressources/*
+ressources/

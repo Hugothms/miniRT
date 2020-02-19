@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/17 13:58:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:30:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 # define PARSE_ERROR -3
 # define MLX_ERROR -4
 # define MALLOC_ERROR -5
+
+
+# define REFLEC 1
+# define DEPTH 1
 
 t_scene			*parse(int fd);
 
@@ -64,9 +68,10 @@ t_vect			mult_mat(const float mat[3][3], t_vect vect);
 float			dot_product(const t_vect vect1, const t_vect vect2);
 t_vect			add_vect(const t_vect vect1, const t_vect vect2);
 t_vect			minus_vect(const t_vect vect);
+t_vect			multi_vect(const t_vect vect, float x);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
-float			intersect_sphere(const t_ray ray, const t_sphere *sphere);
+float			intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact);
 void			ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 int				intersect_plane(const t_ray ray, const t_plane plane);
 int				hit_sphere(const t_ray ray, const t_sphere sphere);

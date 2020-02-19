@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/18 14:21:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 13:18:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_rgb	*int_to_rgb(int r, int g, int b)
 	t_rgb	*rgb;
 
 	if(!(rgb = malloc(sizeof(*rgb))))
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	rgb->r = r;
 	rgb->g = g;
 	rgb->b = b;

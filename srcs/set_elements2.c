@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 11:18:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:45:47 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void		set_sphere(t_scene *scene, char **strs)
 {
 	t_sphere	*sphere;
+	float		radius;
 
 	if (!(sphere = malloc(sizeof(*sphere))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	sphere->pos = str_to_triple(strs[1]);
-	sphere->radius = ft_atof(strs[2]);
+	radius = ft_atof(strs[2]);
+	sphere->radius2 = radius * radius;
 	sphere->color = str_to_rgb(strs[3]);
 	ft_lstadd_front(&(scene->spheres), ft_lstnew(sphere));
 }

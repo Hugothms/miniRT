@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/27 17:44:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:44:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_light
 typedef struct		s_sphere
 {
 	t_vect			pos;
-	float			radius;
+	float			radius2;
 	t_rgb			color;
 }					t_sphere;
 
