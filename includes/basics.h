@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/18 14:20:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:10:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,6 @@ typedef struct		s_couple
 	int				w;
 	int				h;
 }					t_couple;
-
-typedef struct		s_mlx
-{
-	void			*mlx_ptr;
-	void			*win_ptr;
-}					t_mlx;
-
-typedef struct		s_img
-{
-	void			*img_ptr;
- 	int				bits_per_pixel;
-	int				size_line;
-	int				endian;
-	unsigned char	*data;
-}					t_img;
 
 typedef struct		s_rgb
 {

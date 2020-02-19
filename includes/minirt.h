@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 17:30:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:20:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,35 @@
 
 # define REFLEC 1
 # define DEPTH 1
+
+
+
+
+typedef struct		s_mlx
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+}					t_mlx;
+
+typedef struct		s_img
+{
+	void			*img_ptr;
+ 	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+	unsigned char	*data;
+}					t_img;
+
+typedef struct	s_window
+{
+	t_mlx		*mlx;
+	t_img		*img1;
+	t_img		*img2;
+}				t_window;
+
+
+
+
 
 t_scene			*parse(int fd);
 
@@ -85,5 +114,7 @@ t_scene			*get_scene(int argc, char *argv[]);
 
 float			distance(t_vect p1, t_vect p2);
 int				solve_quadratic(const t_vect point, float *x0, float *x1);
+
+
 
 #endif
