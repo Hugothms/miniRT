@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 #include <stdio.h>
-# include <mlx.h>
+# include "../minilibx_opengl/mlx.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
