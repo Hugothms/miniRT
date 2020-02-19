@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 18:31:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:53:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 		impact_light = closest_object(to_light, scene, &obstacle); // rapprochement du point d'impact vers la camera
 		// if(object == obstacle)
 		// {
-		// 	*color = light->color;
+		// 	*color = *mult_rgb(light->color, *int_to_rgb(50,50,50));
 		// 	return (NULL);
 		// }
 		//if the light is not in shadow of another object
 		if (!obstacle)
 		{
 			//add this light contribution to computed color;
-			*color = ((t_sphere*)object)->color; // je return des que je trouve une light (a modifier)
+			*color = *mult_rgb(((t_sphere*)object)->color, light->color); // (a modifier)
 		}
 		//printf("%d,%d\n", pixel.w, pixel.h);
 		lights = lights->next;

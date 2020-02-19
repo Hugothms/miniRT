@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 13:18:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:54:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ t_rgb	char_to_rgb(char *r, char *g, char *b)
 int		rgb_to_int(t_rgb rgb)
 {
 	return(rgb.r << 16 | rgb.g << 8 | rgb.b);
+}
+
+t_rgb	*mult_rgb(t_rgb rgb, t_rgb mult)
+{
+	return (int_to_rgb(rgb.r * (mult.r/255), rgb.g * (mult.g/255), rgb.b * (mult.b/255)));
 }
 
 int		get_t(int color)
