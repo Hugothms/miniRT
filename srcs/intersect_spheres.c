@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 15:44:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/20 15:46:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void *
 			*object = spheres->content;
 			impact->dist = tmp;
 			impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
-			impact->normal = normalize(new_vect(sphere->pos.x + impact->pos.x, sphere->pos.y + impact->pos.y, sphere->pos.z + impact->pos.z));
+			impact->normal = normalize(new_vect(impact->pos.x - sphere->pos.x, impact->pos.y - sphere->pos.y, impact->pos.z - sphere->pos.z));
 			ft_memcpy(scene->type, "sp\0", 3);
 		}
 		spheres = spheres->next;
