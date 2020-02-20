@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/20 11:42:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/20 11:43:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 	return (NULL);
 }
 
-void		print_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
+void		make_img(const t_mlx *mlx,  t_img *img,const t_scene *scene)
 {
 	t_couple	pixel;
 	t_rgb		*color;
