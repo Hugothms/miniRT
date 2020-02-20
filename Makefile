@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/18 12:54:45 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/20 11:38:44 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,13 @@ CC = clang
 CFLAGS += -Wall -Werror -Wextra
 LDFLAGS += -g3 -fsanitize=address
 
-SRCS = 	srcs/main.c				\
-		srcs/color.c			\
+SRCS = 	srcs/color.c			\
 		srcs/error.c			\
 		srcs/get_next_line.c	\
 		srcs/intersect_spheres.c\
+		srcs/main.c				\
+		srcs/make_img.c			\
 		srcs/parse.c			\
-		srcs/print.c			\
 		srcs/ray.c				\
 		srcs/save_bmp.c			\
 		srcs/set_elements.c		\

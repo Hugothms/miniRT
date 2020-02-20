@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 18:20:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/20 11:36:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ int		main(int argc, char *argv[])
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	start = clock();
-	print_img(mlx, img, scene);
+	make_img(mlx, img, scene);
 	end = clock();
-	printf("print_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
 	end = clock();
