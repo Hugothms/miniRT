@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/20 11:36:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/20 12:20:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINIRT_H
 
 #include <stdio.h>
-# include "../minilibx_opengl/mlx.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
@@ -24,6 +23,7 @@
 # include <unistd.h>
 
 # include "../libft/libft.h"
+# include "mlx.h"
 # include "basics.h"
 # include "elements.h"
 # include "scene.h"
