@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/21 18:58:52 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/21 19:10:26 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ LIBFTDIR = libft/
 LIBLINK = -L./libft -lft
 MAKE = make
 
-MLX_INCLUDE = libmlx.a -framework OpenGL -framework AppKit
+MLX_INCLUDE = -L./libmlx -lmlx -framework OpenGL -framework AppKit
 
 OPTI = -Ofast #-O3
 
@@ -54,13 +54,13 @@ OPTI = -Ofast #-O3
 all : compilelibft $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) -Ofast $(LDFLAGS) $(MLX_INCLUDE) -o $@ $(OBJSLIBFT) $^ $(LIBLINK)
+	$(CC) $(OPTI) $(LDFLAGS) $(MLX_INCLUDE) -o $@ $(OBJSLIBFT) $^ $(LIBLINK)
 
 compilelibft :
 	$(MAKE) -C libft all
 
 .c.o:
-	$(CC) $(LDFLAGS) -I$(INCL) -c $< -o ${<:.c=.o}
+	$(CC) -c $(OPTI) $(LDFLAGS) -I$(INCL) -o $@ $<
 
 clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"

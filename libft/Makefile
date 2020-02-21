@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/21 16:55:04 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/21 19:11:59 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,17 +108,17 @@ RANLIB_BG = \033[48;5;172m
 CLEAR_COLOR = \033[m
 ###########################
 
-
+OPTI = -Ofast #-O3
 
 all:		$(NAME)
 
 $(NAME):	${OBJS}
-	echo "Creating $(GREEN_FG)libft.a $(CLEAR_COLOR)"
+	#echo "Creating $(GREEN_FG)libft.a$(CLEAR_COLOR)"
 	ar rc	$(NAME) ${OBJS}
 	ranlib	$(NAME)
 
 .c.o:
-	${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
+	${CC} -c $(OPTI) ${CFLAGS} -I$(INCLUDES) -o $@ $<
 
 clean:
 	rm -f $(OBJS)
