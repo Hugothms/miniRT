@@ -1,11 +1,8 @@
 *.DS_Store
 .vscode/*
-a.out*
+ressources/*
 *.txt
 *.o
 *.code-workspace
 *.out*
 *.bmp
-ressources/**
-ressources/*
-ressources/
