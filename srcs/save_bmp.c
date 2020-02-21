@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 18:13:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/21 20:11:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			write_data(int f, const unsigned char *data, t_couple resolution)
 		write(f, data + resolution.w * line * 4, resolution.w * 4);
 }
 
-void			save_bmp(const char *filename, const unsigned char *data, t_couple resolution)
+void			save_bmp(const char *filename, const unsigned char *data, const t_couple resolution)
 {
 	int				filesize;
 	int				f;
@@ -73,3 +73,12 @@ void			save_bmp(const char *filename, const unsigned char *data, t_couple resolu
 	write_data(f, data, resolution);
 	close(f);
 }
+
+/*--normal
+              Output a normal diff.
+
+       -n  --rcs
+              Output an RCS format diff.
+
+       -y  --side-by-side
+              Output in two columns.*/
