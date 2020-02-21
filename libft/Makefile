@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/06 17:28:14 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/21 16:55:04 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRCS 		=	ft_swap.c				\
 				ft_putstrn_fd.c			\
 				ft_putnbr_base.c		\
 				ft_strcmp.c				\
+				ft_strncmp_rev.c		\
 				ft_strstr.c				\
 				ft_strcat.c				\
 				ft_strmap.c				\

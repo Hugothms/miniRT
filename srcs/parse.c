@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/18 12:49:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:41:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ t_scene		*get_scene(int argc, char *argv[])
 
 	if (argc < 2 || argc > 3)
 		print_err_and_exit("Wrong number of argument", 1);
+	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
+		print_err_and_exit("First argument must be a '.rt' file", 1);
 	if (argc == 3 && ft_strcmp(argv[2], "-save"))
-		print_err_and_exit("2nd argument must be '-save'", 1);
+		print_err_and_exit("Second argument must be '-save'", 1);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		print_err_and_exit(strerror(errno), errno);
 	if (!(scene = parse(fd)))

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:21:48 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-void				ft_putchar_fd(char c, int fd);
 void				ft_putchar(int c);
-void				ft_putnbr_fd(int nb, int fd);
+void				ft_putchar_fd(char c, int fd);
 void				ft_putnbr(int nb);
+void				ft_putnbr_fd(int nb, int fd);
 void				ft_putnbr_unsigned_fd(unsigned int nb, int fd);
 void				ft_putnbr_unsigned(unsigned int nb);
 void				ft_putstrn(const char *str, unsigned int n);
@@ -75,6 +75,7 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char				*ft_strcat(char *dest, const char *src);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strstr(const char *str, const char *to_find);
 char				*ft_strnstr(const char *str, const char *to_find,

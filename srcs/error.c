@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 11:01:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:40:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	print_err_and_exit(char *str, int err)
 {
-	write(STDERR_FILENO, "Error: ", 7);
-	while (*str)
-		write(STDERR_FILENO, str++, 1);
-	write(STDERR_FILENO, "\n", 1);
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(" (exit code: ", STDERR_FILENO);
+	ft_putnbr_fd(err, STDERR_FILENO);
+	ft_putstr_fd(")\n", STDERR_FILENO);
 	exit(err);
 }
