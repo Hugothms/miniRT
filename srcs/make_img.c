@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 16:27:17 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/21 19:18:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 			//add this light contribution to computed color;
 			*color = *mult_rgb(*color, light->color); // (a modifier)
 		}
-		// *color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la shpere
+		*color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la shpere
 		lights = lights->next;
 	}
 	return (NULL);

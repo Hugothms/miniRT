@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 16:41:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/21 19:20:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_img	*init_img(t_mlx *mlx, t_couple resolution)
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	if (!(img->data = (unsigned char*)mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	printf("%d,%d,%d\n",(img->bits_per_pixel), (img->size_line), (img->endian));
 	return (img);
 }
 
@@ -84,38 +83,38 @@ int		main(int argc, char *argv[])
 	t_img		*img;
 
 	clock_t start, end;
-	// start = clock();
+	start = clock();
 	scene = get_scene(argc, argv);
-	// end = clock();
-	// printf("\nget_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	// start = clock();
+	end = clock();
+	printf("\nget_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	mlx = malloc_mlx_init();
-	// end = clock();
-	// printf("malloc_mlx_init:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	// start = clock();
+	end = clock();
+	printf("malloc_mlx_init:%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	img = init_img(mlx, scene->resolution);
-	// end = clock();
-	// printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	// start = clock();
+	end = clock();
+	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	start = clock();
 	make_img(img, scene);
-	// end = clock();
-	// printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	end = clock();
+	printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	if (argc == 2)
 	{
 		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, "title window")))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-		// start = clock();
+		start = clock();
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
-		// end = clock();
-		// printf("put_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+		end = clock();
+		printf("put_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 		get_controls_loop(mlx, img, scene);
 	}
 	else if (argc == 3)
 	{
-		// start = clock();
+		start = clock();
 		save_bmp(screenshot_datetime(), img->data, scene->resolution);
-		// end = clock();
-		// printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+		end = clock();
+		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	}
 	return (0);
 }

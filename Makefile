@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/21 19:10:26 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/21 19:51:11 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,15 @@ HEADER = $(INCL)minirt.h
 
 LIBFT = libft.a
 LIBFTDIR = libft/
-LIBLINK = -L./libft -lft
+LIBFTLINK = -L./libft -lft
+
+LIBMLX = libmlx.a
+LIBMLXDIR = libmlx
+LIBMLXLINK = -L./libmlx -lmlx
+MLX_INCLUDE = -framework OpenGL -framework AppKit
+
 MAKE = make
 
-MLX_INCLUDE = -L./libmlx -lmlx -framework OpenGL -framework AppKit
 
 OPTI = -Ofast #-O3
 
@@ -51,25 +56,30 @@ OPTI = -Ofast #-O3
 
 
 
-all : compilelibft $(NAME)
+all : compilelibft compilelibmlx $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) $(OPTI) $(LDFLAGS) $(MLX_INCLUDE) -o $@ $(OBJSLIBFT) $^ $(LIBLINK)
+	$(CC) $(OPTI) $(LDFLAGS) -o $@ $(OBJSLIBFT) $^ $(LIBFTLINK) $(LIBMLXLINK) $(MLX_INCLUDE)
 
 compilelibft :
 	$(MAKE) -C libft all
 
+compilelibmlx :
+	$(MAKE) -C libmlx all
+
 .c.o:
-	$(CC) -c $(OPTI) $(LDFLAGS) -I$(INCL) -o $@ $<
+	$(CC) -c $(LDFLAGS) -I$(INCL) -o $@ $<
 
 clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
 	cd $(LIBFTDIR) && $(MAKE) clean
-	rm -rf $(OBJS) $(LIBFT)
+	cd $(LIBMLXDIR) && $(MAKE) clean
+	rm -rf $(OBJS) $(LIBFT) $(LIBMLX)
 
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(LIBFTDIR) && $(MAKE) fclean
+	cd $(LIBMLXDIR) && $(MAKE) clean
 	rm -f $(NAME) a.out
 
 re:		fclean all

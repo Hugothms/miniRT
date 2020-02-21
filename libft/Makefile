@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/21 19:11:59 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/21 19:44:56 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,7 @@ $(NAME):	${OBJS}
 	ranlib	$(NAME)
 
 .c.o:
-	${CC} -c $(OPTI) ${CFLAGS} -I$(INCLUDES) -o $@ $<
+	${CC} -c ${CFLAGS} -I$(INCLUDES) -o $@ $<
 
 clean:
 	rm -f $(OBJS)
