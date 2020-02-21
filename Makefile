@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/21 19:51:11 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/21 19:59:11 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,13 +73,13 @@ compilelibmlx :
 clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
 	cd $(LIBFTDIR) && $(MAKE) clean
-	cd $(LIBMLXDIR) && $(MAKE) clean
+	# cd $(LIBMLXDIR) && $(MAKE) clean
 	rm -rf $(OBJS) $(LIBFT) $(LIBMLX)
 
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(LIBFTDIR) && $(MAKE) fclean
-	cd $(LIBMLXDIR) && $(MAKE) clean
+	# cd $(LIBMLXDIR) && $(MAKE) clean
 	rm -f $(NAME) a.out
 
 re:		fclean all
