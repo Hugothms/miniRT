@@ -6,12 +6,12 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/20 11:38:44 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/21 18:58:52 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-C = gcc
-CC = clang
+C = clang
+CC = gcc
 CFLAGS += -Wall -Werror -Wextra
 LDFLAGS += -g3 -fsanitize=address
 
@@ -43,26 +43,24 @@ LIBFTDIR = libft/
 LIBLINK = -L./libft -lft
 MAKE = make
 
-EXEC = test.out
-EXEC_HARDCORE = test_hardcore.out
-EXEC_test = test_test.out
-EXEC_precise = precise.out
-
 MLX_INCLUDE = libmlx.a -framework OpenGL -framework AppKit
 
 OPTI = -Ofast #-O3
 
 
-all : complib $(NAME)
 
-$(OBJS) : %.o: %.c $(HEADER)
-	$(C) -I $(INCL) -c $< -o $@
+
+
+all : compilelibft $(NAME)
 
 $(NAME) : $(OBJS)
-	$(C) $(CFLAGS) $(LDFLAGS) $(MLX_INCLUDE) -o $@ $(OBJSLIBFT) $^ $(LIBLINK)
+	$(CC) -Ofast $(LDFLAGS) $(MLX_INCLUDE) -o $@ $(OBJSLIBFT) $^ $(LIBLINK)
 
-complib :
+compilelibft :
 	$(MAKE) -C libft all
+
+.c.o:
+	$(CC) $(LDFLAGS) -I$(INCL) -c $< -o ${<:.c=.o}
 
 clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
@@ -72,14 +70,12 @@ clean:
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(LIBFTDIR) && $(MAKE) fclean
-	rm -f $(NAME) $(EXEC) $(EXEC_HARDCORE) $(EXEC_test) $(EXEC_precise)
+	rm -f $(NAME) a.out
 
 re:		fclean all
 
-.c.o:
-	${CC} ${CFLAGS} -I$(INCLUDES) -c $< -o ${<:.c=.o}
 
-.PHONY: $(EXEC_precise)
+.PHONY: clean fclean
 
 
 
@@ -88,7 +84,7 @@ re:		fclean all
 
 
 ###########################
-BLACK_FG =	\033[38;5;0m
+--BLACK_FG =	\033[38;5;0m
 RED_FG =	\033[38;5;196m
 REDL_FG =	\033[1;31m
 GREEN_FG =	\033[38;5;46m
@@ -111,12 +107,6 @@ test: $(NAME)
 
 test_save: $(NAME)
 	./$< example.rt -save
-
-test_re: re $(NAME)
-	./$(NAME) example.rt
-
-test_re_save: re $(NAME)
-	./$(NAME) example.rt -save
 
 
 
