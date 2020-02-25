@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/25 16:47:13 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/25 17:43:39 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,8 @@ SRCS 		=	ft_swap.c				\
 				ft_nbrlen.c				\
 				ft_itoa_width.c			\
 				ft_max_float.c			\
-				ft_max_int.c
+				ft_min_int.c			\
+				ft_min_float.c
 
 
 
