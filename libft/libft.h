@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 17:21:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 16:46:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 char				*ft_itoa_width(int nb, int width);
 int					ft_nbrlen(int n);
+int					ft_max_int(int a, int b);
+float				ft_max_float(float a, float b);
 
 #endif
