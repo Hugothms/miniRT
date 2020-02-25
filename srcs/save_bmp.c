@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 20:11:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 13:21:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ unsigned char	*info_header_bmp(t_couple resolution)
 	return (bmpinfoheader);
 }
 
-void			write_data(int f, const unsigned char *data, t_couple resolution)
+void			write_data(int f, const unsigned char *data, t_couple resolution, const int filesize)
 {
-	int 			filesize;
 	int 			line;
 
-	filesize = 54 + 3 * resolution.w * resolution.h;
 	line = resolution.h;
 	while(--line + 1)
 		write(f, data + resolution.w * line * 4, resolution.w * 4);
@@ -70,7 +68,7 @@ void			save_bmp(const char *filename, const unsigned char *data, const t_couple 
 	bmpinfoheader = info_header_bmp(resolution);
 	write(f, bmpinfoheader, 40);
 	free(bmpinfoheader);
-	write_data(f, data, resolution);
+	write_data(f, data, resolution, filesize);
 	close(f);
 }
 

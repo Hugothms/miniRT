@@ -6,26 +6,29 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 20:06:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:40:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int		key_function(int keycode, t_window *w)
+int		close_function(const t_window *w)
+{
+	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
+	mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
+	//free(mlx);
+	exit(0);
+}
+
+int		key_function(const int keycode, const t_window *w)
 {
 	printf("%i\n", keycode);
 	if (keycode == 53)
-	{
-		mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-		mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-		//free(mlx);
-		exit(0);
-	}
+		close_function(w);
 	else if (keycode == 123)
 	{
 		mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-		mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img1->img_ptr, 0, 0);
+		mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
 	}
 	else if (keycode == 124)
 	{
@@ -33,7 +36,7 @@ int		key_function(int keycode, t_window *w)
 		//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img2->img_ptr, 0, 0);
 	}
 	if (keycode == 1)
-		save_bmp(screenshot_datetime(), w->img1->data, w->scene->resolution);
+		save_bmp(screenshot_datetime(), w->img->data, w->scene->resolution);
 	return (0);
 }
 
@@ -48,7 +51,7 @@ t_mlx	*malloc_mlx_init(void)
 	return (mlx);
 }
 
-t_img	*init_img(t_mlx *mlx, t_couple resolution)
+t_img	*init_img(t_mlx *mlx, const t_couple resolution)
 {
 	t_img		*img;
 
@@ -65,18 +68,17 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 {
 	t_window	*window;
 
-	//mlx_hook(vars.win, 2, 1L<<0, close, &vars);
 	if(!(window = malloc(sizeof(*window))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	window->mlx = mlx;
-	window->img1 = img;
-	window->img2 = img;
+	window->img = img;
 	window->scene = scene;
+	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window);
 	mlx_key_hook(mlx->win_ptr, key_function, window);
 	mlx_loop(mlx->mlx_ptr);
 }
 
-int		main(int argc, char *argv[])
+int		main(const int argc, const char *argv[])
 {
 	t_scene		*scene;
 	t_mlx		*mlx;
