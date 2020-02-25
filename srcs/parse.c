@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 17:41:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:14:24 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_scene		*parse(int fd)
 	return (scene);
 }
 
-t_scene		*get_scene(int argc, char *argv[])
+t_scene		*get_scene(const int argc, const char *argv[])
 {
 	int			fd;
 	t_scene		*scene;

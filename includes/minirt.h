@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 20:07:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:15:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ typedef struct		s_img
 typedef struct	s_window
 {
 	t_mlx		*mlx;
-	t_img		*img1;
-	t_img		*img2;
+	t_img		*img;
 	t_scene		*scene;
 }				t_window;
 
@@ -111,7 +110,7 @@ void			make_img(t_img *img, const t_scene *scene);
 void			save_bmp(const char *filename, const unsigned char *pixels, const t_couple resolution);
 void			ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width);
 char			*screenshot_datetime();
-t_scene			*get_scene(int argc, char *argv[]);
+t_scene			*get_scene(const int argc, const char *argv[]);
 
 float			distance(t_vect p1, t_vect p2);
 int				solve_quadratic(const t_vect point, float *x0, float *x1);
