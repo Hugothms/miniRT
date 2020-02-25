@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 14:40:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 15:02:48 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int		main(const int argc, const char *argv[])
 	else if (argc == 3)
 	{
 		start = clock();
-		save_bmp("t123.bmp", img->data, scene->resolution);
 		save_bmp(screenshot_datetime(), img->data, scene->resolution);
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);

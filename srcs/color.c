@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/20 14:50:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:57:46 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,17 @@ int		rgb_to_int(t_rgb rgb)
 	return(rgb.r << 16 | rgb.g << 8 | rgb.b);
 }
 
-t_rgb	*mult_rgb(t_rgb rgb, t_rgb mult)
+t_rgb	*mult_rgb_rgb(t_rgb rgb, t_rgb mult)
 {
 	return (int_to_rgb(rgb.r * (mult.r / 255.), rgb.g * (mult.g / 255.), rgb.b * (mult.b / 255.)));
 }
 
-t_rgb	*add_rgb(t_rgb rgb, t_rgb add)
+t_rgb	*mult_rgb_float(t_rgb rgb, float mult)
+{
+	return (int_to_rgb(rgb.r * mult, rgb.g * mult, rgb.b * mult));
+}
+
+t_rgb	*add_rgb_rgb(t_rgb rgb, t_rgb add)
 {
 	return (int_to_rgb(rgb.r + (add.r / 255.), rgb.g + (add.g / 255.), rgb.b + (add.b / 255.)));
 }
