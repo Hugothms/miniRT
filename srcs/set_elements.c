@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 14:53:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/25 17:46:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ void	set_resolution(t_scene *scene, char **data)
 void	set_ambient_light(t_scene *scene, char **data)
 {
 	t_ambient_light	*ambient_light;
+	float			ratio;
 
 	if (!(ambient_light = malloc(sizeof(*ambient_light))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	ambient_light->ratio = ft_atof(data[1]);
-	ambient_light->rgb = str_to_rgb(data[2]);
+	ratio = ft_atof(data[1]);
+	ambient_light->color = *mult_rgb_float(str_to_rgb(data[2]), ratio);
 	scene->ambient_light = *ambient_light;
 }
 
@@ -65,6 +66,6 @@ void	set_light(t_scene *scene, char **data)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	light->pos = str_to_triple(data[1]);
 	ratio = ft_atof(data[2]) * 255;
-	light->color = *mult_rgb_rgb(str_to_rgb(data[3]), *int_to_rgb(ratio, ratio, ratio));
+	light->color = *mult_rgb_float(str_to_rgb(data[3]), ratio);
 	ft_lstadd_front(&(scene->lights), ft_lstnew(light));
 }
