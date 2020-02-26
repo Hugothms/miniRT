@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 14:57:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/26 11:35:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ t_rgb	*mult_rgb_float(t_rgb rgb, float mult)
 t_rgb	*add_rgb_rgb(t_rgb rgb, t_rgb add)
 {
 	return (int_to_rgb(rgb.r + (add.r / 255.), rgb.g + (add.g / 255.), rgb.b + (add.b / 255.)));
+}
+
+void		min_rgb(t_rgb *color)
+{
+	color->r = ft_min_int(color->r, 255);
+	color->g = ft_min_int(color->g, 255);
+	color->b = ft_min_int(color->b, 255);
 }
 
 int		get_t(int color)

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 18:24:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/26 13:35:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 			diffuse = *mult_rgb_float(light->color, ft_max_float(dot_product(impact->normal, to_light.dir), 0.0));
 			*color = *mult_rgb_rgb(*add_rgb_rgb(scene->ambient_light.color, diffuse), *color);
 			// *color = *mult_rgb_float(*mult_rgb_rgb(*color, light->color), 100 / (distance(impact->pos, light->pos) * distance(impact->pos, light->pos))); // (a modifier)
-			color->r = ft_min_int(color->r, 255);
-			color->g = ft_min_int(color->g, 255);
-			color->b = ft_min_int(color->b, 255);
+			min_rgb(color);
 		}
 		else
 			*color = *mult_rgb_rgb(scene->ambient_light.color, *color);
