@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/26 13:35:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:16:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,37 +71,26 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 	t_ray		to_light;
 	void		*obstacle;
 	t_impact	*impact_obstacle;
-	int			nblights;
 	t_rgb		diffuse;
 
-	nblights = 0;
+	diffuse = *int_to_rgb(0, 0, 0);
 	lights = scene->lights;
 	while (lights->next)
 	{
-		nblights++;
 		obstacle = NULL;
 		light = (t_light*)(lights->content);
 		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-5), add_vect(light->pos, minus_vect(impact->pos)));
 		impact_obstacle = closest_object(to_light, scene, &obstacle); // rapprochement du point d'impact vers la camera
-		// if (object == obstacle)
-		// {
-		// 	*color = *mult_rgb(*mult_rgb(*color, light->color), *int_to_rgb(50,50,50));
-		// 	return (NULL);
-		// }
-		// if the light is not in shadow of another object
 		if (!obstacle)
 		{
 			// add this light contribution to computed color;
-			diffuse = *mult_rgb_float(light->color, ft_max_float(dot_product(impact->normal, to_light.dir), 0.0));
-			*color = *mult_rgb_rgb(*add_rgb_rgb(scene->ambient_light.color, diffuse), *color);
-			// *color = *mult_rgb_float(*mult_rgb_rgb(*color, light->color), 100 / (distance(impact->pos, light->pos) * distance(impact->pos, light->pos))); // (a modifier)
-			min_rgb(color);
+			diffuse = *add_rgb_rgb(diffuse, *mult_rgb_float(light->color, 0.001 * ft_max_float(dot_product(impact->normal, to_light.dir), 0.0)));
 		}
-		else
-			*color = *mult_rgb_rgb(scene->ambient_light.color, *color);
 		//*color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la shpere
 		lights = lights->next;
 	}
+	*color = *mult_rgb_rgb(*add_rgb_rgb(scene->ambient_light.color, diffuse), *color);
+	min_rgb(color);
 	return (NULL);
 }
 
