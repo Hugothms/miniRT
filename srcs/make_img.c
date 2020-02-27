@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/27 14:16:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/27 17:52:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int wi
 	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
 }
 
-/***
- * cree un ray depuis la posision de la camera qui passe par le pixel demandé
- * en prenant en compre la resolution de l'image et l'angle de vision de la camera
- ***/
+/**
+ * cree un ray depuis la posision de la camera qui passe par le pixel demandé en prenant en compre la resolution de l'image et l'angle de vision de la camera
+ **/
 t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pixel)
 {
 	t_vect vect_dir;
@@ -43,9 +42,9 @@ t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pi
 	return (new_ray(((t_camera *)(cameras))->pos, vect_dir));
 }
 
-/***
+/**
  * trouve l'objet le plus proche dans la direction du ray
- ***/
+ **/
 t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 {
 	t_impact	*impact;
@@ -64,11 +63,9 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	return (NULL);
 }
 
-/***
- * set la color en fonction des lumieres, de la normale du point d'impact,
- * des eventuels obstacles et de
- *
- ***/
+/**
+ * set la color en fonction des lumieres, de la normale du point d'impact et des eventuels obstacles
+ **/
 t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb *color)
 {
 	t_list		*lights;
@@ -86,7 +83,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 		light = (t_light*)(lights->content);
 		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-5), add_vect(light->pos, minus_vect(impact->pos))); // rapprochement du point d'impact vers la camera
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
-		if (!obstacle)
+		if (!impact_obstacle || impact_obstacle->dist >= impact->dist)
 		{
 			float angle = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0);
 			t_rgb color_l = *mult_rgb_float(light->color, angle);
@@ -104,8 +101,8 @@ void		make_img(t_img *img,const t_scene *scene)
 {
 	t_couple	pixel;
 	t_ray		ray;
-	float		reflec;
-	int			depth;
+	// float		reflec;
+	// int			depth;
 	t_rgb		*color;
 	void		*object;
 	t_impact	*impact;
@@ -117,12 +114,12 @@ void		make_img(t_img *img,const t_scene *scene)
 		while (++pixel.w < scene->resolution.w)
 		{
 			color = int_to_rgb(0, 0, 0);
-			reflec = REFLEC;
-			depth = DEPTH;
-			object = NULL; // peut etre a deplacer dans le while suivant
-			impact = NULL; // idem
-			while (depth-- && reflec > 1e-6)
-			{
+			// reflec = REFLEC;
+			// depth = DEPTH;
+			object = NULL; // peut etre a deplacer dans le while suivant ou a supprimer
+			impact = NULL; // peut etre a deplacer dans le while suivant
+			// while (depth-- && reflec > 1e-6)
+			// {
 				ray = generate_ray(scene->cameras, scene->resolution, pixel);
 				impact = closest_object(ray, scene, &object);
 				//get_obj(scene->type, object);
@@ -133,7 +130,7 @@ void		make_img(t_img *img,const t_scene *scene)
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;
-			}
+			// }
 			ft_put_pixel(img->data, pixel, rgb_to_int(*color), scene->resolution.w);
 		}
 	}

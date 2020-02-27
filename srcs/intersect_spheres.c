@@ -6,16 +6,15 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/27 14:10:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/27 15:01:34 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-/***
- * check si le ray intersect la sphere
- * retourne la distance entre le ray et le point de contact s'il y a contact
- ***/
+/**
+ * retourne la distance entre le ray et le point de contact avec un sphere s'il existe, INFINITY sinon
+ **/
 float	intersect_sphere(const t_ray ray, const t_sphere *sphere, t_impact *impact)
 {
 	float	x0;
