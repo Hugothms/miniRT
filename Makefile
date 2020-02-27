@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/21 19:59:11 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/27 14:08:37 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,10 +113,10 @@ CLEAR_COLOR =	\033[m
 
 
 test: $(NAME)
-	./$< example.rt
+	./$< scenes/example.rt
 
 test_save: $(NAME)
-	./$< example.rt -save
+	./$< scenes/example.rt -save
 
 
 
