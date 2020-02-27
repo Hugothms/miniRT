@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 14:15:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/27 13:59:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define REFLEC 1
 # define DEPTH 1
 
-
+# define ALBEDO 0.0005
 
 
 typedef struct		s_mlx
