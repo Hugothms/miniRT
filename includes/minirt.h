@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/28 12:53:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/28 19:12:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int				intersect_plane(const t_ray ray, const t_plane plane);
 int				hit_sphere(const t_ray ray, const t_sphere sphere);
 float			to_rad(float angle);
 
-void			make_img(t_img *img, const t_scene *scene);
+void			make_img(t_img *img, const t_scene *scene, const t_camera *camera);
 void			save_bmp(const char *filename, const unsigned char *pixels, const t_couple resolution);
 void			ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution);
 char			*screenshot_datetime();

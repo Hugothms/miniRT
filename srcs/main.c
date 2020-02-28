@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 15:02:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/28 19:13:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		main(const int argc, const char *argv[])
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	start = clock();
-	make_img(img, scene);
+	make_img(img, scene, scene->cameras->content);
 	end = clock();
 	printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	if (argc == 2)

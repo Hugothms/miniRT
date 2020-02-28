@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 17:46:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/28 18:48:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_sphere
 	t_vect			pos;
 	float			radius2;
 	t_rgb			color;
+	float			reflec;
 }					t_sphere;
 
 typedef struct		s_plane

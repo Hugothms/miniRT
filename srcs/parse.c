@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 14:14:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/28 18:59:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void		*init_scene(t_scene *scene)
 	scene->resolution.w = 0;
 	scene->resolution.h = 0;
 	scene->ambient_light.ratio = 0;
-	scene->ambient_light.rgb.r = 0;
-	scene->ambient_light.rgb.g = 0;
-	scene->ambient_light.rgb.b = 0;
+	scene->ambient_light.color.r = 0;
+	scene->ambient_light.color.g = 0;
+	scene->ambient_light.color.b = 0;
 	scene->cameras = ft_lstnew(NULL);
 	scene->lights = ft_lstnew(NULL);
 	scene->spheres = ft_lstnew(NULL);
