@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 15:45:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/28 19:01:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void		set_sphere(t_scene *scene, char **strs)
 	radius = ft_atof(strs[2]);
 	sphere->radius2 = radius * radius;
 	sphere->color = str_to_rgb(strs[3]);
+	sphere->reflec = 0;
+	if (strs[4])
+		sphere->reflec = ft_atof(strs[4]);
 	ft_lstadd_front(&(scene->spheres), ft_lstnew(sphere));
 }
 

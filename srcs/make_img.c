@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/28 13:16:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/28 19:12:15 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,21 @@ void		ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple reso
 /**
  * cree un ray depuis la posision de la camera qui passe par le pixel demandé en prenant en compre la resolution de l'image et l'angle de vision de la camera
  **/
-t_ray		generate_ray(const t_list *cameras, const t_couple resolution, t_couple pixel)
+t_ray		generate_ray(const t_camera *camera, const t_couple resolution, t_couple pixel)
 {
 	t_vect vect_dir;
-
-	//Ray = { starting point, direction };
-	vect_dir = set_vect_dir_cam(((t_camera *)cameras->content), resolution, pixel.h, pixel.w);
+	vect_dir = set_vect_dir_cam(camera, resolution, pixel.h, pixel.w);
 	//printf("position:\t(% .3f,\t% .3f,\t% .3f)\n",\
-											((t_camera*)cameras->content)->pos.x,\
-											((t_camera*)cameras->content)->pos.y,\
-											((t_camera*)cameras->content)->pos.z);
+											(camera->pos.x,\
+											(camera->pos.y,\
+											(camera->pos.z);
 	//printf("direction:%s\t(% .3f,\t% .3f,\t % .3f)\n\n",\
 											i  == resolution.h / 2 \
 											&& pixel.w == resolution.w / 2 ? "\tmiddle\n\n" : "",\
 											vect_dir.x,\
 											vect_dir.y,\
 											vect_dir.z);
-	return (new_ray(((t_camera *)(cameras))->pos, vect_dir));
+	return (new_ray(camera->pos, vect_dir));
 }
 
 /**
@@ -74,6 +72,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 	void		*obstacle;
 	t_impact	*impact_obstacle;
 	t_rgb		diffuse;
+	t_rgb		specular;
 
 	diffuse = *int_to_rgb(0, 0, 0);
 	lights = scene->lights;
@@ -85,9 +84,10 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
 		if (!obstacle)
 		{
-			float angle = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0);
-			t_rgb color_l = *mult_rgb_float(light->color, angle);
+			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0);
+			t_rgb color_l = *mult_rgb_float(light->color, normal_dot_light);
 			diffuse = *mult_rgb_float(*add_rgb_rgb(diffuse, color_l), ALBEDO);
+			//add_vect(to_light.dir, multi_vect(impact->normal, -2. * normal_dot_light));
 		}
 		lights = lights->next;
 	}
@@ -97,12 +97,12 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 	return (NULL);
 }
 
-void		make_img(t_img *img,const t_scene *scene)
+void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 {
 	t_couple	pixel;
 	t_ray		ray;
-	// float		reflec;
-	// int			depth;
+	float		reflec;
+	int			depth;
 	t_rgb		*color;
 	void		*object;
 	t_impact	*impact;
@@ -114,23 +114,22 @@ void		make_img(t_img *img,const t_scene *scene)
 		while (++pixel.w < scene->resolution.w)
 		{
 			color = int_to_rgb(0, 0, 0);
-			// reflec = REFLEC;
-			// depth = DEPTH;
+			reflec = REFLEC;
+			depth = DEPTH;
 			object = NULL; // peut etre a deplacer dans le while suivant ou a supprimer
 			impact = NULL; // peut etre a deplacer dans le while suivant
-			// while (depth-- && reflec > 1e-6)
-			// {
-				ray = generate_ray(scene->cameras, scene->resolution, pixel);
+			while (depth-- && reflec > 1e-6)
+			{
+				ray = generate_ray(camera, scene->resolution, pixel);
 				impact = closest_object(ray, scene, &object);
-				//get_obj(scene->type, object);
 				if (impact)
 				{
 					*color = ((t_sphere*)object)->color;
 					manage_light(scene, object, impact, color);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
-				//reflection factor = reflection factor * surface reflection property;
-			// }
+				//reflec = reflec * ((t_sphere*)object)->reflec;
+			}
 			ft_put_pixel(img->data, pixel, rgb_to_int(*color), scene->resolution);
 		}
 	}
