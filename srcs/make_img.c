@@ -6,15 +6,15 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/27 17:52:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/02/28 13:16:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int win_width)
+void		ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution)
 {
-	int	(*tab)[win_width][1]; // prepare the cast
+	int	(*tab)[resolution.w][1]; // prepare the cast
 
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
 	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
@@ -23,7 +23,7 @@ void        	ft_put_pixel(unsigned char *data, t_couple pixel, int color, int wi
 /**
  * cree un ray depuis la posision de la camera qui passe par le pixel demandé en prenant en compre la resolution de l'image et l'angle de vision de la camera
  **/
-t_ray generate_ray(const t_list *cameras, const t_couple resolution, t_couple pixel)
+t_ray		generate_ray(const t_list *cameras, const t_couple resolution, t_couple pixel)
 {
 	t_vect vect_dir;
 
@@ -83,7 +83,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 		light = (t_light*)(lights->content);
 		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-5), add_vect(light->pos, minus_vect(impact->pos))); // rapprochement du point d'impact vers la camera
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
-		if (!impact_obstacle || impact_obstacle->dist >= impact->dist)
+		if (!obstacle)
 		{
 			float angle = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0);
 			t_rgb color_l = *mult_rgb_float(light->color, angle);
@@ -131,7 +131,7 @@ void		make_img(t_img *img,const t_scene *scene)
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflection factor = reflection factor * surface reflection property;
 			// }
-			ft_put_pixel(img->data, pixel, rgb_to_int(*color), scene->resolution.w);
+			ft_put_pixel(img->data, pixel, rgb_to_int(*color), scene->resolution);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/27 14:08:37 by hthomas          ###   ########.fr        #
+#    Updated: 2020/02/28 12:48:43 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ MLX_INCLUDE = -framework OpenGL -framework AppKit
 MAKE = make
 
 
-OPTI = -Ofast #-O3
+OPTI = -Ofast -flto -march=native #-O3
 
 
 
