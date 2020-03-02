@@ -6,11 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 16:43:12 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 16:45:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/02 13:37:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-float	ft_max_float(float a, float b)
+float	ft_max_float(const float a, const float b)
 {
 	return (a > b ? a : b);
 }

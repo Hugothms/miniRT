@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/28 19:12:15 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/02 13:38:11 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 		{
 			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0);
 			t_rgb color_l = *mult_rgb_float(light->color, normal_dot_light);
-			diffuse = *mult_rgb_float(*add_rgb_rgb(diffuse, color_l), ALBEDO);
+			diffuse = *mult_rgb_float(*add_rgb_rgb(*mult_rgb_float(diffuse, 1), color_l), ALBEDO);
 			//add_vect(to_light.dir, multi_vect(impact->normal, -2. * normal_dot_light));
 		}
 		lights = lights->next;
