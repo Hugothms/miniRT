@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/19 16:45:43 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/02 13:36:46 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_vect		new_vect(const float x, const float y, const float z)
 	return (new);
 }
 
-float	distance(t_vect p1, t_vect p2)
+float	distance(const t_vect p1, const t_vect p2)
 {
 	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
 }
 
-t_vect		normalize(t_vect vect)
+t_vect		normalize(const t_vect vect)
 {
 	float	length;
 
@@ -35,20 +35,21 @@ t_vect		normalize(t_vect vect)
 	return (new_vect(vect.x / length, vect.y / length, vect.z / length));
 }
 
-t_vect		mult_mat(const float mat[3][3], t_vect vect)
+t_vect		mult_mat(const float mat[3][3], const t_vect vect)
 {
 	float	x;
 	float	y;
 	float	z;
+	t_vect	res;
 
 	x = mat[0][0] * vect.x + mat[0][1] * vect.x + mat[0][2] * vect.x;
 	y = mat[1][0] * vect.y + mat[1][1] * vect.y + mat[1][2] * vect.y;
 	z = mat[2][0] * vect.z + mat[2][1] * vect.z + mat[2][2] * vect.z;
-	vect = new_vect(x, y, z);
-	return (vect);
+	res = new_vect(x, y, z);
+	return (res);
 }
 
-t_vect		rot_vect(t_vect vect, const float angle, const char axe)
+t_vect		rot_vect(const t_vect vect, const float angle, const char axe)
 {
 	float	alpha;
 
@@ -77,7 +78,7 @@ t_vect		minus_vect(const t_vect vect)
 	return (new_vect(-vect.x, -vect.y, -vect.z));
 }
 
-t_vect		multi_vect(const t_vect vect, float x)
+t_vect		multi_vect(const t_vect vect, const float x)
 {
 	return (new_vect(vect.x * x, vect.y * x, vect.z * x));
 }
