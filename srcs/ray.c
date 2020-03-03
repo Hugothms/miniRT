@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/04 19:17:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/03 16:27:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_ray		new_ray(const t_vect position, const t_vect direction)
 
 	ray.pos = position;
 	ray.dir = direction;
+	ray.t = INFINITY;
 	return (ray);
 }
 
