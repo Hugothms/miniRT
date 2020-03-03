@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/28 12:48:43 by hthomas          ###   ########.fr        #
+#    Updated: 2020/03/03 18:03:48 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,8 @@ OPTI = -Ofast -flto -march=native #-O3
 
 all : compilelibft compilelibmlx $(NAME)
 
-$(NAME) : $(OBJS)
-	$(CC) $(OPTI) $(LDFLAGS) -o $@ $(OBJSLIBFT) $^ $(LIBFTLINK) $(LIBMLXLINK) $(MLX_INCLUDE)
+$(NAME) : $(OBJSLIBFT) $(OBJS)
+	$(CC) $(OPTI) $(LDFLAGS) -o $@ $^ $(LIBMLXLINK) $(MLX_INCLUDE)
 
 compilelibft :
 	$(MAKE) -C libft all
@@ -67,7 +67,7 @@ compilelibft :
 compilelibmlx :
 	$(MAKE) -C libmlx all
 
-.c.o:
+%.o: %.c $(INCL)
 	$(CC) -c $(LDFLAGS) -I$(INCL) -o $@ $<
 
 clean:
@@ -79,7 +79,7 @@ clean:
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(LIBFTDIR) && $(MAKE) fclean
-	# cd $(LIBMLXDIR) && $(MAKE) clean
+	# cd $(LIBMLXDIR) && $(MAKE) fclean
 	rm -f $(NAME) a.out
 
 re:		fclean all
