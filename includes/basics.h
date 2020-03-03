@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/26 11:35:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/03 16:35:57 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_vect
 
 typedef struct		s_ray
 {
+	float			t;
 	t_vect			pos;
 	t_vect			dir;
 }					t_ray;
