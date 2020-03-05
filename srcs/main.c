@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/28 19:13:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/05 17:33:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		close_function(const t_window *w)
 
 int		key_function(const int keycode, const t_window *w)
 {
+	clock_t start, end;
 	printf("%i\n", keycode);
 	if (keycode == 53)
 		close_function(w);
@@ -36,7 +37,12 @@ int		key_function(const int keycode, const t_window *w)
 		//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img2->img_ptr, 0, 0);
 	}
 	if (keycode == 1)
+	{
+		start = clock();
 		save_bmp(screenshot_datetime(), w->img->data, w->scene->resolution);
+		end = clock();
+		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	}
 	return (0);
 }
 

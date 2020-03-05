@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/03 17:01:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/05 15:53:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 	t_rgb		specular;
 
 	diffuse = *int_to_rgb(0, 0, 0);
+	t_rgb color_l = *int_to_rgb(0, 0, 0);
 	lights = scene->lights;
 	while (lights->next)
 	{
@@ -85,7 +86,7 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 		if (!obstacle)
 		{
 			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0);
-			t_rgb color_l = *mult_rgb_float(light->color, normal_dot_light);
+			color_l = *add_rgb_rgb(*mult_rgb_float(light->color, normal_dot_light), color_l);
 			diffuse = *mult_rgb_float(*add_rgb_rgb(*mult_rgb_float(diffuse, 1), color_l), ALBEDO);
 			//add_vect(to_light.dir, multi_vect(impact->normal, -2. * normal_dot_light));
 		}

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/05 15:44:56 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/05 17:43:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned char	*file_header_bmp(int filesize)
 {
 	unsigned char	*bmpfileheader;
 
-	if(!(bmpfileheader = malloc(14 * sizeof(unsigned char))))
+	if(!(bmpfileheader = (unsigned char*) malloc(14 * sizeof(unsigned char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ft_memcpy(bmpfileheader, (char[]){'B','M', 0,0,0,0, 0,0, 0,0, 54,0,0,0}, 14);
 	bmpfileheader[2] = (unsigned char)(filesize);
@@ -28,11 +28,11 @@ unsigned char	*file_header_bmp(int filesize)
 
 unsigned char	*info_header_bmp(t_couple resolution)
 {
-		unsigned char	*bmpinfoheader;
+	unsigned char	*bmpinfoheader;
 
-	if(!(bmpinfoheader = malloc(40 * sizeof(unsigned char))))
+	if(!(bmpinfoheader = (unsigned char*) malloc(40 * sizeof(unsigned char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 32,0}, 40);
+	ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 32,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0}, 40);
 	bmpinfoheader[4] = (unsigned char)(resolution.w);
 	bmpinfoheader[5] = (unsigned char)(resolution.w >> 8);
 	bmpinfoheader[6] = (unsigned char)(resolution.w >> 16);
@@ -60,8 +60,8 @@ void			save_bmp(const char *filename, const unsigned char *data, const t_couple 
 	unsigned char	*bmpfileheader;
 	unsigned char	*bmpinfoheader;
 
-	filesize = 54 + 3 * resolution.w * resolution.h;
-	f = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0755);
+	filesize = 14 + 40 + 3 * resolution.w * resolution.h;
+	f = open(filename, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0755);
 	bmpfileheader = file_header_bmp(filesize);
 	write(f, bmpfileheader, 14);
 	free(bmpfileheader);
