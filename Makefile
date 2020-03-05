@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/03 18:03:48 by hthomas          ###   ########.fr        #
+#    Updated: 2020/03/05 17:34:25 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,4 +123,5 @@ test_save: $(NAME)
 # gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt -save
 #"sudo apt-get update" "sudo apt install gdb" "sudo apt install gcc"
 #https://stackoverflow.com/c/42network/questions/950/954#954
+#.SILENT:
 
