@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/02/25 17:43:39 by hthomas          ###   ########.fr        #
+#    Updated: 2020/03/07 10:58:34 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,7 +122,7 @@ $(NAME):	${OBJS}
 	ranlib	$(NAME)
 
 .c.o:
-	${CC} -c ${CFLAGS} -I$(INCLUDES) -o $@ $<
+	${CC} -c ${CFLAGS} -I. -o $@ $<
 
 clean:
 	rm -f $(OBJS)
