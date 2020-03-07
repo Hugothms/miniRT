@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:29:01 by hthomas           #+#    #+#             */
-/*   Updated: 2020/01/09 10:53:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/07 11:40:47 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # endif
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
+# endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 255
 # endif
 # define END_OF_LINE '\n'
 # define ERR -1

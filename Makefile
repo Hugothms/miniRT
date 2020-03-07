@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
+#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/05 17:34:25 by hthomas          ###   ########.fr        #
+#    Updated: 2020/03/07 12:20:38 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,11 @@ LIBFTDIR = libft/
 LIBFTLINK = -L./libft -lft
 
 LIBMLX = libmlx.a
-LIBMLXDIR = libmlx
-LIBMLXLINK = -L./libmlx -lmlx
-MLX_INCLUDE = -framework OpenGL -framework AppKit
+#LIBMLXDIR = libmlx
+LIBMLXDIR = minilibx
+LIBMLXLINK = -L./$(LIBMLXDIR) -lmlx
+#MLX_INCLUDE = -framework OpenGL -framework AppKit
+MLX_INCLUDE = -IOpenGL -IAppKit -lm
 
 MAKE = make
 
@@ -65,7 +67,7 @@ compilelibft :
 	$(MAKE) -C libft all
 
 compilelibmlx :
-	$(MAKE) -C libmlx all
+	$(MAKE) -C $(LIBMLXDIR) all
 
 %.o: %.c $(INCL)
 	$(CC) -c $(LDFLAGS) -I$(INCL) -o $@ $<
