@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/11 14:42:42 by hugo             ###   ########.fr        #
+#    Updated: 2020/03/11 17:38:51 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,8 @@ OPTI = -Ofast -flto -march=native #-O3
 
 
 
-# compilelibmlx
-all : compilelibft  $(NAME)
+
+all : compilelibft compilelibmlx $(NAME)
 
 $(NAME) : $(OBJSLIBFT) $(OBJS)
 	$(CC) $(OPTI) $(LDFLAGS) -o $@ $^ $(LIBMLXLINK) $(MLX_INCLUDE)

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/02 13:36:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/11 18:21:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ float		dot_product(const t_vect vect1, const t_vect vect2)
 
 t_vect		add_vect(const t_vect vect1, const t_vect vect2)
 {
-	return (new_vect(vect1.x + vect2.x, vect1.y - vect2.y, vect1.z - vect2.z));
+	return (new_vect(vect1.x + vect2.x, vect1.y + vect2.y, vect1.z + vect2.z));
 }
 
 t_vect		minus_vect(const t_vect vect)
