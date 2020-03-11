@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/05 15:53:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/11 12:54:27 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 				//reflec = reflec * ((t_sphere*)object)->reflec;
 			}
 			ft_put_pixel(img->data, pixel, rgb_to_int(*color), scene->resolution);
+			free(color);
 		}
 	}
 }

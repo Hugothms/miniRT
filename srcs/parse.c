@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/28 18:59:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/11 12:43:37 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ t_scene		*parse(int fd)
 		else if (!ft_is_from_charset(line, set))
 		{
 			free(line);
+			free(data);
 			ft_putstr("Error\n");
 			return (NULL);
 		}
 		free(line);
+		free(data);
 	}
 	return (scene);
 }

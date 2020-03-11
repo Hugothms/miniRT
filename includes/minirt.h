@@ -6,7 +6,7 @@
 /*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/07 12:19:08 by hugo             ###   ########.fr       */
+/*   Updated: 2020/03/11 12:40:06 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <unistd.h>
 
 # include "../libft/libft.h"
-# include "mlx_copy.h"
+# include "mlxlinux.h"
 # include "mlx.h"
 # include "basics.h"
 # include "elements.h"
@@ -42,7 +42,22 @@
 
 # define ALBEDO 0.0005
 
+/*MACOS*/
+# define CODE_ESC 53
+# define CODE_UP 0
+# define CODE_DOWN 0
+# define CODE_LEFT 123
+# define CODE_RIGHT 124
+# define CODE_S 1
 
+/*LINUX*/
+# define CODE_ESC 65307
+# define CODE_UP 65362
+# define CODE_DOWN 65364
+# define CODE_LEFT 65361
+# define CODE_RIGHT 65363
+# define CODE_S 115
+ 
 typedef struct		s_mlx
 {
 	void			*mlx_ptr;

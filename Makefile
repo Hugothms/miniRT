@@ -6,7 +6,7 @@
 #    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/07 12:20:38 by hugo             ###   ########.fr        #
+#    Updated: 2020/03/11 12:26:59 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,14 +40,14 @@ HEADER = $(INCL)minirt.h
 
 LIBFT = libft.a
 LIBFTDIR = libft/
-LIBFTLINK = -L./libft -lft
+LIBFTLINK = -L $(LIBFTDIR) -lft
 
 LIBMLX = libmlx.a
 #LIBMLXDIR = libmlx
-LIBMLXDIR = minilibx
-LIBMLXLINK = -L./$(LIBMLXDIR) -lmlx
+LIBMLXDIR = /usr/local/lib
+LIBMLXLINK = -L $(LIBMLXDIR) -lmlx
 #MLX_INCLUDE = -framework OpenGL -framework AppKit
-MLX_INCLUDE = -IOpenGL -IAppKit -lm
+MLX_INCLUDE = -I /usr/local/include -lm -lXext -lX11
 
 MAKE = make
 
@@ -57,8 +57,8 @@ OPTI = -Ofast -flto -march=native #-O3
 
 
 
-
-all : compilelibft compilelibmlx $(NAME)
+# compilelibmlx
+all : compilelibft  $(NAME)
 
 $(NAME) : $(OBJSLIBFT) $(OBJS)
 	$(CC) $(OPTI) $(LDFLAGS) -o $@ $^ $(LIBMLXLINK) $(MLX_INCLUDE)
