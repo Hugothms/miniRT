@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/28 18:48:56 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:28:05 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_sphere
 typedef struct		s_plane
 {
 	t_vect			pos;
-	t_vect			vect;
+	t_vect			normal;
 	t_rgb			color;
 }					t_plane;
 
