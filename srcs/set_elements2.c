@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_elements2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/28 19:01:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:28:07 by hugo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		set_plane(t_scene *scene, char **strs)
 	if (!(plane = malloc(sizeof(*plane))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	plane->pos = str_to_triple(strs[1]);
-	plane->vect = normalize(str_to_triple(strs[2]));
+	plane->normal = normalize(str_to_triple(strs[2]));
 	plane->color = str_to_rgb(strs[3]);
 	ft_lstadd_front(&(scene->planes), ft_lstnew(plane));
 }

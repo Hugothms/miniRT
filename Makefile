@@ -6,10 +6,12 @@
 #    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/11 12:26:59 by hugo             ###   ########.fr        #
+#    Updated: 2020/03/11 14:42:42 by hugo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = miniRT
+MAKE = make
 C = clang
 CC = gcc
 CFLAGS += -Wall -Werror -Wextra
@@ -33,7 +35,6 @@ SRCS = 	srcs/color.c			\
 
 OBJS = $(SRCS:.c=.o)
 OBJSLIBFT =$(LIBFTDIR)*.o
-NAME = miniRT
 
 INCL = includes/
 HEADER = $(INCL)minirt.h
@@ -44,13 +45,10 @@ LIBFTLINK = -L $(LIBFTDIR) -lft
 
 LIBMLX = libmlx.a
 #LIBMLXDIR = libmlx
-LIBMLXDIR = /usr/local/lib
+LIBMLXDIR = libmlxlinux #/usr/local/lib
 LIBMLXLINK = -L $(LIBMLXDIR) -lmlx
 #MLX_INCLUDE = -framework OpenGL -framework AppKit
-MLX_INCLUDE = -I /usr/local/include -lm -lXext -lX11
-
-MAKE = make
-
+MLX_INCLUDE = -lm -lXext -lX11 #/usr/local/include
 
 OPTI = -Ofast -flto -march=native #-O3
 
