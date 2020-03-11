@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/11 17:09:17 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:34:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	impact->dist = INFINITY;
 	//for each object in the scene
 	ray_spheres(ray, scene, impact, object);
-	// ray_planes(ray, scene, impact, object);
+	ray_planes(ray, scene, impact, object);
 	// ray_squares(ray, scene, impact, object);
 	// ray_cyinders(ray, scene, impact, object);
 	// ray_triangles(ray, scene, impact, object);
@@ -61,11 +61,13 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	return (NULL);
 }
 
+
 /**
  * set la color en fonction des lumieres, de la normale du point d'impact et des eventuels obstacles
  **/
-t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb *color)
+t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
 {
+	
 	t_list		*lights;
 	t_light		*light;
 	t_ray		to_light;
@@ -85,9 +87,9 @@ t_rgb		*manage_light(const t_scene *scene, void *object, t_impact *impact, t_rgb
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
 		if (!obstacle)
 		{
-			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0);
+			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
 			color_l = *add_rgb_rgb(*mult_rgb_float(light->color, normal_dot_light), color_l);
-			diffuse = *mult_rgb_float(*add_rgb_rgb(*mult_rgb_float(diffuse, 1), color_l), ALBEDO);
+			diffuse = *mult_rgb_float(*add_rgb_rgb(*mult_rgb_float(diffuse, 0.000), color_l), ALBEDO);
 			//add_vect(to_light.dir, multi_vect(impact->normal, -2. * normal_dot_light));
 		}
 		lights = lights->next;
@@ -125,8 +127,11 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 				impact = closest_object(ray, scene, &object);
 				if (impact)
 				{
-					*color = ((t_sphere*)object)->color;
-					manage_light(scene, object, impact, color);
+					if (!ft_strcmp(scene->type, "sp"))
+						*color = ((t_sphere*)object)->color;
+					if (!ft_strcmp(scene->type, "pl"))
+						*color = ((t_plane*)object)->color;
+					manage_light(scene, impact, color);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflec = reflec * ((t_sphere*)object)->reflec;
