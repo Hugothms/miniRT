@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/11 19:24:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:03:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,43 @@
 
 # define ALBEDO 0.3
 
-/*MACOS*/
-# define CODE_ESC 53
-# define CODE_UP 0
-# define CODE_DOWN 0
-# define CODE_LEFT 123
-# define CODE_RIGHT 124
-# define CODE_S 1
+/*
+** Keycodes and screen size LINUX and MAC
+*/
+# ifdef LINUX
+#  define MAX_W		2560
+#  define MAX_H		1440
 
-/*LINUX*/
-# define CODE_ESC 65307
-# define CODE_UP 65362
-# define CODE_DOWN 65364
-# define CODE_LEFT 65361
-# define CODE_RIGHT 65363
-# define CODE_S 115
- 
+#  define ESC		65307
+#  define LEFT		65361
+#  define RIGHT		65363
+
+#  else
+#  define MAX_W		2560
+#  define MAX_H		1440
+
+#  define ESC		53
+#  define LEFT		123
+#  define RIGHT		124
+#  define UP		126
+#  define DOWN		125
+#  define KEY_A		0
+#  define KEY_S		1
+#  define KEY_D		2
+#  define KEY_W		13
+#  define KEY_Q		12
+#  define KEY_E		14
+#  define KEY_J		38
+#  define KEY_K		40
+#  define KEY_L		37
+#  define KEY_I		34
+#  define KEY_U		32
+#  define KEY_O		31
+#  define KEY_SPACE	49
+#  define KEY_PLUS	69
+#  define KEY_MINUS	78
+# endif
+
 typedef struct		s_mlx
 {
 	void			*mlx_ptr;
@@ -84,11 +105,11 @@ typedef struct	s_window
 
 
 
-t_scene			*parse(int fd);
 
-/*
-** parsing elements
-*/
+/**
+ * parsing
+**/
+t_scene			*parse(int fd);
 void			set_resolution(t_scene *scene, char **strs);
 void			set_ambient_light(t_scene *scene, char **strs);
 void			set_camera(t_scene *scene, char **strs);
@@ -99,13 +120,14 @@ void			set_square(t_scene *scene, char **strs);
 void			set_cylinder(t_scene *scene, char **strs);
 void			set_triangle(t_scene *scene, char **strs);
 
-
 t_rgb			str_to_rgb(char *str);
 t_vect			str_to_triple(char *str);
 t_vect			set_triple(char *x, char *y, char *z);
 
-void			print_err_and_exit(char *str, int err);
 
+/**
+ * vectors
+**/
 t_vect			new_vect(const float x, const float y, const float z);
 t_vect			normalize(t_vect vect);
 t_vect			rot_vect(t_vect vect, const float angle, const char axe);
@@ -127,6 +149,8 @@ void			save_bmp(const char *filename, const unsigned char *pixels, const t_coupl
 void			ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution);
 char			*screenshot_datetime();
 t_scene			*get_scene(const int argc, const char *argv[]);
+
+void			print_err_and_exit(char *str, int err);
 
 float			distance(t_vect p1, t_vect p2);
 int				solve_quadratic(const t_vect point, float *x0, float *x1);

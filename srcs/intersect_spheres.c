@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_spheres.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/11 17:06:46 by hugo             ###   ########.fr       */
+/*   Updated: 2020/03/12 18:29:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		intersect_sphere(const t_ray ray, const t_sphere sphere, t_impact *impact)
 	else if (x1 <= 0.)
 		x1 = x0;
 	impact->dist = ft_min_float(x0, x1);
-	impact->pos = add_vect(ray.pos, multi_vect(ray.dir,x1));	
+	impact->pos = add_vect(ray.pos, multi_vect(ray.dir,x1));
 	return (1);
 }
 
@@ -58,21 +58,18 @@ int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 {
 	float	denom;
 	t_vect	p0l0;
-	float	dilat;
+	float	x;
 
 	denom = dot_product(plane.normal, ray.dir);
-	if (denom > 1e-6)
+	if (fabs(denom) > 1e-6)
 	{
-		p0l0.x = plane.pos.x - ray.pos.x;
-		p0l0.y = plane.pos.y - ray.pos.y;
-		p0l0.z = plane.pos.z - ray.pos.z;
-		if ((dilat = dot_product(p0l0, plane.normal) / denom) > 0)
+		if ((x = dot_product(add_vect(plane.pos, minus_vect(ray.pos)), plane.normal) / denom) > 0)
 		{
 			impact->normal = plane.normal;
-			impact->pos = add_vect(ray.pos, multi_vect(ray.dir,dilat));
-			impact->dist = distance(ray.pos, impact->pos);
+			impact->pos = add_vect(ray.pos, multi_vect(ray.dir, x));
+			impact->dist = x;
 			return (1);
-		}		
+		}
 	}
 	return (0);
 }
@@ -92,7 +89,7 @@ void	ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **
 			*object = plane;
 			//impact->dist = tmp;
 			//impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
-			impact->normal = plane->normal;
+			//impact->normal = plane->normal;
 			ft_memcpy(scene->type, "pl\0", 3);
 		}
 		planes = planes->next;
