@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:44:42 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/21 17:43:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/12 13:43:02 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	ft_strncmp_rev(const char *s1, const char *s2, size_t n)
 	unsigned int	i1;
 	unsigned int	i2;
 
-	i1 = ft_strlen(s1) - 1;
-	i2 = ft_strlen(s2) - 1;
-	if (s2[i1])
-		return ((unsigned char)s2[i1]);
+	if (!(s1 || s2))
+		return (0);
+	if (!(s1 && s2))
+		return (-1);
 	if (s1 == s2)
 		return (0);
+	i1 = ft_strlen(s1) - 1;
+	i2 = ft_strlen(s2) - 1;
 	while (i1 + 1 && i2 + 1 && s1[i1] == s2[i2] && n--)
 	{
 		i1--;
