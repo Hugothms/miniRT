@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 08:16:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/06 16:06:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/12 13:46:57 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int		fill_tab(char ***tab, int *words_len, const char *str, char *charset)
 		(*tab)[d1][d2++] = '\0';
 		d1++;
 	}
-	(d1 != 0) ? (*tab)[d1 - 1][d2] = '\0' : 0;
 	(*tab)[d1] = 0;
 	return (1);
 }
