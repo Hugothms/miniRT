@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/11 19:34:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:19:34 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,11 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	return (NULL);
 }
 
-
 /**
  * set la color en fonction des lumieres, de la normale du point d'impact et des eventuels obstacles
  **/
 t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
 {
-	
 	t_list		*lights;
 	t_light		*light;
 	t_ray		to_light;
@@ -83,8 +81,10 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
 	{
 		obstacle = NULL;
 		light = (t_light*)(lights->content);
-		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-5), add_vect(light->pos, minus_vect(impact->pos))); // rapprochement du point d'impact vers la camera
+		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-5), add_vect(light->pos, minus_vect(impact->pos))); // rapprochement du point d'impact vers l'origine
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
+		// float x = impact_obstacle->dist;
+		// if (x > distance(to_light.pos, light->pos))
 		if (!obstacle)
 		{
 			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
@@ -130,7 +130,10 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 					if (!ft_strcmp(scene->type, "sp"))
 						*color = ((t_sphere*)object)->color;
 					if (!ft_strcmp(scene->type, "pl"))
+					{
 						*color = ((t_plane*)object)->color;
+
+					}
 					manage_light(scene, impact, color);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
@@ -141,7 +144,6 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 		}
 	}
 }
-
 
 
 /*

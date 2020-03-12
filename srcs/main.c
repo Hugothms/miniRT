@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/11 12:37:20 by hugo             ###   ########.fr       */
+/*   Updated: 2020/03/12 17:57:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ int		key_function(const int keycode, const t_window *w)
 {
 	clock_t start, end;
 	printf("%i\n", keycode);
-	if (keycode == CODE_ESC)
+	if (keycode == ESC)
 		close_function(w);
-	else if (keycode == CODE_LEFT)
+	else if (keycode == LEFT)
 	{
 		mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 		mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
 	}
-	else if (keycode == CODE_RIGHT)
+	else if (keycode == RIGHT)
 	{
 		mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 		//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img2->img_ptr, 0, 0);
 	}
-	if (keycode == CODE_S)
+	if (keycode == KEY_S)
 	{
 		start = clock();
 		save_bmp(screenshot_datetime(), w->img->data, w->scene->resolution);

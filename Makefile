@@ -6,18 +6,17 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/11 17:38:51 by hthomas          ###   ########.fr        #
+#    Updated: 2020/03/12 18:23:39 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
-MAKE = make
-C = clang
-CC = gcc
-CFLAGS += -Wall -Werror -Wextra
-LDFLAGS += -g3 -fsanitize=address
+--MAKE = make
+--CC = gcc
+--CFLAGS += -Wall -Werror -Wextra
+--LDFLAGS += -g3 -fsanitize=address
 
-SRCS = 	srcs/color.c			\
+--SRCS = 	srcs/color.c			\
 		srcs/error.c			\
 		srcs/get_next_line.c	\
 		srcs/intersect_spheres.c\
@@ -33,24 +32,30 @@ SRCS = 	srcs/color.c			\
 
 
 
-OBJS = $(SRCS:.c=.o)
-OBJSLIBFT =$(LIBFTDIR)*.o
+--OBJS = $(--SRCS:.c=.o)
+--OBJSLIBFT =$(--LIBFTDIR)*.o
 
-INCL = includes/
-HEADER = $(INCL)minirt.h
+--INCL = includes/
+--HEADER = $(--INCL)minirt.h
 
-LIBFT = libft.a
-LIBFTDIR = libft/
-LIBFTLINK = -L $(LIBFTDIR) -lft
+--LIBFT = libft.a
+--LIBFTDIR = libft/
+--LIBFTLINK = -L $(--LIBFTDIR) -lft
 
-LIBMLX = libmlx.a
-#LIBMLXDIR = libmlx
-LIBMLXDIR = libmlxlinux #/usr/local/lib
-LIBMLXLINK = -L $(LIBMLXDIR) -lmlx
-#MLX_INCLUDE = -framework OpenGL -framework AppKit
-MLX_INCLUDE = -lm -lXext -lX11 #/usr/local/include
+ifeq ($(UNAME_S),Linux)
+	LIBMLXDIR	= libmlxlinux
+	MLX_INCLUDE = -lm -lXext -lX11
+	ENV			= -D LINUX
+else
+	LIBMLXDIR	= libmlx
+	MLX_INCLUDE = -framework OpenGL -framework AppKit
+	ENV			=
+endif
+--LIBMLX = libmlx.a
+--LIBMLXLINK = -L $(LIBMLXDIR) -lmlx
 
-OPTI = -Ofast -flto -march=native #-O3
+
+--OPTI = -Ofast -flto -march=native #-O3
 
 
 
@@ -58,28 +63,28 @@ OPTI = -Ofast -flto -march=native #-O3
 
 all : compilelibft compilelibmlx $(NAME)
 
-$(NAME) : $(OBJSLIBFT) $(OBJS)
-	$(CC) $(OPTI) $(LDFLAGS) -o $@ $^ $(LIBMLXLINK) $(MLX_INCLUDE)
+$(NAME) : $(--OBJSLIBFT) $(--OBJS)
+	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $^ $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE)
 
 compilelibft :
-	$(MAKE) -C libft all
+	$(--MAKE) -C libft all
 
 compilelibmlx :
-	$(MAKE) -C $(LIBMLXDIR) all
+	$(--MAKE) -C $(LIBMLXDIR) all
 
-%.o: %.c $(INCL)
-	$(CC) -c $(LDFLAGS) -I$(INCL) -o $@ $<
+%.o: %.c $(--INCL)
+	$(--CC) -c $(--LDFLAGS) -I$(--INCL) -o $@ $<
 
 clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
-	cd $(LIBFTDIR) && $(MAKE) clean
-	# cd $(LIBMLXDIR) && $(MAKE) clean
-	rm -rf $(OBJS) $(LIBFT) $(LIBMLX)
+	cd $(--LIBFTDIR) && $(--MAKE) clean
+	# cd $(LIBMLXDIR) && $(--MAKE) clean
+	rm -rf $(--OBJS) $(--LIBFT) $(--LIBMLX)
 
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
-	cd $(LIBFTDIR) && $(MAKE) fclean
-	# cd $(LIBMLXDIR) && $(MAKE) fclean
+	cd $(--LIBFTDIR) && $(--MAKE) fclean
+	# cd $(LIBMLXDIR) && $(--MAKE) fclean
 	rm -f $(NAME) a.out
 
 re:		fclean all
@@ -90,25 +95,22 @@ re:		fclean all
 
 
 
-
-
-
 ###########################
 --BLACK_FG =	\033[38;5;0m
-RED_FG =	\033[38;5;196m
-REDL_FG =	\033[1;31m
-GREEN_FG =	\033[38;5;46m
-CYAN_FG =	\033[0;36m
-YELLOW_FG =	\033[1;33m
+--RED_FG =	\033[38;5;196m
+--REDL_FG =	\033[1;31m
+--GREEN_FG =	\033[38;5;46m
+--CYAN_FG =	\033[0;36m
+--YELLOW_FG =	\033[1;33m
 
-BLACK_BG =	\033[48;5;0m
-BLUE_BG =	\033[48;5;39m
-PINK_BG =	\033[48;5;213m
-YELLOW_BG =	\033[48;5;11m
-RANLIB_BG =	\033[48;5;172m
-GREEN_BG =	\033[48;5;46m
+--BLACK_BG =	\033[48;5;0m
+--BLUE_BG =	\033[48;5;39m
+--PINK_BG =	\033[48;5;213m
+--YELLOW_BG =	\033[48;5;11m
+--RANLIB_BG =	\033[48;5;172m
+--GREEN_BG =	\033[48;5;46m
 
-CLEAR_COLOR =	\033[m
+--CLEAR_COLOR =	\033[m
 ###########################
 
 
