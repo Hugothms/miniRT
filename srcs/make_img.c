@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/13 19:44:22 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 20:46:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
 	{
 		obstacle = NULL;
 		light = (t_light*)(lights->content);
-		to_light = new_ray(multi_vect(impact->pos, 1 - 1e-5), add_vect(light->pos, minus_vect(impact->pos))); // rapprochement du point d'impact vers l'origine
+		to_light = new_ray(impact->pos, add_vect(light->pos, minus_vect(impact->pos)));
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
 		// float x = impact_obstacle->dist;
 		// if (x > distance(to_light.pos, light->pos))
