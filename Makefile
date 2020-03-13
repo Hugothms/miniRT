@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/12 18:23:39 by hthomas          ###   ########.fr        #
+#    Updated: 2020/03/13 15:09:52 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ NAME = miniRT
 --LIBFTDIR = libft/
 --LIBFTLINK = -L $(--LIBFTDIR) -lft
 
+UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	LIBMLXDIR	= libmlxlinux
 	MLX_INCLUDE = -lm -lXext -lX11
