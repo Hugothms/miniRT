@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/13 18:38:22 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 21:01:15 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define DEPTH 1
 
 # define ALBEDO 0.3
-
+# define EPSILON 1e-5
 /*
 ** Keycodes and screen size LINUX and MAC
 */

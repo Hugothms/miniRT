@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/13 18:56:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 21:02:11 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int		intersect_sphere(const t_ray ray, const t_sphere sphere, t_impact *impact)
 	else if (x1 <= 0.)
 		x1 = x0;
 	impact->dist = ft_min_float(x0, x1);
-	impact->pos = add_vect(ray.pos, multi_vect(ray.dir,x1));
+	impact->pos = add_vect(ray.pos, multi_vect(ray.dir, x1));
+	impact->normal = normalize(add_vect(impact->pos, minus_vect(sphere.pos)));
+	impact->pos = add_vect(impact->pos, multi_vect(impact->normal, EPSILON));
 	return (1);
 }
 
@@ -47,7 +49,6 @@ void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void *
 		if (intersect_sphere(ray, *sphere, impact))
 		{
 			*object = sphere;
-			impact->normal = normalize(add_vect(impact->pos, minus_vect(sphere->pos)));
 			ft_memcpy(scene->type, "sp\0", 3);
 		}
 		spheres = spheres->next;
@@ -68,6 +69,7 @@ int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 		{
 			impact->normal = plane.normal;
 			impact->pos = add_vect(ray.pos, multi_vect(ray.dir, x));
+			impact->pos = add_vect(impact->pos, multi_vect(impact->normal, EPSILON));
 			impact->dist = x;
 			return (1);
 		}
@@ -79,20 +81,45 @@ void	ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **
 {
 	t_list		*planes;
 	t_plane		*plane;
-	float		tmp;
 
 	planes = scene->planes;
 	while (planes->next)
 	{
 		plane = (t_plane*)(planes->content);
-		if ((tmp = intersect_plane(ray, *plane, impact)))
+		if (intersect_plane(ray, *plane, impact))
 		{
 			*object = plane;
-			//impact->dist = tmp;
-			//impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
-			//impact->normal = plane->normal;
 			ft_memcpy(scene->type, "pl\0", 3);
 		}
 		planes = planes->next;
 	}
 }
+
+int		intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+{ 
+	float t = 0; 
+
+	return (0); 
+}
+
+void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
+{
+	t_list		*cylinders;
+	t_cylinder	*cylinder;
+
+	cylinders = scene->cylinders;
+	while (cylinders->next)
+	{
+		cylinder = (t_cylinder*)(cylinders->content);
+		if (intersect_cylinder(ray, *cylinder, impact))
+		{
+			*object = cylinder;
+			//impact->dist = tmp;
+			//impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
+			//impact->normal = cylinder->normal;
+			ft_memcpy(scene->type, "cy\0", 3);
+		}
+		cylinders = cylinders->next;
+	}
+}
+
