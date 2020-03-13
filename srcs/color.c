@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/26 14:25:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:45:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,16 @@ void		min_rgb(t_rgb *color)
 	color->b = ft_min_int(color->b, 255);
 }
 
-int		get_t(int color)
+t_rgb	get_color(char *type, void *object)
 {
-	return (color & 0xFF);
-}
-
-int		get_r(int color)
-{
-	return (color & 0xFF00);
-}
-
-int		get_g(int color)
-{
-	return (color & 0xFF0000);
-}
-
-int		get_b(int color)
-{
-	return (color & 0xFF000000);
+	if (!ft_strcmp(type, "sp"))
+		return((t_sphere*)object)->color;
+	if (!ft_strcmp(type, "pl"))
+		return((t_plane*)object)->color;
+	if (!ft_strcmp(type, "cy"))
+		return((t_cylinder*)object)->color;
+	if (!ft_strcmp(type, "tr"))
+		return((t_triangle*)object)->color;
+	if (!ft_strcmp(type, "sq"))
+		return((t_square*)object)->color;
 }

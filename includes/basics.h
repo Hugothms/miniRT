@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/03 18:11:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:45:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ t_rgb				*mult_rgb_float(t_rgb rgb, float mult);
 t_rgb				*add_rgb_rgb(const t_rgb rgb, const t_rgb add);
 void				min_rgb(t_rgb *color);
 t_ray				new_ray(const t_vect position, const t_vect direction);
+t_rgb				get_color(char *type, void *object);
 
 #endif
