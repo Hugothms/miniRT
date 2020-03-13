@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/12 18:29:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 18:56:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 	denom = dot_product(plane.normal, ray.dir);
 	if (fabs(denom) > 1e-6)
 	{
-		if ((x = dot_product(add_vect(plane.pos, minus_vect(ray.pos)), plane.normal) / denom) > 0)
+		x = dot_product(add_vect(plane.pos, minus_vect(ray.pos)), plane.normal) / denom;
+		if (x > 0 && x < impact->dist)
 		{
 			impact->normal = plane.normal;
 			impact->pos = add_vect(ray.pos, multi_vect(ray.dir, x));

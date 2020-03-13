@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/13 15:36:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 18:38:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,12 @@
 # ifdef LINUX
 #  define MAX_W		1368
 #  define MAX_H		738
-
 #  define ESC		65307
 #  define LEFT		65361
 #  define RIGHT		65363
-
 # else
 #  define MAX_W		2560
 #  define MAX_H		1440
-
 #  define ESC		53
 #  define LEFT		123
 #  define RIGHT		124

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/12 17:19:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/13 19:44:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	// ray_squares(ray, scene, impact, object);
 	// ray_cyinders(ray, scene, impact, object);
 	// ray_triangles(ray, scene, impact, object);
-	if (*object)
-		return (impact);
-	return (NULL);
+	return (impact);
 }
 
 /**
@@ -85,7 +83,7 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
 		// float x = impact_obstacle->dist;
 		// if (x > distance(to_light.pos, light->pos))
-		if (!obstacle)
+		if (impact_obstacle->dist < distance(to_light.pos, light->pos))
 		{
 			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
 			color_l = *add_rgb_rgb(*mult_rgb_float(light->color, normal_dot_light), color_l);
@@ -125,15 +123,9 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 			{
 				ray = generate_ray(camera, scene->resolution, pixel);
 				impact = closest_object(ray, scene, &object);
-				if (impact)
+				if (object)
 				{
-					if (!ft_strcmp(scene->type, "sp"))
-						*color = ((t_sphere*)object)->color;
-					if (!ft_strcmp(scene->type, "pl"))
-					{
-						*color = ((t_plane*)object)->color;
-
-					}
+					*color = get_color(scene->type, object);
 					manage_light(scene, impact, color);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
