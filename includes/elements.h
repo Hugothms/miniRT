@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/11 16:28:05 by hugo             ###   ########.fr       */
+/*   Updated: 2020/03/15 17:51:48 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ typedef struct		s_plane
 typedef struct		s_square
 {
 	t_vect			pos;
-	t_vect			vect;
+	t_vect			normal;
 	float			height;
+	t_vect			p1;
+	t_vect			p2;
+	t_vect			p3;
+	t_vect			p4;
 	t_rgb			color;
 }					t_square;
 
@@ -63,7 +67,7 @@ typedef struct		s_cylinder
 {
 	t_vect			pos;
 	t_vect			vect;
-	float			diameter;
+	float			radius2;
 	float			height;
 	t_rgb			color;
 }					t_cylinder;
