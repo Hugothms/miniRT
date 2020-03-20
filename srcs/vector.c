@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/17 13:41:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/20 12:18:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ t_vect		rot_vect(const t_vect vect, const float angle, const char axe)
 	return (new_vect(0, 0, 0));
 }
 
-float		dot_product(const t_vect vect1, const t_vect vect2)
-{
-	return (vect1.x * vect2.x + vect1.y * vect2.y + vect1.z *vect2.z);
-}
-
 t_vect		add_vect(const t_vect vect1, const t_vect vect2)
 {
 	return (new_vect(vect1.x + vect2.x, vect1.y + vect2.y, vect1.z + vect2.z));
@@ -81,6 +76,11 @@ t_vect		minus_vect(const t_vect vect)
 t_vect		multi_vect(const t_vect vect, const float x)
 {
 	return (new_vect(vect.x * x, vect.y * x, vect.z * x));
+}
+
+float		dot_product(const t_vect vect1, const t_vect vect2)
+{
+	return (vect1.x * vect2.x + vect1.y * vect2.y + vect1.z *vect2.z);
 }
 
 t_vect		cross_product(t_vect v1, t_vect v2)
