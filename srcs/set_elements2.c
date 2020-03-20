@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/16 14:51:00 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/17 13:49:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		set_cylinder(t_scene *scene, char **strs)
 	if (!(cylinder = malloc(sizeof(*cylinder))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	cylinder->pos = str_to_triple(strs[1]);
-	cylinder->vect = normalize(str_to_triple(strs[2]));
+	cylinder->dir = normalize(str_to_triple(strs[2]));
 	radius = ft_atof(strs[3]) / 2;
 	cylinder->radius2 = radius * radius;
 	cylinder->height = ft_atof(strs[4]);
@@ -90,9 +90,9 @@ void		set_triangle(t_scene *scene, char **strs)
 
 	if (!(triangle = malloc(sizeof(*triangle))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	triangle->p1 = str_to_triple(strs[1]);
-	triangle->p2 = str_to_triple(strs[2]);
-	triangle->p3 = str_to_triple(strs[3]);
+	triangle->v0 = str_to_triple(strs[1]);
+	triangle->v1 = str_to_triple(strs[2]);
+	triangle->v2 = str_to_triple(strs[3]);
 	triangle->color = str_to_rgb(strs[4]);
 	ft_lstadd_front(&(scene->triangles), ft_lstnew(triangle));
 }

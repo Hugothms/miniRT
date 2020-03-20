@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/11 18:21:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/17 13:41:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,16 @@ t_vect		multi_vect(const t_vect vect, const float x)
 	return (new_vect(vect.x * x, vect.y * x, vect.z * x));
 }
 
+t_vect		cross_product(t_vect v1, t_vect v2)
+{
+	t_vect	origin;
+	t_vect	normal;
+	float	denom;
+	float	cross;
+
+	origin = new_vect(0, 0, 0);
+	denom = distance(origin, v1) * distance(origin, v2);
+	cross = denom * sinf(acos(dot_product(v1, v2) / denom));
+	normal = new_vect(v1.y * v2.z - v1.z * v2.y, v1.x * v2.z - v1.z * v2.x, v1.y * v2.x - v1.x * v2.y);
+	return (multi_vect(normal, cross));
+}
