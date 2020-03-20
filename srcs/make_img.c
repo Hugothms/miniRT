@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/16 14:51:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/17 13:53:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 	ray_planes(ray, scene, impact, object);
 	//ray_squares(ray, scene, impact, object);
 	ray_cylinders(ray, scene, impact, object);
-	// ray_triangles(ray, scene, impact, object);
+	ray_triangles(ray, scene, impact, object);
 	return (impact);
 }
 

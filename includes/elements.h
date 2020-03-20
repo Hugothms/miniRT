@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/15 17:51:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/17 13:49:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct		s_square
 typedef struct		s_cylinder
 {
 	t_vect			pos;
-	t_vect			vect;
+	t_vect			dir;
 	float			radius2;
 	float			height;
 	t_rgb			color;
@@ -74,9 +74,9 @@ typedef struct		s_cylinder
 
 typedef struct		s_triangle
 {
-	t_vect			p1;
-	t_vect			p2;
-	t_vect			p3;
+	t_vect			v0;
+	t_vect			v1;
+	t_vect			v2;
 	t_rgb			color;
 }					t_triangle;
 
