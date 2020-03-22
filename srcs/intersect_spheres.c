@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/17 13:53:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/22 12:50:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 	if (fabs(denom) > EPSILON)
 	{
 		x = dot_product(add_vect(plane.pos, minus_vect(ray.pos)), plane.normal) / denom;
-		if (x > 0 && x < impact->dist)
+		if (x > EPSILON && x < impact->dist)
 		{
 			impact->normal = plane.normal;
 			impact->pos = add_vect(ray.pos, multi_vect(ray.dir, x));
@@ -95,13 +95,40 @@ void	ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **
 	}
 }
 
+int		intersect_disk(const t_ray ray, const t_disk disk, t_impact *impact)
+{
+	t_vect	v; 
+	float	d2;
+	t_plane	plane;
+
+	plane.pos = disk.pos;
+	plane.normal = disk.normal; 
+	if (intersect_plane(ray, plane, impact))
+	{ 
+		impact->pos = multi_vect(add_vect(ray.pos, ray.dir), impact->dist); 
+		v = add_vect(impact->pos, minus_vect(disk.pos)); 
+		d2 = dot_product(v, v);
+		return (d2 <= disk.radius2);
+	 }
+	 return (0); 
+}
 
 int		intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
 {
+	t_disk disk;
+	disk.pos = cylinder.pos;
+	disk.normal = cylinder.dir;
+	disk.radius2 = cylinder.radius2;
+	if (intersect_disk(ray, disk, impact))
+		return (1);
+	disk.pos = add_vect(disk.pos, multi_vect(cylinder.dir, cylinder.height));
+	if (intersect_disk(ray, disk, impact))
+		return (1);
+	
+	
 	float a = ray.dir.x * ray.dir.x + ray.dir.z * ray.dir.z;
 	float b = 2 * (ray.pos.x * ray.dir.x + ray.pos.z * ray.dir.z);
 	float c = ray.pos.x * ray.pos.x + ray.pos.z * ray.pos.z - cylinder.radius2;
-
 	float discr = b * b - 4 * a * c;
 	if (discr < 0)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/17 13:49:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/03/22 12:24:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ typedef struct		s_cylinder
 	float			height;
 	t_rgb			color;
 }					t_cylinder;
+
+typedef struct		s_disk
+{
+	t_vect			pos;
+	t_vect			normal;
+	float			radius2;
+	t_rgb			color;
+}					t_disk;
 
 typedef struct		s_triangle
 {
