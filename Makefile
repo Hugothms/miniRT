@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
+#    By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/13 18:28:12 by hthomas          ###   ########.fr        #
+#    Updated: 2020/04/01 13:11:34 by hugothms         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ NAME = miniRT
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
 --LDFLAGS += -g3 -fsanitize=address
+--OPTI = -Ofast -flto -march=native #-O3
 
---SRCS = 	srcs/color.c			\
+--SRCS =srcs/color.c			\
 		srcs/error.c			\
 		srcs/get_next_line.c	\
 		srcs/intersect_spheres.c\
@@ -56,7 +57,6 @@ endif
 --LIBMLXLINK = -L $(LIBMLXDIR) -lmlx
 
 
---OPTI = -Ofast -flto -march=native #-O3
 
 
 
