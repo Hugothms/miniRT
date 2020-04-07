@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+         #
+#    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/04/01 13:11:34 by hugothms         ###   ########.fr        #
+#    Updated: 2020/04/07 14:43:47 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = miniRT
 --MAKE = make
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
---LDFLAGS += -g3 -fsanitize=address
+--LDFLAGS += #-g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native #-O3
 
 --SRCS =srcs/color.c			\

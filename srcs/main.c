@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/12 17:57:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/06 14:26:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		main(const int argc, const char *argv[])
 	printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	if (argc == 2)
 	{
-		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, "title window")))
+		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, argv[1])))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 		start = clock();
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
