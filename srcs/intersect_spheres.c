@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/22 12:50:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/07 13:03:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int		intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *im
 	//If ray direction is not pararel to Y Plane
 	if (ray.dir.y != 0.0f) //Paralel
 	{
-		//Compute t's for point intersection in the Y Plane
+        //Compute t's for point intersection in the Y Plane
 		float t3 = (0-ray.pos.y)/ray.dir.y;
 		float t4 = (cylinder.height-ray.pos.y)/ray.dir.y;
 		float t2;
@@ -165,13 +165,12 @@ int		intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *im
 		{
 			// If there is a t >= 0 compute de point and check if the point is inside the cap
 			t_vect point1 = add_vect(ray.pos, multi_vect(ray.dir, t2));
-			//std::cout << "point " << point1.y << " hipo " << point1.x*point1.x + point1.z*point1.z << " radio " << cylinder.radius2 << std::endl;
-			if (point1.x*point1.x + point1.z*point1.z <= cylinder.radius2 + 0.9f)
+			if (point1.x*point1.x + point1.z*point1.z <= cylinder.radius2 + 0.9999f)
 			{
 				// Intersection point is inside cap but, Which t is the smallest? t from cap or t from body cylinder?
 				// I choose the smallest t and check if the t is from cap and compute normal and return intersection.
 				t = ft_min_float(t,t2);
-				/*if (t == t3)
+				if (t == t3)
 				{
 					impact->normal = new_vect(0.0f,-1.0f,0.0f);
 					impact->pos = point1;
@@ -182,7 +181,7 @@ int		intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *im
 					impact->normal = new_vect(0.0f,1.0f,0.0f);
 					impact->pos = point1;
 					return (1);
-				}*/
+				}
 			}
 		}
 	}
@@ -190,6 +189,12 @@ int		intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *im
 	impact->normal = normal;
 	impact->pos = add_vect(ray.pos, multi_vect(ray.dir, t));
 	return (1);
+}
+
+
+int		intersect_cylinder2(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+{
+    return 0;
 }
 
 void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
