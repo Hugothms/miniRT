@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/13 15:38:29 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/14 19:59:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		check_resolution(char **data)
 {
-	if (ft_atoi(data[1]) <= 0 || ft_atoi(data[2]) <= 0)
+	if (ft_atoi_strict(data[1]) <= 0 || ft_atoi_strict(data[2]) <= 0)
 		return (-1);
 	return (0);
 }
@@ -27,8 +27,8 @@ void	set_resolution(t_scene *scene, char **data)
 		print_err_and_exit("resolution (R) must be 2 positive numbers", 20);
 	if (!(resolution = malloc(sizeof(*resolution))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	resolution->w = ft_min_int(ft_atoi(data[1]), MAX_W);
-	resolution->h = ft_min_int(ft_atoi(data[2]), MAX_H);
+	resolution->w = ft_min_int(ft_atoi_strict(data[1]), MAX_W);
+	resolution->h = ft_min_int(ft_atoi_strict(data[2]), MAX_H);
 	scene->resolution = *resolution;
 }
 

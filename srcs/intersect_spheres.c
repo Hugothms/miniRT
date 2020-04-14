@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/07 13:03:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/08 03:04:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void *
 		spheres = spheres->next;
 	}
 }
-
+ 
 int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 {
 	float	denom;
@@ -94,7 +94,7 @@ void	ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **
 		planes = planes->next;
 	}
 }
-
+ 
 int		intersect_disk(const t_ray ray, const t_disk disk, t_impact *impact)
 {
 	t_vect	v; 

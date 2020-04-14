@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hugo <hugo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:49:24 by hthomas           #+#    #+#              #
-#    Updated: 2020/03/07 10:58:34 by hugo             ###   ########.fr        #
+#    Updated: 2020/04/14 20:08:04 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS 		=	ft_swap.c				\
 				ft_strlcpy.c			\
 				ft_strlcat.c			\
 				ft_atoi.c				\
+				ft_atoi_strict.c		\
 				ft_atoi_base.c			\
 				ft_atol.c				\
 				ft_atof.c				\

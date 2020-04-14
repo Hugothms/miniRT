@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/17 13:49:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/14 17:47:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void		set_square_points(t_scene *scene, t_square *square)
 	square->height / 2;
 	square->pos;
 	square->normal;
-//	square->p1 = new_vect(-1, -1, 6);
-//	square->p1 = new_vect(1, -1, 6);
-//	square->p1 = new_vect(-1, -1, 4);
-//	square->p1 = new_vect(1, -1, 4);
+	// square->p1 = new_vect(-1, -1, 6);
+	// square->p2 = new_vect(1, -1, 6);
+	// square->p3 = new_vect(-1, -1, 4);
+	// square->p4 = new_vect(1, -1, 4);
 }
 
 void		set_square(t_scene *scene, char **strs)

@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/04/07 14:43:47 by hthomas          ###   ########.fr        #
+#    Updated: 2020/04/14 17:53:24 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,10 +116,10 @@ re:		fclean all
 
 
 test: $(NAME)
-	./$< scenes/example.rt
+	./$< scenes/test.rt
 
 test_save: $(NAME)
-	./$< scenes/example.rt -save
+	./$< scenes/test.rt -save
 
 
 
