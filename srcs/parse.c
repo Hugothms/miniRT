@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/12 13:45:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/14 22:41:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,45 @@ void		*init_scene(t_scene *scene)
 	return (scene);
 }
 
+int		is_good_size(char *line, char **data, int size, int nb_elements)
+{
+if (ft_in_charset(line[size], WHITE_SPACES))
+		return (ft_tab_size(data) == nb_elements); 
+}
+
 t_scene		*parse(int fd)
 {
 	t_scene	*scene;
 	char	*line;
 	int		ret;
-	char	*set;
 	char	**data;
 
-	set = " \t";
 	if (!(scene = malloc(sizeof(*scene))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if(!(init_scene(scene)))
 		return(NULL);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		data = ft_split_set((*line ? line : "iamcheating"), set);
-		if (!ft_strcmp(data[0], "R") && ft_in_charset(line[1], set) && !scene->resolution.w)
+		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
+		if (!ft_strcmp(data[0], "R") && is_good_size(line, data, 1, 3) && !scene->resolution.w)
 			set_resolution(scene, data);
-		else if (!ft_strcmp(data[0], "A") && ft_in_charset(line[1], set) && !scene->ambient_light.ratio)
+		else if (!ft_strcmp(data[0], "A") && is_good_size(line, data, 1, 3) && !scene->ambient_light.ratio)
 			set_ambient_light(scene, data);
-		else if (!ft_strcmp(data[0], "c") && ft_in_charset(line[1], set))
+		else if (!ft_strcmp(data[0], "c") && is_good_size(line, data, 1, 4))
 			set_camera(scene, data);
-		else if (!ft_strcmp(data[0], "l") && ft_in_charset(line[1], set))
+		else if (!ft_strcmp(data[0], "l") && is_good_size(line, data, 1, 4))
 			set_light(scene, data);
-		else if (!ft_strcmp(data[0], "sp") && ft_in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "sp") && is_good_size(line, data, 2, 4))
 			set_sphere(scene, data);
-		else if (!ft_strcmp(data[0], "pl") && ft_in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "pl") && is_good_size(line, data, 2, 4))
 			set_plane(scene, data);
-		else if (!ft_strcmp(data[0], "sq") && ft_in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "sq") && is_good_size(line, data, 2, 5))
 			set_square(scene, data);
-		else if (!ft_strcmp(data[0], "cy") && ft_in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "cy") && is_good_size(line, data, 2, 6))
 			set_cylinder(scene, data);
-		else if (!ft_strcmp(data[0], "tr") && ft_in_charset(line[2], set))
+		else if (!ft_strcmp(data[0], "tr") && is_good_size(line, data, 2, 5))
 			set_triangle(scene, data);
-		else if (!ft_is_from_charset(line, set))
+		else if (!ft_is_from_charset(line, WHITE_SPACES))
 		{
 			free(line);
 			free(data);

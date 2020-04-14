@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 08:16:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/12 13:46:57 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/14 18:13:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		count_words(const char *str, char *charset)
 	return (count);
 }
 
-int		fill_tab(char ***tab, int *words_len, const char *str, char *charset)
+int		fill_tab(char **tab, int *words_len, const char *str, char *charset)
 {
 	int		d1;
 	int		d2;
@@ -91,17 +91,17 @@ int		fill_tab(char ***tab, int *words_len, const char *str, char *charset)
 	words_count = count_words(str, charset);
 	while (d1 < words_count && str[i_str])
 	{
-		if (!((*tab)[d1] = malloc((words_len[d1] + 1) * sizeof(char))))
+		if (!(tab[d1] = malloc((words_len[d1] + 1) * sizeof(char))))
 			return (0);
 		while (ft_in_charset(str[i_str], charset))
 			i_str++;
 		d2 = 0;
 		while (str[i_str] && !ft_in_charset(str[i_str], charset))
-			(*tab)[d1][d2++] = str[i_str++];
-		(*tab)[d1][d2++] = '\0';
+			tab[d1][d2++] = str[i_str++];
+		tab[d1][d2++] = '\0';
 		d1++;
 	}
-	(*tab)[d1] = 0;
+	tab[d1] = 0;
 	return (1);
 }
 
@@ -129,7 +129,7 @@ char	**ft_split_set(const char *str, char *charset)
 	while (i < words_count)
 		words_len[i++] = 0;
 	count_lengths(words_len, str, charset);
-	allgood = fill_tab(&tab, words_len, str, charset);
+	allgood = fill_tab(tab, words_len, str, charset);
 	if (allgood)
 		return (tab);
 	return (0);

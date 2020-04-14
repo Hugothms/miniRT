@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/17 13:41:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/14 21:21:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 
 # define ALBEDO 0.3
 # define EPSILON 1e-4
+# define WHITE_SPACES " \t"
+
 /*
 ** Keycodes and screen size LINUX and MAC
 */
@@ -153,6 +155,7 @@ void			print_err_and_exit(char *str, int err);
 
 float			distance(t_vect p1, t_vect p2);
 int				solve_quadratic(const t_vect point, float *x0, float *x1);
+int             ft_tab_size(char **tab);
 
 
 

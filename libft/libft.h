@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/25 17:43:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/14 20:08:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char				*fill_nbr_base(char *res, long nbr, char *base, int sign);
 char				*ft_strrev_minus_1(char *res);
 void				ft_swap(void *a, void *b);
 int					ft_atoi(const char *str);
+int					ft_atoi_strict(const char *nptr);
 long				ft_atol(const char *nptr);
 float				ft_atof(const char *str);
 double				ft_pow(double nb, double pow);

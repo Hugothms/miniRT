@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/02/07 17:28:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/14 18:38:24 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,16 @@ int		solve_quadratic(const t_vect point, float *x0, float *x1)
 	if (*x0 > *x1)
 		ft_swap(x0, x1);
 	return (1);
+}
+
+int     ft_tab_size(char **tab)
+{
+    int i;
+
+    if (!tab)
+        return (0);
+    i = 0;
+    while (tab[i])
+        i++;
+    return (i);
 }
