@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/04/15 14:18:01 by hthomas          ###   ########.fr        #
+#    Updated: 2020/04/15 16:52:08 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,19 +17,23 @@ NAME = miniRT
 --LDFLAGS += #-g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native #-O3
 
---SRCS =srcs/color.c			\
-		srcs/error.c			\
-		srcs/get_next_line.c	\
-		srcs/intersect_spheres.c\
-		srcs/main.c				\
-		srcs/make_img.c			\
-		srcs/parse.c			\
-		srcs/ray.c				\
-		srcs/save_bmp.c			\
-		srcs/set_elements.c		\
-		srcs/set_elements2.c	\
-		srcs/utils.c			\
-		srcs/vector.c			\
+--SRCS =srcs/get_next_line.c		\
+		srcs/color.c				\
+		srcs/error.c				\
+		srcs/intersect_cylinders.c	\
+		srcs/intersect_planes.c		\
+		srcs/intersect_spheres.c	\
+		srcs/intersect_squares.c	\
+		srcs/intersect_triangles.c	\
+		srcs/main.c					\
+		srcs/make_img.c				\
+		srcs/parse.c				\
+		srcs/ray.c					\
+		srcs/save_bmp.c				\
+		srcs/set_elements.c			\
+		srcs/set_elements2.c		\
+		srcs/utils.c				\
+		srcs/vector.c				\
 
 
 
