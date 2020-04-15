@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/14 21:21:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 14:38:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "basics.h"
 # include "elements.h"
 # include "scene.h"
+# include "parse.h"
 # include "get_next_line.h"
 
 # define OPEN_ERROR -1
@@ -42,7 +43,6 @@
 
 # define ALBEDO 0.3
 # define EPSILON 1e-4
-# define WHITE_SPACES " \t"
 
 /*
 ** Keycodes and screen size LINUX and MAC

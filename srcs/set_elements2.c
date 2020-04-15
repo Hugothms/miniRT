@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/14 17:47:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 14:26:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void		set_cylinder(t_scene *scene, char **strs)
 	cylinder->color = str_to_rgb(strs[5]);
 	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cylinder));
 }
+
 void		set_square_points(t_scene *scene, t_square *square)
 {
 	t_camera	camera;
