@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 13:18:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 14:31:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
 		}
 		lights = lights->next;
 	}
-	*color = *mult_rgb_rgb(*add_rgb_rgb(scene->amb_light.color, diffuse), *color);
+	*color = *mult_rgb_rgb(*add_rgb_rgb(scene->al.color, diffuse), *color);
 	//*color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la shpere
 	min_rgb(color);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 14:17:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 14:39:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void		*init_scene(t_scene *scene)
 {
 	scene->resolution.w = 0;
 	scene->resolution.h = 0;
-	scene->amb_light.ratio = 0;
-	scene->amb_light.color.r = 0;
-	scene->amb_light.color.g = 0;
-	scene->amb_light.color.b = 0;
+	scene->al.ratio = 0;
+	scene->al.color.r = 0;
+	scene->al.color.g = 0;
+	scene->al.color.b = 0;
 	scene->cameras = ft_lstnew(NULL);
 	scene->lights = ft_lstnew(NULL);
 	scene->spheres = ft_lstnew(NULL);
@@ -33,9 +33,9 @@ void		*init_scene(t_scene *scene)
 	return (scene);
 }
 
-int		check_line(char *line, char **data, char *type, int nb_elements)
+int			check_line(char *line, char **data, char *type, int nb_elements)
 {
-	if (!ft_strcmp(data[0],type))
+	if (!ft_strcmp(data[0], type))
 	{
 		if (ft_in_charset(line[ft_strlen(type)], WHITE_SPACES))
 			return (ft_tab_size(data) == nb_elements);
@@ -57,23 +57,23 @@ t_scene		*parse(int fd)
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
-		if (check_line(line, data, "R", 3) && !scene->resolution.w)
+		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && !scene->resolution.w)
 			set_resolution(scene, data);
-		else if (check_line(line, data, "A", 3) && !scene->amb_light.ratio)
+		else if (check_line(line, data, "A", NB_ELEM_AL) && !scene->al.ratio)
 			set_ambient_light(scene, data);
-		else if (check_line(line, data, "c", 4))
+		else if (check_line(line, data, "c", NB_ELEM_CAMERA))
 			set_camera(scene, data);
-		else if (check_line(line, data, "l", 4))
+		else if (check_line(line, data, "l", NB_ELEM_LIGHT))
 			set_light(scene, data);
-		else if (check_line(line, data, "sp", 4))
+		else if (check_line(line, data, "sp", NB_ELEM_SPHERE))
 			set_sphere(scene, data);
-		else if (check_line(line, data, "pl", 4))
+		else if (check_line(line, data, "pl", NB_ELEM_PLANE))
 			set_plane(scene, data);
-		else if (check_line(line, data, "sq", 5))
+		else if (check_line(line, data, "sq", NB_ELEM_SQUARE))
 			set_square(scene, data);
-		else if (check_line(line, data, "cy", 6))
+		else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
 			set_cylinder(scene, data);
-		else if (check_line(line, data, "tr", 5))
+		else if (check_line(line, data, "tr", NB_ELEM_TRIANGLE))
 			set_triangle(scene, data);
 		else if (!ft_is_from_charset(line, WHITE_SPACES))
 		{

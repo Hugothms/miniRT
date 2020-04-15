@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 14:04:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 14:31:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	set_ambient_light(t_scene *scene, char **data)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ratio = ft_atof(data[1]);
 	ambient_light->color = *mult_rgb_float(str_to_rgb(data[2]), ratio);
-	scene->amb_light = *ambient_light;
+	scene->al = *ambient_light;
 }
 
 void	set_camera(t_scene *scene, char **data)
