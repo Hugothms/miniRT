@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/14 22:41:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 14:17:21 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void		*init_scene(t_scene *scene)
 {
 	scene->resolution.w = 0;
 	scene->resolution.h = 0;
-	scene->ambient_light.ratio = 0;
-	scene->ambient_light.color.r = 0;
-	scene->ambient_light.color.g = 0;
-	scene->ambient_light.color.b = 0;
+	scene->amb_light.ratio = 0;
+	scene->amb_light.color.r = 0;
+	scene->amb_light.color.g = 0;
+	scene->amb_light.color.b = 0;
 	scene->cameras = ft_lstnew(NULL);
 	scene->lights = ft_lstnew(NULL);
 	scene->spheres = ft_lstnew(NULL);
@@ -27,16 +27,20 @@ void		*init_scene(t_scene *scene)
 	scene->squares = ft_lstnew(NULL);
 	scene->cylinders = ft_lstnew(NULL);
 	scene->triangles = ft_lstnew(NULL);
-	if(!(scene->type = malloc(3 * sizeof(char))))
+	if (!(scene->type = malloc(3 * sizeof(char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ft_bzero(scene->type, 3);
 	return (scene);
 }
 
-int		is_good_size(char *line, char **data, int size, int nb_elements)
+int		check_line(char *line, char **data, char *type, int nb_elements)
 {
-if (ft_in_charset(line[size], WHITE_SPACES))
-		return (ft_tab_size(data) == nb_elements); 
+	if (!ft_strcmp(data[0],type))
+	{
+		if (ft_in_charset(line[ft_strlen(type)], WHITE_SPACES))
+			return (ft_tab_size(data) == nb_elements);
+	}
+	return (0);
 }
 
 t_scene		*parse(int fd)
@@ -48,35 +52,34 @@ t_scene		*parse(int fd)
 
 	if (!(scene = malloc(sizeof(*scene))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	if(!(init_scene(scene)))
-		return(NULL);
+	if (!(init_scene(scene)))
+		return (NULL);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
-		if (!ft_strcmp(data[0], "R") && is_good_size(line, data, 1, 3) && !scene->resolution.w)
+		if (check_line(line, data, "R", 3) && !scene->resolution.w)
 			set_resolution(scene, data);
-		else if (!ft_strcmp(data[0], "A") && is_good_size(line, data, 1, 3) && !scene->ambient_light.ratio)
+		else if (check_line(line, data, "A", 3) && !scene->amb_light.ratio)
 			set_ambient_light(scene, data);
-		else if (!ft_strcmp(data[0], "c") && is_good_size(line, data, 1, 4))
+		else if (check_line(line, data, "c", 4))
 			set_camera(scene, data);
-		else if (!ft_strcmp(data[0], "l") && is_good_size(line, data, 1, 4))
+		else if (check_line(line, data, "l", 4))
 			set_light(scene, data);
-		else if (!ft_strcmp(data[0], "sp") && is_good_size(line, data, 2, 4))
+		else if (check_line(line, data, "sp", 4))
 			set_sphere(scene, data);
-		else if (!ft_strcmp(data[0], "pl") && is_good_size(line, data, 2, 4))
+		else if (check_line(line, data, "pl", 4))
 			set_plane(scene, data);
-		else if (!ft_strcmp(data[0], "sq") && is_good_size(line, data, 2, 5))
+		else if (check_line(line, data, "sq", 5))
 			set_square(scene, data);
-		else if (!ft_strcmp(data[0], "cy") && is_good_size(line, data, 2, 6))
+		else if (check_line(line, data, "cy", 6))
 			set_cylinder(scene, data);
-		else if (!ft_strcmp(data[0], "tr") && is_good_size(line, data, 2, 5))
+		else if (check_line(line, data, "tr", 5))
 			set_triangle(scene, data);
 		else if (!ft_is_from_charset(line, WHITE_SPACES))
 		{
 			free(line);
 			free(data);
-			ft_putstr("Error\n");
-			return (NULL);
+			print_err_and_exit("Parse error", PARSE_ERROR);
 		}
 		free(line);
 		free(data);
