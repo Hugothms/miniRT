@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 14:38:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 17:17:46 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,12 @@ t_vect			multi_vect(const t_vect vect, float x);
 t_vect			cross_product(t_vect v1, t_vect v2);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
-int				intersect_sphere(const t_ray ray, const t_sphere sphere, t_impact *impact);
-void			ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
-int				intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
+int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
+void			ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
+void			ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
+void			ray_squares(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
+void			ray_triangles(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 float			to_rad(float angle);
 
 void			make_img(t_img *img, const t_scene *scene, const t_camera *camera);

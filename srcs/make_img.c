@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 14:31:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/15 17:44:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 				if (object)
 				{
 					*color = get_color(scene->type, object);
+					if (dot_product(impact->normal, ray.dir) >= 0)
+						impact->normal = minus_vect(impact->normal);
 					manage_light(scene, impact, color);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
