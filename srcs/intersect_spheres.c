@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 16:48:19 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/16 22:16:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		intersect_sphere(const t_ray ray, const t_sphere sphere, t_impact *impact)
 		x1 = x0;
 	impact->dist = ft_min_float(x0, x1);
 	impact->pos = add_vect(ray.pos, multi_vect(ray.dir, x1));
-	impact->normal = normalize(add_vect(impact->pos, minus_vect(sphere.pos)));
+	impact->normal = normalize(sub_vect(impact->pos, sphere.pos));
 	impact->pos = add_vect(impact->pos, multi_vect(impact->normal, EPSILON));
 	return (1);
 }

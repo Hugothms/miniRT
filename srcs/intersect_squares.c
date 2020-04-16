@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_spheres copy 3.c                         :+:      :+:    :+:   */
+/*   intersect_squares.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 16:49:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/16 22:16:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ float	orient(t_vect a, t_vect b, t_vect c, t_vect n)
 	t_vect	normal;
 	t_vect	origin;
 	
-	ba = add_vect(b, minus_vect(a)), 
-	ca = add_vect(c, minus_vect(a));
+	ba = sub_vect(b, a), 
+	ca = sub_vect(c, a);
 	origin = new_vect(0, 0, 0);
 	normal = new_vect(ba.y * ca.z - ba.z * ca.y, ba.x * ca.z - ba.z * ca.x, ba.y * ca.x - ba.x * ca.y);
 	return (dot_product(multi_vect(normal, distance(origin, cross_product(ba, ca))), n));

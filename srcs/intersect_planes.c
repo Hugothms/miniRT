@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_spheres copy.c                           :+:      :+:    :+:   */
+/*   intersect_planes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 16:48:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/16 22:16:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 	denom = dot_product(plane.normal, ray.dir);
 	if (fabs(denom) > EPSILON)
 	{
-		x = dot_product(add_vect(plane.pos, minus_vect(ray.pos)), plane.normal) / denom;
+		x = dot_product(sub_vect(plane.pos, ray.pos), plane.normal) / denom;
 		if (x > EPSILON && x < impact->dist)
 		{
 			impact->normal = plane.normal;

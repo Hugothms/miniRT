@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 17:17:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/16 22:11:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,13 @@ t_vect			rot_vect(t_vect vect, const float angle, const char axe);
 t_vect			mult_mat(const float mat[3][3], t_vect vect);
 float			dot_product(const t_vect vect1, const t_vect vect2);
 t_vect			add_vect(const t_vect vect1, const t_vect vect2);
+t_vect			sub_vect(const t_vect vect1, const t_vect vect2);
 t_vect			minus_vect(const t_vect vect);
 t_vect			multi_vect(const t_vect vect, float x);
 t_vect			cross_product(t_vect v1, t_vect v2);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
-int		intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
+int				intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
 void			ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
