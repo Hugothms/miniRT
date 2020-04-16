@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_spheres copy 2.c                         :+:      :+:    :+:   */
+/*   intersect_cylinders.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 16:49:02 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/16 22:15:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		intersect_disk(const t_ray ray, const t_disk disk, t_impact *impact)
 	if (intersect_plane(ray, plane, impact))
 	{ 
 		impact->pos = multi_vect(add_vect(ray.pos, ray.dir), impact->dist); 
-		v = add_vect(impact->pos, minus_vect(disk.pos)); 
+		v = sub_vect(impact->pos, disk.pos); 
 		d2 = dot_product(v, v);
 		return (d2 <= disk.radius2);
 	 }
@@ -136,6 +136,35 @@ void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void
 }
 
 
+double			hit_cylinder(t_cylinder *obj, t_vec3 r, t_vec3 p)
+int		intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+{
+	t_vect tmp;
+	t_vect tmp2;
+	t_vect tmp3;
+	t_vect abc;
+	t_vect delta;
+
+	tmp = sub_vect(r, v3scale(cylinder.dir, dot_product(cylinder.dir, r)));
+	tmp2 = sub_vect(p, cylinder.pos);
+	tmp3 = sub_vect(tmp2, v3scale(cylinder.dir, dot_product(tmp2, cylinder.dir)));
+	abc.x = dot_product(tmp, tmp);
+	abc.y = 2 * dot_product(tmp, tmp3);
+	abc.z = dot_product(tmp3, tmp3) - obj->radius * obj->radius;
+	if ((delta.x = abc.y * abc.y - 4 * abc.x * abc.z) < 0)
+		return (NOHIT);
+	delta.y = (-abc.y - sqrt(delta.x)) / (2 * abc.x);
+	delta.z = (-abc.y + sqrt(delta.x)) / (2 * abc.x);
+	tmp = add_vect(p, v3scale(r, delta.y));
+	p = add_vect(p, v3scale(r, delta.z));
+	if (delta.y > 0.00001 && dot_product(cylinder.dir, sub_vect(tmp, cylinder.pos)) > 0 &&
+		dot_product(v3minus(cylinder.dir), sub_vect(tmp, cylinder.pos2)) > 0)
+		return (delta.y);
+	if (delta.z > 0.00001 && dot_product(cylinder.dir, sub_vect(p, cylinder.pos)) > 0 &&
+		dot_product(v3minus(cylinder.dir), sub_vect(p, cylinder.pos2)) > 0)
+		return (delta.z);
+	return (NOHIT);
+}
 
 /*
 

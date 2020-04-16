@@ -1,0 +1,14 @@
+to do
+
+intersections internes
+
+les lumières colorées les multi-spots doiventêtre gérés correctement (addition physique des lumieres)
+
+Cliquer sur la croix rouge de la fenêtre doit fermer la fenêtre et quitter leprogramme correctement.
+
+Si il y a plus d’une caméra, vous devez pouvoir alterner entre les caméras àl’aide d’un keybind de votre choix.
+
+compare distance tolight - normal et inverser normal
+
+tourner la camera
+
