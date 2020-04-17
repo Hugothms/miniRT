@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 14:26:29 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/16 22:27:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,19 @@ void		set_plane(t_scene *scene, char **strs)
 
 void		set_cylinder(t_scene *scene, char **strs)
 {
-	t_cylinder	*cylinder;
+	t_cylinder	*cy;
 	float		radius;
 
-	if (!(cylinder = malloc(sizeof(*cylinder))))
+	if (!(cy = malloc(sizeof(*cy))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	cylinder->pos = str_to_triple(strs[1]);
-	cylinder->dir = normalize(str_to_triple(strs[2]));
+	cy->pos = str_to_triple(strs[1]);
+	cy->pos2 = add_vect(cy->pos, multi_vect(cy->dir, cy->height));
+	cy->dir = normalize(str_to_triple(strs[2]));
 	radius = ft_atof(strs[3]) / 2;
-	cylinder->radius2 = radius * radius;
-	cylinder->height = ft_atof(strs[4]);
-	cylinder->color = str_to_rgb(strs[5]);
-	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cylinder));
+	cy->radius2 = radius * radius;
+	cy->height = ft_atof(strs[4]);
+	cy->color = str_to_rgb(strs[5]);
+	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cy));
 }
 
 void		set_square_points(t_scene *scene, t_square *square)

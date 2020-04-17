@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/06 14:26:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/17 17:44:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,20 @@ t_mlx	*malloc_mlx_init(void)
 	return (mlx);
 }
 
-t_img	*init_img(t_mlx *mlx, const t_couple resolution)
+t_img	*init_img(t_mlx *mlx, t_couple *resolution)
 {
 	t_img		*img;
+	int			w;
+	int			h;
 
 	if (!(img = malloc(sizeof(*img))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution.w, resolution.h)))
+	mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
+	if (w < resolution->w)
+		resolution->w = w;
+	if (h < resolution->h)
+		resolution->h = h;
+	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution->w, resolution->h)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	if (!(img->data = (unsigned char*)mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
@@ -89,7 +96,7 @@ int		main(const int argc, const char *argv[])
 	t_scene		*scene;
 	t_mlx		*mlx;
 	t_img		*img;
-
+	
 	clock_t start, end;
 	start = clock();
 	scene = get_scene(argc, argv);
@@ -100,7 +107,7 @@ int		main(const int argc, const char *argv[])
 	end = clock();
 	printf("malloc_mlx_init:%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	start = clock();
-	img = init_img(mlx, scene->resolution);
+	img = init_img(mlx, &scene->resolution);
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	start = clock();
