@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/16 22:18:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/17 22:36:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 /**
  * set la color en fonction des lumieres, de la normale du point d'impact et des eventuels obstacles
  **/
-t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
+t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_couple	pixel)
 {
 	t_list		*lights;
 	t_light		*light;
@@ -81,13 +81,21 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color)
 		light = (t_light*)(lights->content);
 		to_light = new_ray(impact->pos, sub_vect(light->pos, impact->pos));
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
-		// float x = impact_obstacle->dist;
-		// if (x > distance(to_light.pos, light->pos))
-		if (impact_obstacle->dist > distance(to_light.pos, light->pos))
-		{	
+		if (pixel.w == 680 && pixel.h == 5)
+		{
+			// printf("shade %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\n", impact_obstacle->dist, impact_obstacle->pos.x, impact_obstacle->pos.y, impact_obstacle->pos.z, impact_obstacle->normal.x, impact_obstacle->normal.y, impact_obstacle->normal.z, impact->normal.x, impact->normal.y, impact->normal.z);
+			printf("%.2f\t%.2f\n", impact_obstacle->dist, distance(to_light.pos, light->pos));
+		}
+		if (pixel.w == 699 && pixel.h == 5)
+		{
+			// printf("lumin %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\n", impact_obstacle->dist, impact_obstacle->pos.x, impact_obstacle->pos.y, impact_obstacle->pos.z, impact_obstacle->normal.x, impact_obstacle->normal.y, impact_obstacle->normal.z, impact->normal.x, impact->normal.y, impact->normal.z);
+			printf("%.2f\t%.2f\n", impact_obstacle->dist, distance(to_light.pos, light->pos));
+		}
+		if (impact_obstacle->dist > distance(to_light.pos, light->pos) )
+		{
 			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
 			color_l = *add_rgb_rgb(*mult_rgb_float(light->color, normal_dot_light), color_l);
-			diffuse = *mult_rgb_float(*add_rgb_rgb(*mult_rgb_float(diffuse, 0.000), color_l), ALBEDO);
+			diffuse = *mult_rgb_float(*add_rgb_rgb(diffuse, color_l), ALBEDO);
 			//add_vect(to_light.dir, multi_vect(impact->normal, -2. * normal_dot_light));
 		}
 		lights = lights->next;
@@ -121,6 +129,7 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 			impact = NULL; // peut etre a deplacer dans le while suivant
 			while (depth-- && reflec > EPSILON)
 			{
+				//printf("\nw%dh%d", pixel.w, pixel.h);
 				ray = generate_ray(camera, scene->resolution, pixel);
 				impact = closest_object(ray, scene, &object);
 				if (object)
@@ -128,7 +137,7 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 					*color = get_color(scene->type, object);
 					if (dot_product(impact->normal, ray.dir) >= 0)
 						impact->normal = minus_vect(impact->normal);
-					manage_light(scene, impact, color);
+					manage_light(scene, impact, color, pixel);
 				}
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflec = reflec * ((t_sphere*)object)->reflec;
