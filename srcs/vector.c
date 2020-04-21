@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/16 22:11:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/19 12:07:47 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ float		dot_product(const t_vect vect1, const t_vect vect2)
 	return (vect1.x * vect2.x + vect1.y * vect2.y + vect1.z *vect2.z);
 }
 
-t_vect		cross_product(t_vect v1, t_vect v2)
+t_vect		cross_product(const t_vect v1, const t_vect v2)
 {
 	t_vect	origin;
 	t_vect	normal;

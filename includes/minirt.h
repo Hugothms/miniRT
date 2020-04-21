@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/17 17:33:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/19 12:08:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_vect			add_vect(const t_vect vect1, const t_vect vect2);
 t_vect			sub_vect(const t_vect vect1, const t_vect vect2);
 t_vect			minus_vect(const t_vect vect);
 t_vect			multi_vect(const t_vect vect, float x);
-t_vect			cross_product(t_vect v1, t_vect v2);
+t_vect			cross_product(const t_vect v1, const t_vect v2);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
 int				intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
