@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/19 11:54:43 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/04/23 16:24:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_cou
 		obstacle = NULL;
 		light = (t_light*)(lights->content);
 		to_light = new_ray(impact->pos, sub_vect(light->pos, impact->pos));
-		printf("\t\t");
+		//printf("\t\t");
 		impact_obstacle = closest_object(to_light, scene, &obstacle);
 		if (pixel.w == 680 && pixel.h == 5)
 		{
 			// printf("shade %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\n", impact_obstacle->dist, impact_obstacle->pos.x, impact_obstacle->pos.y, impact_obstacle->pos.z, impact_obstacle->normal.x, impact_obstacle->normal.y, impact_obstacle->normal.z, impact->normal.x, impact->normal.y, impact->normal.z);
-			printf("\n%.2f\t%.2f\n", impact_obstacle->dist, distance(impact->pos, light->pos));
+			//printf("\n%.2f\t%.2f\n", impact_obstacle->dist, distance(impact->pos, light->pos));
 		}
 		if (pixel.w == 699 && pixel.h == 5)
 		{
 			// printf("lumin %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\n", impact_obstacle->dist, impact_obstacle->pos.x, impact_obstacle->pos.y, impact_obstacle->pos.z, impact_obstacle->normal.x, impact_obstacle->normal.y, impact_obstacle->normal.z, impact->normal.x, impact->normal.y, impact->normal.z);
-			printf("\n%.2f\t%.2f\n", impact_obstacle->dist, distance(impact->pos, light->pos));
+			//printf("\n%.2f\t%.2f\n", impact_obstacle->dist, distance(impact->pos, light->pos));
 		}
 		if (impact_obstacle->dist > distance(impact->pos, light->pos) )
 		{
@@ -131,7 +131,7 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 			impact = NULL; // peut etre a deplacer dans le while suivant
 			while (depth-- && reflec > EPSILON)
 			{
-				printf("\nw%dh%d", pixel.w, pixel.h);
+				//printf("\nw%dh%d", pixel.w, pixel.h);
 				ray = generate_ray(camera, scene->resolution, pixel);
 				impact = closest_object(ray, scene, &object);
 				if (object)
