@@ -6,3 +6,4 @@ ressources/*
 *.code-workspace
 *.out*
 *.bmp
+.fuse*
