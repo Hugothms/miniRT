@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/19 12:08:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 18:07:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 /*
 ** Keycodes and screen size LINUX and MAC
 */
-# ifndef LINUX
+# ifdef LINUX
 #  define ESC		65307
 #  define LEFT		65361
 #  define RIGHT		65363
