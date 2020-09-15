@@ -1,11 +1,9 @@
 *.DS_Store
 .vscode/*
 ressources/*
-*.txt
 *.o
 *.code-workspace
 *.out*
-*.bmp
 .fuse*
 miniRT
 libft/libft.a
