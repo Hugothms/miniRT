@@ -6,12 +6,20 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/10 15:14:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:17:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+# include "../lib/libft/libft.h"
+# include "get_next_line.h"
+# include "mlx.h"
+# include "basics.h"
+# include "elements.h"
+# include "scene.h"
+# include "parse.h"
 
 #include <stdio.h>
 # include <fcntl.h>
@@ -19,16 +27,8 @@
 # include <math.h>
 # include <errno.h>
 # include <time.h>
-
 # include <unistd.h>
 
-# include "../lib/libft/libft.h"
-# include "mlx.h"
-# include "basics.h"
-# include "elements.h"
-# include "scene.h"
-# include "parse.h"
-# include "get_next_line.h"
 
 # define OPEN_ERROR -1
 # define CLOSE_ERROR -2
