@@ -6,4 +6,4 @@ ressources/*
 *.out*
 .fuse*
 miniRT
-libft/libft.a
+lib/*.a

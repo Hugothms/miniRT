@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/24 09:45:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/10 14:44:08 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ float intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *i
 		d2 = dot_product(D, D);
 		if (d2 > cylinder.radius2)
 		{
-			printf("1");
+			// printf("1");
 			return (0);
 		}
 		else
@@ -148,7 +148,7 @@ float intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *i
 		R = fabs(dot_product(L, Wn));
 		if (R > sqrt(cylinder.radius2))
 		{
-			printf("2");
+			// printf("2");
 			return (0);
 		}
 		E = cross_product(L, cylinder.dir);
@@ -158,7 +158,8 @@ float intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *i
 		s = sqrt(sqrt(cylinder.radius2) - R * R) / fabs(dot_product(ray.dir, Fn));
 		if (dot_product(L, cylinder.dir) < sqrt(cylinder.radius2))
 		return (t - s);
-	}	
+	}
+	return (0);
 }
 
 void ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
