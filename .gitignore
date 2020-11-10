@@ -7,4 +7,5 @@ lib/*/libft.a
 *.o
 *.out*
 miniRT
-Screenshot/
+Screenshot*
+
