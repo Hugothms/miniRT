@@ -1,9 +1,9 @@
 *.DS_Store
 .vscode/*
-ressources/*
-*.o
-*.code-workspace
-*.out*
 .fuse*
-miniRT
+*.code-workspace
+ressources/*
 lib/*/libft.a
+*.o
+*.out*
+miniRT
