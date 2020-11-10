@@ -6,15 +6,14 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/10 15:17:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:40:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "../lib/libft/libft.h"
-# include "get_next_line.h"
+# include "../lib/libft/includes/libft.h"
 # include "mlx.h"
 # include "basics.h"
 # include "elements.h"
@@ -46,7 +45,7 @@
 /*
 ** Keycodes and screen size LINUX and MAC
 */
-# ifdef LINUX
+# ifndef LINUX
 #  define ESC		65307
 #  define LEFT		65361
 #  define RIGHT		65363

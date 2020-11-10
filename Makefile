@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2020/11/10 14:56:27 by hthomas          ###   ########.fr        #
+#    Updated: 2020/11/10 15:35:54 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ SRCDIR	= srcs/
 
 LIB		= lib/
 
-FILES	=	get_next_line.c			\
-			color.c					\
+FILES	=	color.c					\
 			error.c					\
 			intersect_cylinders.c	\
 			intersect_planes.c		\
@@ -39,23 +38,16 @@ FILES	=	get_next_line.c			\
 
 
 SRCS	= $(addprefix $(SRCDIR), $(FILES))
-
 OBJS	= ${SRCS:.c=.o}
-
 CC		= gcc -g
-
 RM		= rm -f
 
 CFLAGS	= -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)#-Wall -Wextra -Werror
-
 FLAGS = -L $(LIB)libft -lft#-L $(LIB)libvector -lvct
 
 MACOS_MACRO = -D MACOS
-
 LINUX_MACRO = -D LINUX
-
 MACOS_FLAGS	= -L $(LIB)minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
-
 LINUX_FLAGS = -L $(LIB)minilibx-linux -lmlx -lm -lX11 -lXext -lpthread
 
 UNAME := $(shell uname)
@@ -85,7 +77,8 @@ compilelibft :
 compilelibmlx :
 	make -C $(LIB)minilibx-linux all
 
-
+%.o: %.c $(HEAD)
+	$(CC) -c -I$(HEAD) -o $@ $<
 
 all:		${NAME}
 
