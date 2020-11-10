@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/17 17:44:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/10 14:05:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		key_function(const int keycode, const t_window *w)
 {
 	clock_t start, end;
 	printf("%i\n", keycode);
+	printf("%i\n", ESC);
 	if (keycode == ESC)
 		close_function(w);
 	else if (keycode == LEFT)
@@ -91,45 +92,69 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	mlx_loop(mlx->mlx_ptr);
 }
 
+// int		main(const int argc, const char *argv[])
+// {
+// 	t_scene		*scene;
+// 	t_mlx		*mlx;
+// 	t_img		*img;
+	
+// 	clock_t start, end;
+// 	// start = clock();
+// 	scene = get_scene(argc, argv);
+// 	// end = clock();
+// 	// printf("\nget_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+// 	// start = clock();
+// 	mlx = malloc_mlx_init();
+// 	// end = clock();
+// 	// printf("malloc_mlx_init:%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+// 	// start = clock();
+// 	img = init_img(mlx, &scene->resolution);
+// 	// end = clock();
+// 	// printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+// 	// start = clock();
+// 	make_img(img, scene, scene->cameras->content);
+// 	// end = clock();
+// 	// printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+// 	if (argc == 2)
+// 	{
+// 		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, argv[1])))
+// 			print_err_and_exit("Minilibx error", MLX_ERROR);
+// 		// start = clock();
+// 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
+// 		// end = clock();
+// 		// printf("put_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+// 		get_controls_loop(mlx, img, scene);
+// 	}
+// 	else if (argc == 3)
+// 	{
+// 		// start = clock();
+// 		save_bmp(screenshot_datetime(), img->data, scene->resolution);
+// 		// end = clock();
+// 		// printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+// 	}
+// 	return (0);
+// }
+
+
 int		main(const int argc, const char *argv[])
 {
 	t_scene		*scene;
 	t_mlx		*mlx;
 	t_img		*img;
 	
-	clock_t start, end;
-	start = clock();
-	scene = get_scene(argc, argv);
-	end = clock();
-	printf("\nget_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	start = clock();
-	mlx = malloc_mlx_init();
-	end = clock();
-	printf("malloc_mlx_init:%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	start = clock();
-	img = init_img(mlx, &scene->resolution);
-	end = clock();
-	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	start = clock();
-	make_img(img, scene, scene->cameras->content);
-	end = clock();
-	printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	if (argc == 2)
+	while (argv && argv[1])
 	{
+		scene = get_scene(argc, argv);
+		mlx = malloc_mlx_init();
+		img = init_img(mlx, &scene->resolution);
+		make_img(img, scene, scene->cameras->content);
 		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, argv[1])))
-		print_err_and_exit("Minilibx error", MLX_ERROR);
-		start = clock();
+			print_err_and_exit("Minilibx error", MLX_ERROR);
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
-		end = clock();
-		printf("put_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-		get_controls_loop(mlx, img, scene);
+		// get_controls_loop(mlx, img, scene);
+		argv++;
 	}
-	else if (argc == 3)
-	{
-		start = clock();
-		save_bmp(screenshot_datetime(), img->data, scene->resolution);
-		end = clock();
-		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	}
+	get_controls_loop(mlx, img, scene);
+
 	return (0);
 }

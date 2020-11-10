@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 18:07:29 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/10 14:32:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <stdlib.h>
 # include <math.h>
 # include <errno.h>
-#include <time.h>
+# include <time.h>
 
 # include <unistd.h>
 
-# include "../libft/libft.h"
+# include "../lib/libft/libft.h"
 # include "mlxlinux.h"
 # include "mlx.h"
 # include "basics.h"
@@ -52,6 +52,7 @@
 #  define LEFT		65361
 #  define RIGHT		65363
 #  define KEY_S		115
+#  define KEY_Q		113
 # else
 #  define ESC		53
 #  define LEFT		123
