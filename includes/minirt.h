@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/10 14:32:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:14:48 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <unistd.h>
 
 # include "../lib/libft/libft.h"
-# include "mlxlinux.h"
 # include "mlx.h"
 # include "basics.h"
 # include "elements.h"
