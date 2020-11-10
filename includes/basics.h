@@ -6,14 +6,14 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/13 19:45:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/10 15:01:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BASICS_H
 # define BASICS_H
 
-# include "../libft/libft.h"
+# include "minirt.h"
 
 typedef struct		s_couple
 {
