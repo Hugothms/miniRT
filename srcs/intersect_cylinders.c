@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/10 14:44:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 17:08:08 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int intersect_disk(const t_ray ray, const t_disk disk, t_impact *impact)
 {
 	t_vect v;
-	float d2;
+	double d2;
 	t_plane plane;
 
 	plane.pos = disk.pos;
@@ -42,16 +42,16 @@ int intersect_cylinder2(const t_ray ray, const t_cylinder cylinder, t_impact *im
 	if (intersect_disk(ray, disk, impact))
 		return (1);
 
-	float a = ray.dir.x * ray.dir.x + ray.dir.z * ray.dir.z;
-	float b = 2 * (ray.pos.x * ray.dir.x + ray.pos.z * ray.dir.z);
-	float c = ray.pos.x * ray.pos.x + ray.pos.z * ray.pos.z - cylinder.radius2;
-	float discr = b * b - 4 * a * c;
+	double a = ray.dir.x * ray.dir.x + ray.dir.z * ray.dir.z;
+	double b = 2 * (ray.pos.x * ray.dir.x + ray.pos.z * ray.dir.z);
+	double c = ray.pos.x * ray.pos.x + ray.pos.z * ray.pos.z - cylinder.radius2;
+	double discr = b * b - 4 * a * c;
 	if (discr < 0)
 		return (0);
 
-	float x1 = (-b + sqrt(discr)) / (2 * a);
-	float x2 = (-b - sqrt(discr)) / (2 * a);
-	float t;
+	double x1 = (-b + sqrt(discr)) / (2 * a);
+	double x2 = (-b - sqrt(discr)) / (2 * a);
+	double t;
 	//choose the smallest and >=0 t
 	if (x1 > x2)
 		t = x2;
@@ -72,7 +72,7 @@ int intersect_cylinder2(const t_ray ray, const t_cylinder cylinder, t_impact *im
 	return (1);
 }
 
-float intersect_cylinder3(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+double intersect_cylinder3(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
 {
 	t_vect tmp;
 	t_vect tmp2;
@@ -110,21 +110,21 @@ float intersect_cylinder3(const t_ray ray, const t_cylinder cylinder, t_impact *
 	return (0);
 }
 
-float intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+double intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
 {
 	t_vect	W;
 	t_vect	Wn;
-	float	w2;
-	float	a;
+	double	w2;
+	double	a;
 	t_vect	L;
 	t_vect	D;
-	float	d2;
-	float	R;
+	double	d2;
+	double	R;
 	t_vect	E;
-	float	t;
+	double	t;
 	t_vect	F;
 	t_vect	Fn;
-	float	s;
+	double	s;
 	
 	L = sub_vect(ray.pos, cylinder.pos);
 	W = cross_product(ray.dir, cylinder.dir);
@@ -162,17 +162,20 @@ float intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *i
 	return (0);
 }
 
+double		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact);
+
 void ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
 	t_list *cylinders;
 	t_cylinder *cylinder;
-	float tmp;
+	double tmp;
 
 	cylinders = scene->cylinders;
 	while (cylinders->next)
 	{
 		cylinder = (t_cylinder *)(cylinders->content);
-		if (tmp = intersect_cylinder(ray, *cylinder, impact))
+		// if (tmp = intersect_cylinder(ray, *cylinder, impact))
+		if (tmp = cylinder_intersection(ray, *cylinder, impact))
 		{
 			*object = cylinder;
 			impact->dist = tmp;
@@ -184,3 +187,172 @@ void ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void
 		cylinders = cylinders->next;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+double			solve_plane(t_vect o, t_vect d, t_vect plane_p, t_vect plane_nv)
+{
+	double	x;
+	double	denom;
+
+	denom = dot_product(plane_nv, d);
+	if (denom == 0)
+		return (INFINITY);
+	x = (dot_product(plane_nv, sub_vect(plane_p, o))) / denom;
+	return (x > 0 ? x : INFINITY);
+}
+
+static double	caps_intersection(t_ray ray, const t_cylinder cylinder, t_impact *impact)
+{
+	double	id1;
+	double	id2;
+	t_vect	ip1;
+	t_vect	ip2;
+	t_vect	c2;
+
+	c2 = add_vect(cylinder.pos, multi_vect(cylinder.dir, cylinder.height));
+	id1 = solve_plane(ray.pos, ray.dir, cylinder.pos, cylinder.dir);
+	id2 = solve_plane(ray.pos, ray.dir, c2, cylinder.dir);
+	if (id1 < INFINITY || id2 < INFINITY)
+	{
+		ip1 = add_vect(ray.pos, multi_vect(ray.dir, id1));
+		ip2 = add_vect(ray.pos, multi_vect(ray.dir, id2));
+		if ((id1 < INFINITY && distance(ip1, cylinder.pos) <= cylinder.radius2) && (id2 < INFINITY && distance(ip2, c2) <= cylinder.radius2))
+			return (id1 < id2 ? id1 : id2);
+		else if (id1 < INFINITY && distance(ip1, cylinder.pos) <= cylinder.radius2)
+			return (id1);
+		else if (id2 < INFINITY && distance(ip2, c2) <= cylinder.radius2)
+			return (id2);
+		return (INFINITY);
+	}
+	return (INFINITY);
+}
+
+static int		solve_cylinder(double x[2], t_ray ray, const t_cylinder cylinder)
+{
+	t_vect	v;
+	t_vect	u;
+	double	a;
+	double	b;
+	double	c;
+
+	v = multi_vect(cylinder.dir, dot_product(ray.dir, cylinder.dir));
+	v = sub_vect(ray.dir, v);
+	u = multi_vect(cylinder.dir, dot_product(sub_vect(ray.pos, cylinder.pos), cylinder.dir));
+	u = sub_vect(sub_vect(ray.pos, cylinder.pos), u);
+	a = dot_product(v, v);
+	b = 2 * dot_product(v, u);
+	c = dot_product(u, u) - pow(cylinder.radius2, 2);
+	x[0] = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+	x[1] = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+	if ((x[0] != x[0] && x[1] != x[1]) || (x[0] < EPSILON && x[1] < EPSILON))
+	{
+		x[0] = INFINITY;
+		x[1] = INFINITY;
+		return (0);
+	}
+	return (1);
+}
+
+static t_vect		calc_cy_normal(double x2[2], t_ray ray, const t_cylinder cylinder, double dist1, double dist2)
+{
+	double	dist;
+	double	x;
+
+	if ((dist1 >= 0 && dist1 <= cylinder.height && x2[0] > EPSILON) && (dist2 >= 0 && dist2 <= cylinder.height && x2[1] > EPSILON))
+	{
+		dist = x2[0] < x2[1] ? dist1 : dist2;
+		x = x2[0] < x2[1] ? x2[0] : x2[1];
+	}
+	else if (dist1 >= 0 && dist1 <= cylinder.height && x2[0] > EPSILON)
+	{
+		dist = dist1;
+		x = x2[0];
+	}
+	else
+	{
+		dist = dist2;
+		x = x2[1];
+	}
+	x2[0] = x;
+	return (normalize(sub_vect(sub_vect(multi_vect(ray.dir, x),	multi_vect(cylinder.dir, dist)), sub_vect(cylinder.pos, ray.pos))));
+}
+
+static double	cy_intersection(t_ray ray, const t_cylinder cylinder, t_impact *impact)
+{
+	double	x2[2];
+
+	if (solve_cylinder(x2, ray, cylinder) == 0)
+		return (INFINITY);
+	double dist1 = dot_product(cylinder.dir, sub_vect(multi_vect(ray.dir, x2[0]), sub_vect(cylinder.pos, ray.pos)));
+	double dist2 = dot_product(cylinder.dir, sub_vect(multi_vect(ray.dir, x2[1]), sub_vect(cylinder.pos, ray.pos)));
+	if (!((dist1 >= 0 && dist1 <= cylinder.height && x2[0] > EPSILON) || (dist2 >= 0 && dist2 <= cylinder.height && x2[0] > EPSILON)))
+		return (INFINITY);
+	impact->pos = calc_cy_normal(x2, ray, cylinder, dist1, dist2);
+	impact->normal = sub_vect(cylinder.pos, impact->pos);
+	return (x2[0]);
+}
+
+
+double		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+{
+	double	cylinder_inter;
+	double	caps_inter;
+
+	cylinder_inter = cy_intersection(ray, cylinder, impact);
+	// if (cylinder->texture == 4)
+	// 	caps_inter = INFINITY;
+	// else
+		caps_inter = caps_intersection(ray, cylinder, impact);
+	// caps_inter = INFINITY;
+	if (cylinder_inter < INFINITY || caps_inter < INFINITY)
+	{
+		if (cylinder_inter < caps_inter)
+		{
+			impact->dist = cylinder_inter;
+			// impact->pos = NULL;
+			return (1);
+		}
+		impact->dist = caps_inter;
+		// impact->pos = NULL;
+		return (1);
+	}
+	return (0);
+}
+
+
+
+
+
+
+
+
+
+
