@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/14 18:38:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ char	*screenshot_datetime()
 	return (*res);
 }
 
-int		solve_quadratic(const t_vect point, float *x0, float *x1)
+int		solve_quadratic(const t_vect point, double *x0, double *x1)
 {
-	float	discr;
-	float	q;
+	double	discr;
+	double	q;
 
 	discr = point.y * point.y - 4 * point.x * point.z;
 	if (discr < 0)

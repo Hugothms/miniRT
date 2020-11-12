@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/16 22:25:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct		s_ambient_light
 {
-	float			ratio;
+	double			ratio;
 	t_rgb			color;
 }					t_ambient_light;
 
@@ -26,22 +26,22 @@ typedef struct		s_camera
 	t_vect			pos;
 	t_vect			orientation;
 	t_vect			up;
-	float			fov;
+	double			fov;
 }					t_camera;
 
 typedef struct		s_light
 {
 	t_vect			pos;
-	float			ratio;
+	double			ratio;
 	t_rgb			color;
 }					t_light;
 
 typedef struct		s_sphere
 {
 	t_vect			pos;
-	float			radius2;
+	double			radius2;
 	t_rgb			color;
-	float			reflec;
+	double			reflec;
 }					t_sphere;
 
 typedef struct		s_plane
@@ -55,7 +55,7 @@ typedef struct		s_square
 {
 	t_vect			pos;
 	t_vect			normal;
-	float			height;
+	double			height;
 	t_vect			p1;
 	t_vect			p2;
 	t_vect			p3;
@@ -68,8 +68,8 @@ typedef struct		s_cylinder
 	t_vect			pos;
 	t_vect			pos2;
 	t_vect			dir;
-	float			radius2;
-	float			height;
+	double			radius2;
+	double			height;
 	t_rgb			color;
 }					t_cylinder;
 
@@ -77,7 +77,7 @@ typedef struct		s_disk
 {
 	t_vect			pos;
 	t_vect			normal;
-	float			radius2;
+	double			radius2;
 	t_rgb			color;
 }					t_disk;
 

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/16 22:18:02 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ int		intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *im
 	t_vect v0v1 = sub_vect(triangle.v1, triangle.v0);
 	t_vect v0v2 = sub_vect(triangle.v2, triangle.v0);
 	t_vect pvec = cross_product(ray.dir, v0v2);
-	float det = dot_product(v0v1, pvec);
+	double det = dot_product(v0v1, pvec);
 	if (fabs(det) < EPSILON)
 		return 0;
-	float invDet = 1 / det;
+	double invDet = 1 / det;
 
 	t_vect tvec = sub_vect(ray.pos, triangle.v0);
-	float u = dot_product(tvec, pvec) * invDet;
+	double u = dot_product(tvec, pvec) * invDet;
 	if (u < 0 || u > 1)
 		return 0;
 
 	t_vect qvec = cross_product(tvec, v0v1);
-	float v = dot_product(ray.dir, qvec) * invDet;
+	double v = dot_product(ray.dir, qvec) * invDet;
 	if (v < 0 || u + v > 1)
 		return 0;
 
-	float t = dot_product(v0v2, qvec) * invDet;
+	double t = dot_product(v0v2, qvec) * invDet;
 
 	return 1;
 	/*
@@ -41,17 +41,17 @@ int		intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *im
 	Vec3f v0v2 = v2 - v0;
 	// no need to normalize
 	Vec3f N = cross_product(v0v1, v0v2); // N
-	float denom = dot_product(N, N);
+	double denom = dot_product(N, N);
 
 	// Step 1: finding P
 
 	// check if ray and plane are parallel ?
-	float NdotRayray.Direction = dot_product(N, ray.dir);
+	double NdotRayray.Direction = dot_product(N, ray.dir);
 	if (fabs(NdotRayray.Direction) < EPSILON) // almost 0
 		return false; // they are parallel so they don't intersect !
 
 	// compute d parameter using equation 2
-	float d = dot_product(N, v0);
+	double d = dot_product(N, v0);
 
 	// compute t (equation 3)
 	t = (dot_product(N, ray.pos) + d) / NdotRayray.Direction;

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/16 22:27:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		set_sphere(t_scene *scene, char **strs)
 {
 	t_sphere	*sphere;
-	float		radius;
+	double		radius;
 
 	if (!(sphere = malloc(sizeof(*sphere))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
@@ -44,7 +44,7 @@ void		set_plane(t_scene *scene, char **strs)
 void		set_cylinder(t_scene *scene, char **strs)
 {
 	t_cylinder	*cy;
-	float		radius;
+	double		radius;
 
 	if (!(cy = malloc(sizeof(*cy))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);

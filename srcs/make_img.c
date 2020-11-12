@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/23 16:24:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 17:04:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,17 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_cou
 		}
 		if (impact_obstacle->dist > distance(impact->pos, light->pos) )
 		{
-			float normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
-			color_l = *add_rgb_rgb(*mult_rgb_float(light->color, normal_dot_light), color_l);
-			diffuse = *mult_rgb_float(*add_rgb_rgb(diffuse, color_l), ALBEDO);
+			double normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
+			color_l = *add_rgb_rgb(*mult_rgb_double(light->color, normal_dot_light), color_l);
+			diffuse = *mult_rgb_double(*add_rgb_rgb(diffuse, color_l), ALBEDO);
 			//add_vect(to_light.dir, multi_vect(impact->normal, -2. * normal_dot_light));
 		}
 		lights = lights->next;
 	}
-	*color = *mult_rgb_rgb(*add_rgb_rgb(scene->al.color, diffuse), *color);
-	//*color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la shpere
-	//*color = *int_to_rgb((fabsf(to_light.pos.z)) * 2, (fabsf(to_light.pos.x)) * 2, (fabsf(to_light.pos.y)) * 2); // color en gradient en fonction de la normale a la shpere
+	// *color = *mult_rgb_rgb(*add_rgb_rgb(scene->al.color, diffuse), *color);
+	*color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la surface
+	// *color = *int_to_rgb((fabsf(impact->pos.z)) * 255, (fabsf(impact->pos.x)) * 255, (fabsf(impact->pos.y)) * 255); // color en gradient en fonction de la position a la surface
+	// *color = *int_to_rgb((fabsf(to_light.pos.z)) * 2, (fabsf(to_light.pos.x)) * 2, (fabsf(to_light.pos.y)) * 2); // color en gradient en fonction de la normale a la surface
 	min_rgb(color);
 	return (NULL);
 }
@@ -112,7 +113,7 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 {
 	t_couple	pixel;
 	t_ray		ray;
-	float		reflec;
+	double		reflec;
 	int			depth;
 	t_rgb		*color;
 	void		*object;
