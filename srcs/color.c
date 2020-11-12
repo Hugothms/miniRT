@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/13 19:45:00 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_rgb	*mult_rgb_rgb(t_rgb rgb, t_rgb mult)
 	return (int_to_rgb(rgb.r * (mult.r / 255.), rgb.g * (mult.g / 255.), rgb.b * (mult.b / 255.)));
 }
 
-t_rgb	*mult_rgb_float(t_rgb rgb, float mult)
+t_rgb	*mult_rgb_double(t_rgb rgb, double mult)
 {
 	return (int_to_rgb(rgb.r * mult, rgb.g * mult, rgb.b * mult));
 }

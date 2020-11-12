@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/16 22:16:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-float	orient(t_vect a, t_vect b, t_vect c, t_vect n)
+double	orient(t_vect a, t_vect b, t_vect c, t_vect n)
 {	
 	t_vect	ba;
 	t_vect	ca;
@@ -28,10 +28,10 @@ float	orient(t_vect a, t_vect b, t_vect c, t_vect n)
 
 int		intersect_square(const t_ray ray, const t_square square, t_impact *impact)
 {
-	float		o1;
-	float		o2;
-	float		o3;
-	float		o4;
+	double		o1;
+	double		o2;
+	double		o3;
+	double		o4;
 	t_impact	*impact_plane;
 	t_plane		plane;
 	

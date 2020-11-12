@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/16 22:16:19 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 13:05:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  **/
 int		intersect_sphere(const t_ray ray, const t_sphere sphere, t_impact *impact)
 {
-	float	x0;
-	float	x1;
+	double	x0;
+	double	x1;
 	t_vect	vect;
 
 	vect = new_vect(ray.pos.x - sphere.pos.x, ray.pos.y - sphere.pos.y, ray.pos.z - sphere.pos.z);

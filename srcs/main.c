@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/10 15:37:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/11/12 15:51:14 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		key_function(const int keycode, const t_window *w)
 {
 	clock_t start, end;
 	printf("%i\n", keycode);
-	printf("%i\n", ESC);
 	if (keycode == ESC)
 		close_function(w);
 	else if (keycode == LEFT)
@@ -141,6 +140,7 @@ int		main(const int argc, const char *argv[])
 	t_scene		*scene;
 	t_mlx		*mlx;
 	t_img		*img;
+	char		*title;
 	
 	while (argv && argv[1])
 	{
@@ -148,9 +148,11 @@ int		main(const int argc, const char *argv[])
 		mlx = malloc_mlx_init();
 		img = init_img(mlx, &scene->resolution);
 		make_img(img, scene, scene->cameras->content);
-		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, argv[1])))
+		title = ft_strjoin("miniRT - ", argv[1]);
+		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, title)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
+		free(title);
 		// get_controls_loop(mlx, img, scene);
 		argv++;
 	}
