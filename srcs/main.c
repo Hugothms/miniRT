@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 15:51:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/02/22 09:44:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ t_img	*init_img(t_mlx *mlx, t_couple *resolution)
 
 	if (!(img = malloc(sizeof(*img))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
+	w = 1080;
+	h = 720;
+	// mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
 	if (w < resolution->w)
 		resolution->w = w;
 	if (h < resolution->h)
