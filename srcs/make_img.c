@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 17:04:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/02/22 09:51:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_cou
 		}
 		lights = lights->next;
 	}
-	// *color = *mult_rgb_rgb(*add_rgb_rgb(scene->al.color, diffuse), *color);
-	*color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la surface
+	*color = *mult_rgb_rgb(*add_rgb_rgb(scene->al.color, diffuse), *color); // real color
+	// *color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la surface
 	// *color = *int_to_rgb((fabsf(impact->pos.z)) * 255, (fabsf(impact->pos.x)) * 255, (fabsf(impact->pos.y)) * 255); // color en gradient en fonction de la position a la surface
 	// *color = *int_to_rgb((fabsf(to_light.pos.z)) * 2, (fabsf(to_light.pos.x)) * 2, (fabsf(to_light.pos.y)) * 2); // color en gradient en fonction de la normale a la surface
 	min_rgb(color);
