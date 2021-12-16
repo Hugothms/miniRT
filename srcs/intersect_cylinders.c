@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 17:08:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/13 16:42:25 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ double intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *
 	t_vect	F;
 	t_vect	Fn;
 	double	s;
-	
+
 	L = sub_vect(ray.pos, cylinder.pos);
 	W = cross_product(ray.dir, cylinder.dir);
 	w2 = dot_product(W,W);
@@ -175,7 +175,7 @@ void ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void
 	{
 		cylinder = (t_cylinder *)(cylinders->content);
 		// if (tmp = intersect_cylinder(ray, *cylinder, impact))
-		if (tmp = cylinder_intersection(ray, *cylinder, impact))
+		if (tmp == cylinder_intersection(ray, *cylinder, impact))
 		{
 			*object = cylinder;
 			impact->dist = tmp;

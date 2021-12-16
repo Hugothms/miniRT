@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/13 20:44:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,24 @@ void	ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **
 		planes = planes->next;
 	}
 }
+
+// int		ft_rt_vect_ray_pl(t_ray *r, t_plane *pl, t_vect *inter)
+// {
+// 	t_vect	trdir;
+// 	double		ps;
+
+// 	inter->denom = ft_vec_mul(&pl->v, &r->dir);
+// 	if (fabs(inter->denom) > 1E-6)
+// 	{
+// 		ft_vec_s(&inter->polo, &pl->u, &r->orig);
+// 		inter->t = ft_vec_mul(&inter->polo, &pl->v) / inter->denom;
+// 		ft_vec_ms(&trdir, &r->dir, inter->t);
+// 		ft_vec_a(&inter->p, &r->orig, &trdir);
+// 		inter->n = pl->v;
+// 		ps = ft_vec_mul(&r->dir, &inter->n);
+// 		if (ps > 1E-6)
+// 			ft_vec_ms(&inter->n, &inter->n, -1.0);
+// 		return (inter->t >= 0);
+// 	}
+// 	return (0);
+// }
