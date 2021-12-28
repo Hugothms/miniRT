@@ -9,7 +9,7 @@ First clone the repository and the git submodules:
     
 Then make and run the executable:
 
-    make && ./miniTR scenes/test.rt
+    make && ./miniRT scenes/test.rt
     
 Or, you can make and run more conveniently:
 
