@@ -1,0 +1,5 @@
+[submodule "lib/libft"]
+	path = lib/libft
+	url = git@github.com:Hugothms/libft.git
+	branch = master
+	update = merge
