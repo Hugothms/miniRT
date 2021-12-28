@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/10 14:00:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/28 15:56:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_scene		*parse(int fd)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(init_scene(scene)))
 		return (NULL);
-	while ((ret = get_next_line(fd, &line)) == 1)
+	while ((ret = get_next_line(&line, fd)) == 1)
 	{
 		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
 		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && !scene->resolution.w)
