@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 15:32:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 16:06:02 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 
 /**
  * set la color en fonction des lumieres, de la normale du point d'impact et des eventuels obstacles
+ * @param color	real color
  **/
 t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_couple	pixel)
 {
@@ -73,7 +74,6 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_cou
 	t_rgb		specular;
 
 	diffuse = *int_to_rgb(0, 0, 0);
-	t_rgb color_l = *int_to_rgb(0, 0, 0);
 	lights = scene->lights;
 	while (lights->next)
 	{
@@ -95,16 +95,17 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_cou
 		if (impact_obstacle->dist > distance(impact->pos, light->pos) )
 		{
 			double normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
-			color_l = *add_rgb_rgb(*mult_rgb_double(light->color, normal_dot_light), color_l);
-			diffuse = *mult_rgb_double(*add_rgb_rgb(diffuse, color_l), ALBEDO);
+			t_rgb color_l = *mult_rgb_double(light->color, normal_dot_light);
+			diffuse = *add_rgb_rgb(diffuse, color_l);
 			//add_vect(to_light.dir, multi_vect(impact->normal, -2. * normal_dot_light));
 		}
 		lights = lights->next;
 	}
-	*color = *mult_rgb_rgb(*add_rgb_rgb(scene->al.color, diffuse), *color); // real color
+	diffuse = *mult_rgb_double(diffuse, ALBEDO);
+	*color = *mult_rgb_rgb(*add_rgb_rgb(scene->al.color, diffuse), *color);
 	// *color = *int_to_rgb((fabsf(impact->normal.z)) * 255, (fabsf(impact->normal.x)) * 255, (fabsf(impact->normal.y)) * 255); // color en gradient en fonction de la normale a la surface
 	// *color = *int_to_rgb((fabsf(impact->pos.z)) * 255, (fabsf(impact->pos.x)) * 255, (fabsf(impact->pos.y)) * 255); // color en gradient en fonction de la position a la surface
-	// *color = *int_to_rgb((fabsf(to_light.pos.z)) * 2, (fabsf(to_light.pos.x)) * 2, (fabsf(to_light.pos.y)) * 2); // color en gradient en fonction de la normale a la surface
+	// *color = *int_to_rgb((fabsf(to_light.pos.z)) * 2, (fabsf(to_light.pos.x)) * 2, (fabsf(to_light.pos.y)) * 2); // color en gradient en fonction de la position de la source lumineuse
 	min_rgb(color);
 	return (NULL);
 }
@@ -115,7 +116,7 @@ void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 	t_ray		ray;
 	double		reflec;
 	int			depth;
-	t_rgb		*color;
+	t_rgb		*color; // real color
 	void		*object;
 	t_impact	*impact;
 
