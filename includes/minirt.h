@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 15:49:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 19:58:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void			make_img(t_img *img, const t_scene *scene, const t_camera *camera);
 void			save_bmp(const char *filename, const unsigned char *pixels, const t_couple resolution);
 void			ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution);
 char			*screenshot_datetime();
-t_scene			*get_scene(const int argc, const char *argv[]);
+t_scene			*get_scene(const int argc, char *argv[]);
 
 void			print_err_and_exit(const char *str, const int err);
 

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 15:48:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:30:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,18 @@ t_scene		*parse(int fd)
 	return (scene);
 }
 
-t_scene		*get_scene(const int argc, const char *argv[])
+t_scene		*get_scene(const int argc, char *argv[])
 {
 	int			fd;
 	t_scene		*scene;
 
-	if (argc < 2 || argc > 3)
-		print_err_and_exit("Wrong number of argument", 1);
+	if (argc < 2)
+		print_err_and_exit("Error: expecting a '.rt'file", 1);
+	if (argc > 3)
+		print_err_and_exit("Error: expecting a 2 arguments maximum", 1);
 	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
 		print_err_and_exit("First argument must be a '.rt' file", 1);
-	if (argc == 3 && ft_strcmp(argv[2], "-save"))
+	if (argc == 3 && ft_strcmp(argv[3], "-save"))
 		print_err_and_exit("Second argument must be '-save'", 1);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		print_err_and_exit(strerror(errno), errno);

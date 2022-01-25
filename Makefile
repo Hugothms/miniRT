@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2022/01/25 14:37:05 by hthomas          ###   ########.fr        #
+#    Updated: 2022/01/25 20:30:07 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJS	= ${SRCS:.c=.o}
 CC		= gcc -g
 RM		= rm -f
 
-CFLAGS	= -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS)#-Wall -Wextra -Werror
+CFLAGS	= -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS) -Wall -Wextra -fsanitize=address -g3#-Werror -Ofast
 FLAGS = -L $(LIB)libft -lft#-L $(LIB)libvector -lvct
 
 MACOS_MACRO = -D MACOS

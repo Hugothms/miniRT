@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 15:49:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:07:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ char	*screenshot_datetime()
 
 	t = time(NULL);
 	tm = *localtime(&t);
+	size_t name_length = 11;
 	*res = ft_strdup("Screenshot YYYY-MM-DD hh:mm:ss.bmp");
-	ft_memcpy(*res + 11, ft_itoa_width(tm.tm_year + 1900, 4), 4);
-	ft_memcpy(*res + 16, ft_itoa_width(tm.tm_mon + 1, 2), 2);
-	ft_memcpy(*res + 19, ft_itoa_width(tm.tm_mday, 2), 2);
-	ft_memcpy(*res + 22, ft_itoa_width(tm.tm_hour, 2), 2);
-	ft_memcpy(*res + 25, ft_itoa_width(tm.tm_min, 2), 2);
-	ft_memcpy(*res + 28, ft_itoa_width(tm.tm_sec, 2), 2);
+	ft_memcpy(*res + name_length, ft_itoa_width(tm.tm_year + 1900, 4), 4);
+	ft_memcpy(*res + name_length + (size_t) 5, ft_itoa_width(tm.tm_mon + 1, 2), 2);
+	ft_memcpy(*res + name_length + (size_t) 8, ft_itoa_width(tm.tm_mday, 2), 2);
+	ft_memcpy(*res + name_length + (size_t) 11, ft_itoa_width(tm.tm_hour, 2), 2);
+	ft_memcpy(*res + name_length + (size_t) 14, ft_itoa_width(tm.tm_min, 2), 2);
+	ft_memcpy(*res + name_length + (size_t) 17, ft_itoa_width(tm.tm_sec, 2), 2);
 	return (*res);
 }
 
