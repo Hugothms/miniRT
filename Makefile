@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2021/02/22 09:55:59 by hthomas          ###   ########.fr        #
+#    Updated: 2022/01/25 14:37:05 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ compilelibmlx :
 	make -C $(LIB)libmlx all
 
 %.o: %.c $(HEAD)
-	$(CC) -c -I$(HEAD) -o $@ $<
+	$(CC) -c -I $(HEAD) -o $@ $<
 
 all:		${NAME}
 
@@ -193,12 +193,24 @@ re:			fclean all
 # ###########################
 
 
-test: $(NAME)
+run: $(NAME)
 	./$< scenes/test.rt
 
-test_save: $(NAME)
+run_save: $(NAME)
 	./$< scenes/test.rt -save
 
+run_all: $(NAME)
+	./$< scenes/90spheres.rt &
+	./$< scenes/circle.rt &
+	./$< scenes/cylinder.rt &
+	./$< scenes/default.rt &
+	./$< scenes/example.rt &
+	./$< scenes/gradient.rt &
+	./$< scenes/mollecules.rt &
+	./$< scenes/peach.rt &
+	./$< scenes/square.rt &
+	./$< scenes/triangle.rt &
+	./$< scenes/test.rt
 
 
 # gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt -save
