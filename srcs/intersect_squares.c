@@ -6,27 +6,27 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:36:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
 double	orient(t_vect a, t_vect b, t_vect c, t_vect n)
-{	
+{
 	t_vect	ba;
 	t_vect	ca;
 	t_vect	normal;
 	t_vect	origin;
-	
-	ba = sub_vect(b, a), 
+
+	ba = sub_vect(b, a),
 	ca = sub_vect(c, a);
 	origin = new_vect(0, 0, 0);
 	normal = new_vect(ba.y * ca.z - ba.z * ca.y, ba.x * ca.z - ba.z * ca.x, ba.y * ca.x - ba.x * ca.y);
 	return (dot_product(multi_vect(normal, distance(origin, cross_product(ba, ca))), n));
 }
 
-int		intersect_square(const t_ray ray, const t_square square, t_impact *impact)
+int	intersect_square(const t_ray ray, const t_square square, t_impact *impact)
 {
 	double		o1;
 	double		o2;
@@ -34,7 +34,7 @@ int		intersect_square(const t_ray ray, const t_square square, t_impact *impact)
 	double		o4;
 	t_impact	*impact_plane;
 	t_plane		plane;
-	
+
 	plane.pos = square.pos;
 	plane.normal = square.normal;
 	intersect_plane(ray, plane, impact_plane);

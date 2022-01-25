@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 16:06:02 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:36:36 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void		ft_put_pixel(unsigned char *data, const t_couple pixel, const int color, const t_couple resolution)
+void	ft_put_pixel(unsigned char *data, const t_couple pixel, const int color, const t_couple resolution)
 {
 	int	(*tab)[resolution.w][1]; // prepare the cast
 
@@ -23,7 +23,7 @@ void		ft_put_pixel(unsigned char *data, const t_couple pixel, const int color, c
 /**
  * cree un ray depuis la posision de la camera qui passe par le pixel demandé en prenant en compre la resolution de l'image et l'angle de vision de la camera
  **/
-t_ray		generate_ray(const t_camera *camera, const t_couple resolution, t_couple pixel)
+t_ray	generate_ray(const t_camera *camera, const t_couple resolution, t_couple pixel)
 {
 	t_vect vect_dir;
 	vect_dir = set_vect_dir_cam(camera, resolution, pixel.h, pixel.w);
@@ -63,7 +63,7 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
  * set la color en fonction des lumieres, de la normale du point d'impact et des eventuels obstacles
  * @param color	real color
  **/
-t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_couple	pixel)
+t_rgb	*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_couple	pixel)
 {
 	t_list		*lights;
 	t_light		*light;
@@ -110,7 +110,7 @@ t_rgb		*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_cou
 	return (NULL);
 }
 
-void		make_img(t_img *img, const t_scene *scene, const t_camera *camera)
+void	make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 {
 	t_couple	pixel;
 	t_ray		ray;

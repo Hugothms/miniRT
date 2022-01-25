@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 15:33:22 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:41:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_vect		set_vect(const char *x, const char *y, const char *z)
+t_vect	set_vect(const char *x, const char *y, const char *z)
 {
 	t_vect	vect;
 
@@ -22,7 +22,7 @@ t_vect		set_vect(const char *x, const char *y, const char *z)
 	return (vect);
 }
 
-t_vect		str_to_vect(const char *str)
+t_vect	str_to_vect(const char *str)
 {
 	char	**tab;
 
@@ -30,7 +30,7 @@ t_vect		str_to_vect(const char *str)
 	return (set_vect(tab[0], tab[1], tab[2]));
 }
 
-t_rgb		str_to_rgb(const char *str)
+t_rgb	str_to_rgb(const char *str)
 {
 	char	**tab;
 
@@ -43,7 +43,7 @@ double	to_rad(const double angle)
 	return (angle * M_PI * 0.5);
 }
 
-t_ray		new_ray(const t_vect position, const t_vect direction)
+t_ray	new_ray(const t_vect position, const t_vect direction)
 {
 	t_ray	ray;
 
@@ -53,7 +53,7 @@ t_ray		new_ray(const t_vect position, const t_vect direction)
 	return (ray);
 }
 
-t_vect		set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j)
+t_vect	set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j)
 {
 	t_vect	vect_dir;
 	double	a;

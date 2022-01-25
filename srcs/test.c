@@ -1,5 +1,5 @@
 #include "../includes/minirt.h"
-#include "../libft/libft.h"
+#include "../lib/libft/includes/libft.h"
 
 void hexDump(char *desc, void *addr, int len)
 {

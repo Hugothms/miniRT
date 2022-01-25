@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:30:43 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:35:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void		*init_scene(t_scene *scene)
+void *init_scene(t_scene *scene)
 {
 	scene->resolution.w = 0;
 	scene->resolution.h = 0;
@@ -33,7 +33,7 @@ void		*init_scene(t_scene *scene)
 	return (scene);
 }
 
-int			check_line(const char *line, char **data, const char *type, const int nb_elements)
+int	check_line(const char *line, char **data, const char *type, const int nb_elements)
 {
 	if (!ft_strcmp(data[0], type))
 	{
@@ -43,7 +43,7 @@ int			check_line(const char *line, char **data, const char *type, const int nb_e
 	return (0);
 }
 
-t_scene		*parse(int fd)
+t_scene	*parse(int fd)
 {
 	t_scene	*scene;
 	char	*line;
@@ -87,7 +87,7 @@ t_scene		*parse(int fd)
 	return (scene);
 }
 
-t_scene		*get_scene(const int argc, char *argv[])
+t_scene	*get_scene(const int argc, char *argv[])
 {
 	int			fd;
 	t_scene		*scene;

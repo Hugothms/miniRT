@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:34:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:36:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int		close_function(const t_window *w)
+int	close_function(const t_window *w)
 {
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
@@ -20,7 +20,7 @@ int		close_function(const t_window *w)
 	exit(0);
 }
 
-int		key_function(const int keycode, const t_window *w)
+int	key_function(const int keycode, const t_window *w)
 {
 	clock_t start, end;
 	printf("%i\n", keycode);
@@ -93,7 +93,7 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	mlx_loop(mlx->mlx_ptr);
 }
 
-int		main(const int argc, char *argv[])
+int	main(const int argc, char *argv[])
 {
 	t_scene		*scene;
 	t_mlx		*mlx;

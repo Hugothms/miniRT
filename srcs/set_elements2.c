@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 15:27:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:37:14 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void		set_sphere(t_scene *scene, char **strs)
+void	set_sphere(t_scene *scene, char **strs)
 {
 	t_sphere	*sphere;
 	double		radius;
@@ -29,7 +29,7 @@ void		set_sphere(t_scene *scene, char **strs)
 	ft_lstadd_front(&(scene->spheres), ft_lstnew(sphere));
 }
 
-void		set_plane(t_scene *scene, char **strs)
+void	set_plane(t_scene *scene, char **strs)
 {
 	t_plane		*plane;
 
@@ -41,7 +41,7 @@ void		set_plane(t_scene *scene, char **strs)
 	ft_lstadd_front(&(scene->planes), ft_lstnew(plane));
 }
 
-void		set_cylinder(t_scene *scene, char **strs)
+void	set_cylinder(t_scene *scene, char **strs)
 {
 	t_cylinder	*cy;
 	double		radius;
@@ -58,7 +58,7 @@ void		set_cylinder(t_scene *scene, char **strs)
 	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cy));
 }
 
-void		set_square_points(t_scene *scene, t_square *square)
+void	set_square_points(t_scene *scene, t_square *square)
 {
 	t_camera	camera;
 
@@ -72,7 +72,7 @@ void		set_square_points(t_scene *scene, t_square *square)
 	// square->p4 = new_vect(1, -1, 4);
 }
 
-void		set_square(t_scene *scene, char **strs)
+void	set_square(t_scene *scene, char **strs)
 {
 	t_square	*square;
 
@@ -86,7 +86,7 @@ void		set_square(t_scene *scene, char **strs)
 	ft_lstadd_front(&(scene->squares), ft_lstnew(square));
 }
 
-void		set_triangle(t_scene *scene, char **strs)
+void	set_triangle(t_scene *scene, char **strs)
 {
 	t_triangle	*triangle;
 

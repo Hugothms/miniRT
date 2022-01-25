@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 13:49:41 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:39:17 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_vect		new_vect(const double x, const double y, const double z)
+t_vect	new_vect(const double x, const double y, const double z)
 {
 	t_vect	new;
 
@@ -27,7 +27,7 @@ double	distance(const t_vect p1, const t_vect p2)
 	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
 }
 
-t_vect		normalize(const t_vect vect)
+t_vect	normalize(const t_vect vect)
 {
 	double	length;
 
@@ -35,7 +35,7 @@ t_vect		normalize(const t_vect vect)
 	return (new_vect(vect.x / length, vect.y / length, vect.z / length));
 }
 
-t_vect		mult_mat(const double mat[3][3], const t_vect vect)
+t_vect	mult_mat(const double mat[3][3], const t_vect vect)
 {
 	double	x;
 	double	y;
@@ -49,7 +49,7 @@ t_vect		mult_mat(const double mat[3][3], const t_vect vect)
 	return (res);
 }
 
-t_vect		rot_vect(const t_vect vect, const double angle, const char axe)
+t_vect	rot_vect(const t_vect vect, const double angle, const char axe)
 {
 	double	alpha;
 
@@ -63,32 +63,32 @@ t_vect		rot_vect(const t_vect vect, const double angle, const char axe)
 	return (new_vect(0, 0, 0));
 }
 
-t_vect		add_vect(const t_vect vect1, const t_vect vect2)
+t_vect	add_vect(const t_vect vect1, const t_vect vect2)
 {
 	return (new_vect(vect1.x + vect2.x, vect1.y + vect2.y, vect1.z + vect2.z));
 }
 
-t_vect		sub_vect(const t_vect vect1, const t_vect vect2)
+t_vect	sub_vect(const t_vect vect1, const t_vect vect2)
 {
 	return (new_vect(vect1.x - vect2.x, vect1.y - vect2.y, vect1.z - vect2.z));
 }
 
-t_vect		minus_vect(const t_vect vect)
+t_vect	minus_vect(const t_vect vect)
 {
 	return (new_vect(-vect.x, -vect.y, -vect.z));
 }
 
-t_vect		multi_vect(const t_vect vect, const double x)
+t_vect	multi_vect(const t_vect vect, const double x)
 {
 	return (new_vect(vect.x * x, vect.y * x, vect.z * x));
 }
 
-double		dot_product(const t_vect vect1, const t_vect vect2)
+double	dot_product(const t_vect vect1, const t_vect vect2)
 {
 	return (vect1.x * vect2.x + vect1.y * vect2.y + vect1.z *vect2.z);
 }
 
-t_vect		cross_product(const t_vect v1, const t_vect v2)
+t_vect	cross_product(const t_vect v1, const t_vect v2)
 {
 	t_vect	origin;
 	t_vect	normal;
