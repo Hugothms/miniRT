@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2021/02/22 09:45:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:49:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # define PARSE_ERROR -3
 # define MLX_ERROR -4
 # define MALLOC_ERROR -5
-
 
 # define REFLEC 1
 # define DEPTH 1
@@ -115,23 +114,23 @@ void			set_square(t_scene *scene, char **strs);
 void			set_cylinder(t_scene *scene, char **strs);
 void			set_triangle(t_scene *scene, char **strs);
 
-t_rgb			str_to_rgb(char *str);
-t_vect			str_to_triple(char *str);
-t_vect			set_triple(char *x, char *y, char *z);
+t_rgb			str_to_rgb(const char *str);
+t_vect			str_to_vect(const char *str);
+t_vect			set_vect(const char *x, const char *y, const char *z);
 
 
 /**
  * vectors
 **/
 t_vect			new_vect(const double x, const double y, const double z);
-t_vect			normalize(t_vect vect);
-t_vect			rot_vect(t_vect vect, const double angle, const char axe);
+t_vect			normalize(const t_vect vect);
+t_vect			rot_vect(const t_vect vect, const double angle, const char axe);
 t_vect			mult_mat(const double mat[3][3], t_vect vect);
 double			dot_product(const t_vect vect1, const t_vect vect2);
 t_vect			add_vect(const t_vect vect1, const t_vect vect2);
 t_vect			sub_vect(const t_vect vect1, const t_vect vect2);
 t_vect			minus_vect(const t_vect vect);
-t_vect			multi_vect(const t_vect vect, double x);
+t_vect			multi_vect(const t_vect vect, const double x);
 t_vect			cross_product(const t_vect v1, const t_vect v2);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
@@ -141,7 +140,7 @@ void			ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void 
 void			ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_squares(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_triangles(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
-double			to_rad(double angle);
+double			to_rad(const double angle);
 
 void			make_img(t_img *img, const t_scene *scene, const t_camera *camera);
 void			save_bmp(const char *filename, const unsigned char *pixels, const t_couple resolution);
@@ -149,12 +148,10 @@ void			ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple res
 char			*screenshot_datetime();
 t_scene			*get_scene(const int argc, const char *argv[]);
 
-void			print_err_and_exit(char *str, int err);
+void			print_err_and_exit(const char *str, const int err);
 
-double			distance(t_vect p1, t_vect p2);
+double			distance(const t_vect p1, const t_vect p2);
 int				solve_quadratic(const t_vect point, double *x0, double *x1);
 int             ft_tab_size(char **tab);
-
-
 
 #endif

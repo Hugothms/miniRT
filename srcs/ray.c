@@ -6,31 +6,31 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:51:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:33:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_vect		set_triple(char *x, char *y, char *z)
+t_vect		set_vect(const char *x, const char *y, const char *z)
 {
-	t_vect	triple;
+	t_vect	vect;
 
-	triple.x = ft_atof(x);
-	triple.y = ft_atof(y);
-	triple.z = ft_atof(z);
-	return (triple);
+	vect.x = ft_atof(x);
+	vect.y = ft_atof(y);
+	vect.z = ft_atof(z);
+	return (vect);
 }
 
-t_vect		str_to_triple(char *str)
+t_vect		str_to_vect(const char *str)
 {
 	char	**tab;
 
 	tab = ft_split(str, ',');
-	return (set_triple(tab[0], tab[1], tab[2]));
+	return (set_vect(tab[0], tab[1], tab[2]));
 }
 
-t_rgb		str_to_rgb(char *str)
+t_rgb		str_to_rgb(const char *str)
 {
 	char	**tab;
 
@@ -38,7 +38,7 @@ t_rgb		str_to_rgb(char *str)
 	return (char_to_rgb(tab[0], tab[1], tab[2]));
 }
 
-double	to_rad(double angle)
+double	to_rad(const double angle)
 {
 	return (angle * M_PI * 0.5);
 }

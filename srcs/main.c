@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2021/02/22 09:44:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:30:17 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		key_function(const int keycode, const t_window *w)
 {
 	clock_t start, end;
 	printf("%i\n", keycode);
-	if (keycode == ESC)
+	if (keycode == ESC || keycode == KEY_Q)
 		close_function(w);
 	else if (keycode == LEFT)
 	{
@@ -98,7 +98,7 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 // 	t_scene		*scene;
 // 	t_mlx		*mlx;
 // 	t_img		*img;
-	
+
 // 	clock_t start, end;
 // 	// start = clock();
 // 	scene = get_scene(argc, argv);
@@ -143,7 +143,7 @@ int		main(const int argc, const char *argv[])
 	t_mlx		*mlx;
 	t_img		*img;
 	char		*title;
-	
+
 	while (argv && argv[1])
 	{
 		scene = get_scene(argc, argv);

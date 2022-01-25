@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:27:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		set_sphere(t_scene *scene, char **strs)
 
 	if (!(sphere = malloc(sizeof(*sphere))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	sphere->pos = str_to_triple(strs[1]);
+	sphere->pos = str_to_vect(strs[1]);
 	radius = ft_atof(strs[2]);
 	sphere->radius2 = radius * radius;
 	sphere->color = str_to_rgb(strs[3]);
@@ -35,8 +35,8 @@ void		set_plane(t_scene *scene, char **strs)
 
 	if (!(plane = malloc(sizeof(*plane))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	plane->pos = str_to_triple(strs[1]);
-	plane->normal = normalize(str_to_triple(strs[2]));
+	plane->pos = str_to_vect(strs[1]);
+	plane->normal = normalize(str_to_vect(strs[2]));
 	plane->color = str_to_rgb(strs[3]);
 	ft_lstadd_front(&(scene->planes), ft_lstnew(plane));
 }
@@ -48,9 +48,9 @@ void		set_cylinder(t_scene *scene, char **strs)
 
 	if (!(cy = malloc(sizeof(*cy))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	cy->pos = str_to_triple(strs[1]);
+	cy->pos = str_to_vect(strs[1]);
 	cy->pos2 = add_vect(cy->pos, multi_vect(cy->dir, cy->height));
-	cy->dir = normalize(str_to_triple(strs[2]));
+	cy->dir = normalize(str_to_vect(strs[2]));
 	radius = ft_atof(strs[3]) / 2;
 	cy->radius2 = radius * radius;
 	cy->height = ft_atof(strs[4]);
@@ -61,7 +61,7 @@ void		set_cylinder(t_scene *scene, char **strs)
 void		set_square_points(t_scene *scene, t_square *square)
 {
 	t_camera	camera;
-	
+
 	camera = *(t_camera*)scene->cameras->content;
 	square->height / 2;
 	square->pos;
@@ -78,8 +78,8 @@ void		set_square(t_scene *scene, char **strs)
 
 	if (!(square = malloc(sizeof(*square))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	square->pos = str_to_triple(strs[1]);
-	square->normal = normalize(str_to_triple(strs[2]));
+	square->pos = str_to_vect(strs[1]);
+	square->normal = normalize(str_to_vect(strs[2]));
 	square->height = ft_atof(strs[3]);
 	square->color = str_to_rgb(strs[4]);
 	set_square_points(scene, square);
@@ -92,9 +92,9 @@ void		set_triangle(t_scene *scene, char **strs)
 
 	if (!(triangle = malloc(sizeof(*triangle))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	triangle->v0 = str_to_triple(strs[1]);
-	triangle->v1 = str_to_triple(strs[2]);
-	triangle->v2 = str_to_triple(strs[3]);
+	triangle->v0 = str_to_vect(strs[1]);
+	triangle->v1 = str_to_vect(strs[2]);
+	triangle->v2 = str_to_vect(strs[3]);
 	triangle->color = str_to_rgb(strs[4]);
 	ft_lstadd_front(&(scene->triangles), ft_lstnew(triangle));
 }

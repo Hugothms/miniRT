@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2021/02/22 09:51:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:32:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void		ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution)
+void		ft_put_pixel(unsigned char *data, const t_couple pixel, const int color, const t_couple resolution)
 {
 	int	(*tab)[resolution.w][1]; // prepare the cast
 

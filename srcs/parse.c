@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2021/12/28 15:56:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/25 15:48:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		*init_scene(t_scene *scene)
 	return (scene);
 }
 
-int			check_line(char *line, char **data, char *type, int nb_elements)
+int			check_line(const char *line, char **data, const char *type, const int nb_elements)
 {
 	if (!ft_strcmp(data[0], type))
 	{
