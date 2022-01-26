@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 11:13:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 12:01:47 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 	step = scene->resolution.h / (float) (THREADS);
 	// if (step < 1)
 	// 	step = 1;
+	int	fd[THREADS][2];
 	for (i = 0; i < THREADS - 1; i++)
 	{
-		int	fd[2];
-
-		if (pipe(fd) == -1)
+		printf("Will pipe %zu\n", i);
+		if (pipe(fd[i]) == -1)
 		{
 			ft_putstr_fd("Pipe failed\n", STDERR);
 			exit(PIPE_ERROR);
@@ -122,50 +122,41 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 		}
 		if (pid == 0)
 		{
+			close(fd[i][0]);
 			start.h = i * step;
 			scene->resolution.h = ft_max_int(0, (i + 1) * step - 1);
 			if (start.h > scene->resolution.h)
 				exit(0);
-			printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step - 1);
+			// printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step - 1);
 			printf("make_img %zu from %i\t%i\n", 		i, 	start.h,	scene->resolution.h);
 			make_img(img->data, scene, camera, start);
-
+		printf("Process %zu will write in %i at offset %i for %i bytes\n", i, fd[i][1], start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
+			write(fd[i][1], ((void*)(img->data)) + start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
+			printf("Process %zu Writen\n", i);
+			close(fd[i][1]);
 			exit(0);
 		}
 	}
 	start.h = i * step;
 	scene->resolution.h = ft_max_int(0, (i + 1) * step);
-	printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step);
+	// printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step);
 	printf("make_img %zu from %i\t%i\n", i, start.h, scene->resolution.h);
 	make_img(img->data, scene, camera, start);
 	while (wait(NULL) > 0)
 		;
+	printf("end waiting\n");
+	for (i = 0; i < THREADS - 1; i++)
+	{
+		start.h = i * step;
+		scene->resolution.h = ft_max_int(0, (i + 1) * step - 1);
+		close(fd[i][1]);
+		// wait(NULL);
+		printf("for loop %zu will read in %i at offset %i for %i bytes\n", i, fd[i][0], start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
+		read(fd[i][0], ((void*)(img->data)) + start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
+		printf("Process %zu read\n", i);
+		close(fd[i][0]);
+	}
 }
-
-	// if (g_glob.pid > 0)
-	// {
-	// 	close(fdpipe[1]);
-	// 	if ((*lst_line)->pipe && !((*lst_line)->next->next) &&\
-	// 	!ft_strncmp((*lst_line)->next->cmd->str, "exit", 5))
-	// 		return (last_pipe_exit(lst_line, fd_inold));
-	// 	*lst_line = (*lst_line)->next;
-	// 	(*lst_line)->input = fdpipe[0];
-	// 	dup2((*lst_line)->input, STDIN);
-	// 	close(fdpipe[0]);
-	// }
-	// else if (g_glob.pid == 0)
-	// {
-	// 	close(fdpipe[0]);
-	// 	(*lst_line)->output = fdpipe[1];
-	// 	dup2((*lst_line)->output, STDOUT);
-	// 	if (make_and_exec_cmd((*lst_line), env))
-	// 		g_glob.exit = CMD_NOT_FOUND;
-	// 	close(fdpipe[1]);
-	// 	exit(0);
-	// }
-
-
-
 
 int	main(const int argc, char *argv[])
 {
