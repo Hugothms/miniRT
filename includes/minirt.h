@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 19:58:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 11:09:02 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,32 @@
 # include <time.h>
 # include <unistd.h>
 
+# ifdef NUM_THREADS
+#  define THREADS NUM_THREADS
+# else
+#  define THREADS 2
+# endif
 
 # define OPEN_ERROR -1
 # define CLOSE_ERROR -2
 # define PARSE_ERROR -3
 # define MLX_ERROR -4
 # define MALLOC_ERROR -5
+# define PIPE_ERROR -6
+# define FORK_ERROR -7
 
 # define REFLEC 1
 # define DEPTH 1
 
 # define ALBEDO 0.3
 # define EPSILON 1e-4
+
+/*
+** STD IN/OUT
+*/
+# define STDIN			0
+# define STDOUT			1
+# define STDERR			2
 
 /*
 ** Keycodes and screen size LINUX and MAC
@@ -142,7 +156,7 @@ void			ray_squares(const t_ray ray, const t_scene *scene, t_impact *impact, void
 void			ray_triangles(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 double			to_rad(const double angle);
 
-void			make_img(t_img *img, const t_scene *scene, const t_camera *camera);
+void			make_img(unsigned char *data, const t_scene *scene, const t_camera *camera, const t_couple start);
 void			save_bmp(const char *filename, const unsigned char *pixels, const t_couple resolution);
 void			ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution);
 char			*screenshot_datetime();

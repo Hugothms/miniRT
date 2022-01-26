@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:36:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 09:33:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_rgb	*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_coup
 	return (NULL);
 }
 
-void	make_img(t_img *img, const t_scene *scene, const t_camera *camera)
+void	make_img(unsigned char *data, const t_scene *scene, const t_camera *camera, const t_couple start)
 {
 	t_couple	pixel;
 	t_ray		ray;
@@ -120,10 +120,10 @@ void	make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 	void		*object;
 	t_impact	*impact;
 
-	pixel.h = -1;
+	pixel.h = start.h - 1;
 	while (++pixel.h < scene->resolution.h)
 	{
-		pixel.w = -1;
+		pixel.w = start.w - 1;
 		while (++pixel.w < scene->resolution.w)
 		{
 			color = int_to_rgb(0, 0, 0);
@@ -146,7 +146,7 @@ void	make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 				//Final color = Final color + computed color * previous reflection factor;
 				//reflec = reflec * ((t_sphere*)object)->reflec;
 			}
-			ft_put_pixel(img->data, pixel, rgb_to_int(*color), scene->resolution);
+			ft_put_pixel(data, pixel, rgb_to_int(*color), scene->resolution);
 			free(color);
 		}
 	}

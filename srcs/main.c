@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:36:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 11:13:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,80 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	mlx_loop(mlx->mlx_ptr);
 }
 
+void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
+{
+	t_couple	start;
+	float		step;
+	size_t		i;
+
+	start.w = 0;
+	start.h = 0;
+	step = scene->resolution.h / (float) (THREADS);
+	// if (step < 1)
+	// 	step = 1;
+	for (i = 0; i < THREADS - 1; i++)
+	{
+		int	fd[2];
+
+		if (pipe(fd) == -1)
+		{
+			ft_putstr_fd("Pipe failed\n", STDERR);
+			exit(PIPE_ERROR);
+		}
+		printf("Will fork %zu\n", i);
+		int pid = fork();
+		if (pid < 0)
+		{
+			ft_putstr_fd("Fork failed\n", STDERR);
+			exit(FORK_ERROR);
+		}
+		if (pid == 0)
+		{
+			start.h = i * step;
+			scene->resolution.h = ft_max_int(0, (i + 1) * step - 1);
+			if (start.h > scene->resolution.h)
+				exit(0);
+			printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step - 1);
+			printf("make_img %zu from %i\t%i\n", 		i, 	start.h,	scene->resolution.h);
+			make_img(img->data, scene, camera, start);
+
+			exit(0);
+		}
+	}
+	start.h = i * step;
+	scene->resolution.h = ft_max_int(0, (i + 1) * step);
+	printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step);
+	printf("make_img %zu from %i\t%i\n", i, start.h, scene->resolution.h);
+	make_img(img->data, scene, camera, start);
+	while (wait(NULL) > 0)
+		;
+}
+
+	// if (g_glob.pid > 0)
+	// {
+	// 	close(fdpipe[1]);
+	// 	if ((*lst_line)->pipe && !((*lst_line)->next->next) &&\
+	// 	!ft_strncmp((*lst_line)->next->cmd->str, "exit", 5))
+	// 		return (last_pipe_exit(lst_line, fd_inold));
+	// 	*lst_line = (*lst_line)->next;
+	// 	(*lst_line)->input = fdpipe[0];
+	// 	dup2((*lst_line)->input, STDIN);
+	// 	close(fdpipe[0]);
+	// }
+	// else if (g_glob.pid == 0)
+	// {
+	// 	close(fdpipe[0]);
+	// 	(*lst_line)->output = fdpipe[1];
+	// 	dup2((*lst_line)->output, STDOUT);
+	// 	if (make_and_exec_cmd((*lst_line), env))
+	// 		g_glob.exit = CMD_NOT_FOUND;
+	// 	close(fdpipe[1]);
+	// 	exit(0);
+	// }
+
+
+
+
 int	main(const int argc, char *argv[])
 {
 	t_scene		*scene;
@@ -104,7 +178,8 @@ int	main(const int argc, char *argv[])
 	scene = get_scene(argc, argv);
 	mlx = malloc_mlx_init();
 	img = init_img(mlx, &scene->resolution);
-	make_img(img, scene, scene->cameras->content);
+	make_img_multi_thread(img, scene, scene->cameras->content);
+	// make_img(img, scene, scene->cameras->content);
 	end = clock();
 	printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	if (argc == 2)
