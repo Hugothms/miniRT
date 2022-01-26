@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:35:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:35:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int	intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
+bool	intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 {
 	double	denom;
 	double	x;

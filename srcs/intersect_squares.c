@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:36:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:34:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ double	orient(t_vect a, t_vect b, t_vect c, t_vect n)
 	return (dot_product(multi_vect(normal, distance(origin, cross_product(ba, ca))), n));
 }
 
-int	intersect_square(const t_ray ray, const t_square square, t_impact *impact)
+bool	intersect_square(const t_ray ray, const t_square square, t_impact *impact)
 {
 	double		o1;
 	double		o2;

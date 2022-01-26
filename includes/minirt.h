@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:26:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:35:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <errno.h>
 # include <time.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 # ifndef THREADS
 #  define THREADS 1
@@ -137,7 +138,7 @@ t_vect			multi_vect(const t_vect vect, const double x);
 t_vect			cross_product(const t_vect v1, const t_vect v2);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
-int				intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
+bool			intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
 void			ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
@@ -154,7 +155,7 @@ t_scene			*get_scene(const int argc, char *argv[]);
 void			print_err_and_exit(const char *str, const int err);
 
 double			distance(const t_vect p1, const t_vect p2);
-int				solve_quadratic(const t_vect point, double *x0, double *x1);
+bool			solve_quadratic(const t_vect point, double *x0, double *x1);
 int             ft_tab_size(char **tab);
 
 #endif

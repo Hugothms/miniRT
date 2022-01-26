@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2021/12/13 16:42:25 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:33:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,7 @@ int intersect_cylinder2(const t_ray ray, const t_cylinder cylinder, t_impact *im
 
 	double x1 = (-b + sqrt(discr)) / (2 * a);
 	double x2 = (-b - sqrt(discr)) / (2 * a);
-	double t;
-	//choose the smallest and >=0 t
-	if (x1 > x2)
-		t = x2;
-	if (t < 0)
-		t = x1;
-	// if both solution are <0 => NO INTERSECTION!
+	double t = ft_min_float(x1, x2);
 	if (t < 0)
 		return (0);
 	// normal calculation
@@ -125,6 +119,7 @@ double intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *
 	t_vect	F;
 	t_vect	Fn;
 	double	s;
+	(void) impact;
 
 	L = sub_vect(ray.pos, cylinder.pos);
 	W = cross_product(ray.dir, cylinder.dir);
@@ -162,20 +157,20 @@ double intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *
 	return (0);
 }
 
-double		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact);
+bool		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact);
 
 void ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
 	t_list *cylinders;
 	t_cylinder *cylinder;
-	double tmp;
+	bool tmp;
 
 	cylinders = scene->cylinders;
 	while (cylinders->next)
 	{
 		cylinder = (t_cylinder *)(cylinders->content);
 		// if (tmp = intersect_cylinder(ray, *cylinder, impact))
-		if (tmp == cylinder_intersection(ray, *cylinder, impact))
+		if ((tmp = cylinder_intersection(ray, *cylinder, impact)))
 		{
 			*object = cylinder;
 			impact->dist = tmp;
@@ -236,6 +231,7 @@ static double	caps_intersection(t_ray ray, const t_cylinder cylinder, t_impact *
 	t_vect	ip1;
 	t_vect	ip2;
 	t_vect	c2;
+	(void)impact;
 
 	c2 = add_vect(cylinder.pos, multi_vect(cylinder.dir, cylinder.height));
 	id1 = solve_plane(ray.pos, ray.dir, cylinder.pos, cylinder.dir);
@@ -255,7 +251,7 @@ static double	caps_intersection(t_ray ray, const t_cylinder cylinder, t_impact *
 	return (INFINITY);
 }
 
-static int		solve_cylinder(double x[2], t_ray ray, const t_cylinder cylinder)
+static bool		solve_cylinder(double x[2], t_ray ray, const t_cylinder cylinder)
 {
 	t_vect	v;
 	t_vect	u;
@@ -321,7 +317,7 @@ static double	cy_intersection(t_ray ray, const t_cylinder cylinder, t_impact *im
 }
 
 
-double		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+bool		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
 {
 	double	cylinder_inter;
 	double	caps_inter;

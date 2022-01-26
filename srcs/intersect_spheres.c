@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:36:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:35:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * retourne la distance entre le ray et le point de contact avec un sphere s'il existe, INFINITY sinon
  **/
-int	intersect_sphere(const t_ray ray, const t_sphere sphere, t_impact *impact)
+bool	intersect_sphere(const t_ray ray, const t_sphere sphere, t_impact *impact)
 {
 	double	x0;
 	double	x1;

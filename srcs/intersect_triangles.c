@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:36:09 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:35:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int	intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *impact)
+bool	intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *impact)
 {
 	t_vect v0v1 = sub_vect(triangle.v1, triangle.v0);
 	t_vect v0v2 = sub_vect(triangle.v2, triangle.v0);
