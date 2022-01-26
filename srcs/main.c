@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 12:01:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 12:20:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 	int	fd[THREADS][2];
 	for (i = 0; i < THREADS - 1; i++)
 	{
-		printf("Will pipe %zu\n", i);
 		if (pipe(fd[i]) == -1)
 		{
 			ft_putstr_fd("Pipe failed\n", STDERR);
 			exit(PIPE_ERROR);
 		}
+		printf("Pipe %zu is %d,%d\n", i, fd[i][0], fd[i][1]);
 		printf("Will fork %zu\n", i);
 		int pid = fork();
 		if (pid < 0)
@@ -128,11 +128,11 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 			if (start.h > scene->resolution.h)
 				exit(0);
 			// printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step - 1);
-			printf("make_img %zu from %i\t%i\n", 		i, 	start.h,	scene->resolution.h);
+			printf("make_img%zu from %i to %i\n", 		i, 	start.h,	scene->resolution.h);
 			make_img(img->data, scene, camera, start);
-		printf("Process %zu will write in %i at offset %i for %i bytes\n", i, fd[i][1], start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
+			printf("Process %zu will write in %i at offset %i for %i bytes\n", i, fd[i][1], start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
 			write(fd[i][1], ((void*)(img->data)) + start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
-			printf("Process %zu Writen\n", i);
+			printf("Process %zu wrode\n", i);
 			close(fd[i][1]);
 			exit(0);
 		}
@@ -140,7 +140,7 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 	start.h = i * step;
 	scene->resolution.h = ft_max_int(0, (i + 1) * step);
 	// printf("\nmake_img %zu from %.1f\t %.1f\n", i, 	i * step, 	(i + 1) * step);
-	printf("make_img %zu from %i\t%i\n", i, start.h, scene->resolution.h);
+	printf("make_img%zu from %i to %i\n", i, start.h, scene->resolution.h);
 	make_img(img->data, scene, camera, start);
 	while (wait(NULL) > 0)
 		;
@@ -153,7 +153,7 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 		// wait(NULL);
 		printf("for loop %zu will read in %i at offset %i for %i bytes\n", i, fd[i][0], start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
 		read(fd[i][0], ((void*)(img->data)) + start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
-		printf("Process %zu read\n", i);
+		printf("for loop %zu rode\n", i);
 		close(fd[i][0]);
 	}
 }
