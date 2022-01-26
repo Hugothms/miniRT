@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 14:15:02 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 12:20:56 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:19:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 	// if (step < 1)
 	// 	step = 1;
 	int	fd[THREADS][2];
+	printf("threads: %d\n", THREADS);
 	for (i = 0; i < THREADS - 1; i++)
 	{
 		if (pipe(fd[i]) == -1)
@@ -131,7 +132,7 @@ void 	make_img_multi_thread(t_img *img, t_scene *scene, const t_camera *camera)
 			printf("make_img%zu from %i to %i\n", 		i, 	start.h,	scene->resolution.h);
 			make_img(img->data, scene, camera, start);
 			printf("Process %zu will write in %i at offset %i for %i bytes\n", i, fd[i][1], start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
-			write(fd[i][1], ((void*)(img->data)) + start.h * img->size_line, (scene->resolution.h - start.h) * img->size_line);
+			write(fd[i][1], ((void*)(img->data)) + start.h * img->size_line, (scene->resolution.h - start.h) * (img->size_line-100));
 			printf("Process %zu wrode\n", i);
 			close(fd[i][1]);
 			exit(0);
