@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:34:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:38:20 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,15 @@ bool	intersect_square(const t_ray ray, const t_square square, t_impact *impact)
 	double		o2;
 	double		o3;
 	double		o4;
-	t_impact	*impact_plane;
 	t_plane		plane;
 
 	plane.pos = square.pos;
 	plane.normal = square.normal;
-	intersect_plane(ray, plane, impact_plane);
-	o1=orient(impact_plane->pos, square.p1, square.p2, square.normal);
-	o2=orient(impact_plane->pos, square.p2, square.p3, square.normal);
-	o3=orient(impact_plane->pos, square.p3, square.p4, square.normal);
-	o4=orient(impact_plane->pos, square.p4, square.p1, square.normal);
+	intersect_plane(ray, plane, impact);
+	o1=orient(impact->pos, square.p1, square.p2, square.normal);
+	o2=orient(impact->pos, square.p2, square.p3, square.normal);
+	o3=orient(impact->pos, square.p3, square.p4, square.normal);
+	o4=orient(impact->pos, square.p4, square.p1, square.normal);
 
 	return ((o1 > 0 && o2 > 0 && o3 > 0 && o4 > 0) || (o1 < 0 && o2 < 0 && o3 < 0 && o4 < 0));
 }

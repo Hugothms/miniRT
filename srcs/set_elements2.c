@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 10:07:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:39:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	set_square_points(t_scene *scene, t_square *square)
 	t_camera	camera;
 
 	camera = *(t_camera*)scene->cameras->content;
+	(void)square;
 	// square->height / 2;
 	// square->pos;
 	// square->normal;

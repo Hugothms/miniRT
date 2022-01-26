@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 20:36:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:40:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ t_ray	generate_ray(const t_camera *camera, const t_couple resolution, t_couple p
 {
 	t_vect vect_dir;
 	vect_dir = set_vect_dir_cam(camera, resolution, pixel.h, pixel.w);
-	//printf("position:\t(% .3f,\t% .3f,\t% .3f)\n",\
-											(camera->pos.x,\
-											(camera->pos.y,\
-											(camera->pos.z);
-	//printf("direction:%s\t(% .3f,\t% .3f,\t % .3f)\n\n",\
-											i  == resolution.h / 2 \
-											&& pixel.w == resolution.w / 2 ? "\tmiddle\n\n" : "",\
-											vect_dir.x,\
-											vect_dir.y,\
-											vect_dir.z);
 	return (new_ray(camera->pos, vect_dir));
 }
 
@@ -71,7 +61,7 @@ t_rgb	*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_coup
 	void		*obstacle;
 	t_impact	*impact_obstacle;
 	t_rgb		diffuse;
-	t_rgb		specular;
+	// t_rgb		specular;
 
 	diffuse = *int_to_rgb(0, 0, 0);
 	lights = scene->lights;
