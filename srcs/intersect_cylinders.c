@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 14:02:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 17:14:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ double			solve_plane(t_vect o, t_vect d, t_vect plane_p, t_vect plane_nv)
 	if (denom == 0)
 		return (INFINITY);
 	x = (dot_product(plane_nv, sub_vect(plane_p, o))) / denom;
-	return (x > 0 ? x : INFINITY);
+	return (x > EPSILON ? x : INFINITY);
 }
 
 static double	caps_intersection(t_ray ray, const t_cylinder cylinder, t_impact *impact)
@@ -246,7 +246,6 @@ static double	caps_intersection(t_ray ray, const t_cylinder cylinder, t_impact *
 			return (id1);
 		else if (id2 < INFINITY && distance(ip2, c2) <= cylinder.radius2)
 			return (id2);
-		return (INFINITY);
 	}
 	return (INFINITY);
 }
