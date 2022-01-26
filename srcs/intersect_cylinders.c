@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 17:14:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 18:54:24 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,21 +161,25 @@ double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impac
 
 void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
-	t_list *cylinders;
-	t_cylinder *cylinder;
-	double tmp;
+	t_list		*cylinders;
+	t_cylinder	*cylinder;
+	double		tmp;
+	t_impact	*cy_impact;
 
+	cy_impact = (t_impact *)malloc(sizeof(t_impact));
 	cylinders = scene->cylinders;
 	while (cylinders->next)
 	{
 		cylinder = (t_cylinder *)(cylinders->content);
 		// if (tmp = intersect_cylinder(ray, *cylinder, impact))
-		if (((tmp = cylinder_intersection(ray, *cylinder, impact)) < impact->dist) && tmp > 0)
+		if (((tmp = cylinder_intersection(ray, *cylinder, cy_impact)) < impact->dist) && tmp > 0)
 		{
 			*object = cylinder;
 			impact->dist = tmp;
 			impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
+			// impact->pos = cy_impact->pos;
 			impact->normal = minus_vect(ray.dir);
+			// impact->normal = cy_impact->normal;
 			// impact->normal = cylinder->normal;
 			ft_memcpy(scene->type, "cy\0", 3);
 		}
@@ -315,18 +319,16 @@ static double	cy_intersection(t_ray ray, const t_cylinder cylinder, t_impact *im
 	return (x2[0]);
 }
 
-
-double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *cy_impact)
 {
 	double	cylinder_inter;
 	double	caps_inter;
 
-	cylinder_inter = cy_intersection(ray, cylinder, impact);
-	// if (cylinder->texture == 4)
-	// 	caps_inter = INFINITY;
-	// else
-		caps_inter = caps_intersection(ray, cylinder, impact);
-	// caps_inter = INFINITY;
+	cylinder_inter = cy_intersection(ray, cylinder, cy_impact);
+	if (cylinder.is_closed)
+		caps_inter = INFINITY;
+	else
+		caps_inter = caps_intersection(ray, cylinder, cy_impact);
 	if (cylinder_inter < INFINITY || caps_inter < INFINITY)
 	{
 		if (cylinder_inter < caps_inter)
@@ -335,12 +337,3 @@ double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impac
 	}
 	return (INFINITY);
 }
-
-
-
-
-
-
-
-
-

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:36:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 18:49:46 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_scene	*parse(int fd)
 			set_plane(scene, data);
 		else if (check_line(line, data, "sq", NB_ELEM_SQUARE))
 			set_square(scene, data);
-		else if (check_line(line, data, "cy", NB_ELEM_CYLINDER))
+		else if (check_line(line, data, "cy", NB_ELEM_CYLINDER) || check_line(line, data, "cy", NB_ELEM_CYLINDER + 1))
 			set_cylinder(scene, data);
 		else if (check_line(line, data, "tr", NB_ELEM_TRIANGLE))
 			set_triangle(scene, data);

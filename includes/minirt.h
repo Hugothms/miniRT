@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:35:19 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 18:32:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "scene.h"
 # include "parse.h"
 
-#include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
@@ -28,6 +27,7 @@
 # include <time.h>
 # include <unistd.h>
 # include <stdbool.h>
+#include <stdio.h>
 
 # ifndef THREADS
 #  define THREADS 1

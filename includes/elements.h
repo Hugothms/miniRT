@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:50:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/11/12 13:04:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 18:34:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ELEMENTS_H
 
 # include "basics.h"
+# include <stdbool.h>
 
 typedef struct		s_ambient_light
 {
@@ -71,6 +72,7 @@ typedef struct		s_cylinder
 	double			radius2;
 	double			height;
 	t_rgb			color;
+	bool			is_closed;
 }					t_cylinder;
 
 typedef struct		s_disk

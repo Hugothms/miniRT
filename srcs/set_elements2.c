@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 14:08:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 18:50:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	set_cylinder(t_scene *scene, char **strs)
 	cy->height = ft_atof(strs[4]);
 	cy->pos2 = add_vect(cy->pos, multi_vect(cy->dir, cy->height));
 	cy->color = str_to_rgb(strs[5]);
+	if (strs[6])
+		cy->is_closed = ft_atoi_strict(strs[6]);
+	else
+		cy->is_closed = 0;
 	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cy));
 }
 
