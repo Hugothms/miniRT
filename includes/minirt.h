@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 19:58:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:26:47 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # include <time.h>
 # include <unistd.h>
 
+# ifndef THREADS
+#  define THREADS 1
+# endif
 
 # define OPEN_ERROR -1
 # define CLOSE_ERROR -2

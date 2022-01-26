@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2022/01/26 11:04:45 by hthomas          ###   ########.fr        #
+#    Updated: 2022/01/26 13:26:04 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,34 +44,34 @@ INCLFILES=	basics.h				\
 			scene.h					\
 
 SRCS	= $(addprefix $(SRCDIR), $(SRCFILES))
-OBJS	= ${SRCS:.c=.o}
+OBJS	= $(SRCS:.c=.o)
 INCLS	= $(addprefix $(INCLDIR), $(INCLFILES))
 CC		= gcc -g
 RM		= rm -f
 
-CFLAGS	= -I $(INCLDIR) -D NUM_THREADS=$(NUM_THREADS) -Wall -Wextra -fsanitize=address -g3#-Werror -Ofast
+CFLAGS	= -I $(INCLDIR) -DTHREADS=$(THREADS) -Wall -Wextra -fsanitize=address -g3#-Werror -Ofast
 FLAGS = -L $(LIB)libft -lft -L $(LIB)libmlx -lmlx
 
-MACOS_MACRO = -D MACOS
-LINUX_MACRO = -D LINUX
+MACOS_MACRO = -DMACOS
+LINUX_MACRO = -DLINUX
 MACOS_FLAGS	= -framework OpenGL -framework AppKit
 LINUX_FLAGS = -lm -lX11 -lXext -lpthread
 
 UNAME := $(shell uname)
 
 ifeq ($(UNAME),Darwin)
-	NUM_THREADS = $(shell sysctl -n hw.ncpu)
+	THREADS = $(shell sysctl -n hw.ncpu)
 	CFLAGS += $(MACOS_MACRO)
 	FLAGS += $(MACOS_FLAGS)
 endif
 ifeq ($(UNAME),Linux)
-	NUM_THREADS = $(shell nproc --all)
+	THREADS = $(shell nproc --all)
 	CFLAGS += $(LINUX_MACRO)
 	FLAGS += $(LINUX_FLAGS)
 endif
 
 $(NAME) : compilelibft compilelibmlx $(OBJS) $(INCLS)
-	${CC} ${CFLAGS} $(OBJS) $(FLAGS) -o ${NAME}
+	$(CC) $(CFLAGS) $(OBJS) $(FLAGS) -o $(NAME)
 
 compilelibft :
 	make -C $(LIB)libft all
@@ -80,19 +80,19 @@ compilelibmlx :
 	make -C $(LIB)libmlx all
 
 %.o: %.c $(INCLS)
-	$(CC) -c -I $(INCLDIR) -o $@ $<
+	$(CC) $(CFLAGS) -c -I $(INCLDIR) -o $@ $<
 
-all:		${NAME}
+all:		$(NAME)
 
 clean:
 			make clean -C $(LIB)libft
 			# make clean -C $(LIB)libvector
-			${RM} ${OBJS}
+			$(RM) $(OBJS)
 
 fclean:		clean
 			make fclean -C $(LIB)libft
 			# make fclean -C $(LIB)libvector
-			${RM} ${NAME}
+			$(RM) $(NAME)
 
 re:			fclean all
 
