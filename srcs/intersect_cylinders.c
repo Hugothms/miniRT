@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 18:54:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 21:14:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ double intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *
 
 double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact);
 
-void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
+void	ray_cylinders(const t_ray ray, t_scene *scene, t_impact *impact, void **object)
 {
 	t_list		*cylinders;
 	t_cylinder	*cylinder;
@@ -171,42 +171,17 @@ void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void
 	while (cylinders->next)
 	{
 		cylinder = (t_cylinder *)(cylinders->content);
-		// if (tmp = intersect_cylinder(ray, *cylinder, impact))
-		if (((tmp = cylinder_intersection(ray, *cylinder, cy_impact)) < impact->dist) && tmp > 0)
+		if ((tmp = cylinder_intersection(ray, *cylinder, cy_impact)) < impact->dist && tmp > 0)
 		{
 			*object = cylinder;
 			impact->dist = tmp;
 			impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
-			// impact->pos = cy_impact->pos;
 			impact->normal = minus_vect(ray.dir);
-			// impact->normal = cy_impact->normal;
-			// impact->normal = cylinder->normal;
-			ft_memcpy(scene->type, "cy\0", 3);
+			scene->type = "cy";
 		}
 		cylinders = cylinders->next;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

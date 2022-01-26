@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:59:45 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 18:32:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 21:07:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ t_vect			cross_product(const t_vect v1, const t_vect v2);
 
 t_vect			set_vect_dir_cam(const t_camera *camera, const t_couple resolution, const int i, const int j);
 bool			intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact);
-void			ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
+void			ray_cylinders(const t_ray ray, t_scene *scene, t_impact *impact, void **object);
 void			ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
 void			ray_squares(const t_ray ray, const t_scene *scene, t_impact *impact, void **object);
