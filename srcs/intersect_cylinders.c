@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:33:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 14:02:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,26 +157,26 @@ double intersect_cylinder(const t_ray ray, const t_cylinder cylinder, t_impact *
 	return (0);
 }
 
-bool		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact);
+double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact);
 
-void ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
+void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
 	t_list *cylinders;
 	t_cylinder *cylinder;
-	bool tmp;
+	double tmp;
 
 	cylinders = scene->cylinders;
 	while (cylinders->next)
 	{
 		cylinder = (t_cylinder *)(cylinders->content);
 		// if (tmp = intersect_cylinder(ray, *cylinder, impact))
-		if ((tmp = cylinder_intersection(ray, *cylinder, impact)))
+		if (((tmp = cylinder_intersection(ray, *cylinder, impact)) < impact->dist) && tmp > 0)
 		{
 			*object = cylinder;
 			impact->dist = tmp;
 			impact->pos = new_vect(tmp * ray.dir.x, tmp * ray.dir.y, tmp * ray.dir.z);
 			impact->normal = minus_vect(ray.dir);
-			//impact->normal = cylinder->normal;
+			// impact->normal = cylinder->normal;
 			ft_memcpy(scene->type, "cy\0", 3);
 		}
 		cylinders = cylinders->next;
@@ -317,7 +317,7 @@ static double	cy_intersection(t_ray ray, const t_cylinder cylinder, t_impact *im
 }
 
 
-bool		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
+double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact *impact)
 {
 	double	cylinder_inter;
 	double	caps_inter;
@@ -331,18 +331,11 @@ bool		cylinder_intersection(const t_ray ray, const t_cylinder cylinder, t_impact
 	if (cylinder_inter < INFINITY || caps_inter < INFINITY)
 	{
 		if (cylinder_inter < caps_inter)
-		{
-			impact->dist = cylinder_inter;
-			// impact->pos = NULL;
-			return (1);
-		}
-		impact->dist = caps_inter;
-		// impact->pos = NULL;
-		return (1);
+			return (cylinder_inter);
+		return (caps_inter);
 	}
-	return (0);
+	return (INFINITY);
 }
-
 
 
 

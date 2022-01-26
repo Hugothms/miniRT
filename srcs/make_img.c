@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:40:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/26 13:54:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_rgb	*manage_light(const t_scene *scene, t_impact *impact, t_rgb *color, t_coup
 			// printf("lumin %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\t\t%.2f %.2f %.2f\n", impact_obstacle->dist, impact_obstacle->pos.x, impact_obstacle->pos.y, impact_obstacle->pos.z, impact_obstacle->normal.x, impact_obstacle->normal.y, impact_obstacle->normal.z, impact->normal.x, impact->normal.y, impact->normal.z);
 			//printf("\n%.2f\t%.2f\n", impact_obstacle->dist, distance(impact->pos, light->pos));
 		}
-		if (impact_obstacle->dist > distance(impact->pos, light->pos) )
+		if (impact_obstacle->dist > distance(impact->pos, light->pos))
 		{
 			double normal_dot_light = ft_max_float(dot_product(impact->normal, to_light.dir), 0.0) / (distance(impact->pos, light->pos) * (distance(impact->pos, light->pos)));
 			t_rgb color_l = *mult_rgb_double(light->color, normal_dot_light);
