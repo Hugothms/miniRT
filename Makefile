@@ -6,20 +6,20 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2022/01/25 20:30:07 by hthomas          ###   ########.fr        #
+#    Updated: 2022/01/26 11:04:45 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	= miniRT
 
-HEAD	= includes
+INCLDIR	= includes/
 
 SRCDIR	= srcs/
 
 LIB		= lib/
 
-FILES	=	color.c					\
+SRCFILES=	color.c					\
 			error.c					\
 			intersect_cylinders.c	\
 			intersect_planes.c		\
@@ -37,18 +37,25 @@ FILES	=	color.c					\
 			vector.c				\
 
 
-SRCS	= $(addprefix $(SRCDIR), $(FILES))
+INCLFILES=	basics.h				\
+			elements.h minirt.h		\
+			mlx.h					\
+			parse.h					\
+			scene.h					\
+
+SRCS	= $(addprefix $(SRCDIR), $(SRCFILES))
 OBJS	= ${SRCS:.c=.o}
+INCLS	= $(addprefix $(INCLDIR), $(INCLFILES))
 CC		= gcc -g
 RM		= rm -f
 
-CFLAGS	= -I $(HEAD) -D NUM_THREADS=$(NUM_THREADS) -Wall -Wextra -fsanitize=address -g3#-Werror -Ofast
-FLAGS = -L $(LIB)libft -lft#-L $(LIB)libvector -lvct
+CFLAGS	= -I $(INCLDIR) -D NUM_THREADS=$(NUM_THREADS) -Wall -Wextra -fsanitize=address -g3#-Werror -Ofast
+FLAGS = -L $(LIB)libft -lft -L $(LIB)libmlx -lmlx
 
 MACOS_MACRO = -D MACOS
 LINUX_MACRO = -D LINUX
-MACOS_FLAGS	= -L $(LIB)libmlx -lmlx -framework OpenGL -framework AppKit
-LINUX_FLAGS = -L $(LIB)libmlx -lmlx -lm -lX11 -lXext -lpthread
+MACOS_FLAGS	= -framework OpenGL -framework AppKit
+LINUX_FLAGS = -lm -lX11 -lXext -lpthread
 
 UNAME := $(shell uname)
 
@@ -63,12 +70,7 @@ ifeq ($(UNAME),Linux)
 	FLAGS += $(LINUX_FLAGS)
 endif
 
-# ${NAME}:	${OBJS}
-# 			make -C $(LIB)libft
-# 			# make -C $(LIB)libvector
-# 			${CC} ${CFLAGS} $(OBJS) $(FLAGS) -o ${NAME}
-
-$(NAME) : compilelibft compilelibmlx $(OBJS)
+$(NAME) : compilelibft compilelibmlx $(OBJS) $(INCLS)
 	${CC} ${CFLAGS} $(OBJS) $(FLAGS) -o ${NAME}
 
 compilelibft :
@@ -77,8 +79,8 @@ compilelibft :
 compilelibmlx :
 	make -C $(LIB)libmlx all
 
-%.o: %.c $(HEAD)
-	$(CC) -c -I $(HEAD) -o $@ $<
+%.o: %.c $(INCLS)
+	$(CC) -c -I $(INCLDIR) -o $@ $<
 
 all:		${NAME}
 
@@ -93,105 +95,6 @@ fclean:		clean
 			${RM} ${NAME}
 
 re:			fclean all
-
-
-
-
-
-
-
-
-# NAME = miniRT
-# --MAKE = make
-# --CC = gcc
-# --CFLAGS += -Wall -Werror -Wextra
-# --LDFLAGS += #-g3 -fsanitize=address
-# --OPTI = -Ofast -flto -march=native #-O3
-
-
-
-
-# --OBJS = $(--SRCS:.c=.o)
-# --OBJSLIBFT =$(--LIBFTDIR)*.o
-
-# --INCL = includes/
-# --HEADER = $(--INCL)minirt.h
-
-# --LIBFT = libft.a
-# --LIBFTDIR = libft/
-# --LIBFTLINK = -L $(--LIBFTDIR)
-
-# UNAME_S := $(shell uname -s)
-# ifeq ($(UNAME_S), Linux)
-# 	LIBMLXDIR	= libmlxlinux
-# 	MLX_INCLUDE = -lm -lXext -lX11
-# 	ENV			= -D LINUX
-# else
-# 	LIBMLXDIR	= libmlx
-# 	MLX_INCLUDE = -framework OpenGL -framework AppKit
-# 	ENV			=
-# endif
-# --LIBMLX = libmlx.a
-# --LIBMLXLINK = -L $(LIBMLXDIR) -lmlx
-
-
-
-
-
-
-
-# all : compilelibft compilelibmlx $(NAME)
-
-# $(NAME) : $(--OBJSLIBFT) $(--OBJS)
-# 	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $^ $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
-
-# compilelibft :
-# 	$(--MAKE) -C libft all
-
-# compilelibmlx :
-# 	$(--MAKE) -C $(LIBMLXDIR) all
-
-# %.o: %.c $(--INCL)
-# 	$(--CC) -c $(--LDFLAGS) -I$(--INCL) -o $@ $<
-
-# clean:
-# 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
-# 	cd $(--LIBFTDIR) && $(--MAKE) clean
-# 	# cd $(LIBMLXDIR) && $(--MAKE) clean
-# 	rm -rf $(--OBJS) $(--LIBFT) $(--LIBMLX)
-
-# fclean:		clean
-# 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
-# 	cd $(--LIBFTDIR) && $(--MAKE) fclean
-# 	# cd $(LIBMLXDIR) && $(--MAKE) fclean
-# 	rm -f $(NAME) a.out
-
-# re:		fclean all
-
-
-# .PHONY: clean fclean
-
-
-
-
-# ###########################
-# --BLACK_FG =	\033[38;5;0m
-# --RED_FG =	\033[38;5;196m
-# --REDL_FG =	\033[1;31m
-# --GREEN_FG =	\033[38;5;46m
-# --CYAN_FG =	\033[0;36m
-# --YELLOW_FG =	\033[1;33m
-
-# --BLACK_BG =	\033[48;5;0m
-# --BLUE_BG =	\033[48;5;39m
-# --PINK_BG =	\033[48;5;213m
-# --YELLOW_BG =	\033[48;5;11m
-# --RANLIB_BG =	\033[48;5;172m
-# --GREEN_BG =	\033[48;5;46m
-
-# --CLEAR_COLOR =	\033[m
-# ###########################
-
 
 run: $(NAME)
 	./$< scenes/test.rt
@@ -212,9 +115,20 @@ run_all: $(NAME)
 	./$< scenes/triangle.rt &
 	./$< scenes/test.rt
 
+# ###########################
+# --BLACK_FG =	\033[38;5;0m
+# --RED_FG =	\033[38;5;196m
+# --REDL_FG =	\033[1;31m
+# --GREEN_FG =	\033[38;5;46m
+# --CYAN_FG =	\033[0;36m
+# --YELLOW_FG =	\033[1;33m
 
-# gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt -save
-#"sudo apt-get update" "sudo apt install gdb" "sudo apt install gcc"
-#https://stackoverflow.com/c/42network/questions/950/954#954
-#.SILENT:
+# --BLACK_BG =	\033[48;5;0m
+# --BLUE_BG =	\033[48;5;39m
+# --PINK_BG =	\033[48;5;213m
+# --YELLOW_BG =	\033[48;5;11m
+# --RANLIB_BG =	\033[48;5;172m
+# --GREEN_BG =	\033[48;5;46m
 
+# --CLEAR_COLOR =	\033[m
+# ###########################
