@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:46:14 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:54:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 10:42:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ t_impact	*closest_object(const t_ray ray, const t_scene *scene, void **object)
 
 	if(!(impact = malloc(sizeof(*impact))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	if (!(impact->type = malloc(3 * sizeof(char))))
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	ft_bzero(impact->type, 3);
 	impact->dist = INFINITY;
 	//for each object in the scene
 	ray_spheres(ray, scene, impact, object);
@@ -128,7 +131,7 @@ void	make_img(t_img *img, const t_scene *scene, const t_camera *camera)
 				impact = closest_object(ray, scene, &object);
 				if (object)
 				{
-					*color = get_color(scene->type, object);
+					*color = get_color(impact->type, object);
 					if (dot_product(impact->normal, ray.dir) >= 0)
 						impact->normal = minus_vect(impact->normal);
 					manage_light(scene, impact, color, pixel);

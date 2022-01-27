@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 22:17:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:30:09 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static double	caps_intersection(t_ray ray, const t_cylinder cylinder)
 	return (INFINITY);
 }
 
-static bool		solve_cylinder(double x[2], t_ray ray, const t_cylinder cylinder)
+static bool	solve_cylinder(double x[2], t_ray ray, const t_cylinder cylinder)
 {
 	t_vect	v;
 	t_vect	u;
@@ -66,12 +66,8 @@ static bool		solve_cylinder(double x[2], t_ray ray, const t_cylinder cylinder)
 	c = dot_product(u, u) - pow(cylinder.radius2, 2);
 	x[0] = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
 	x[1] = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
-	if ((x[0] != x[0] && x[1] != x[1]) || (x[0] < EPSILON && x[1] < EPSILON))
-	{
-		x[0] = INFINITY;
-		x[1] = INFINITY;
+	if (x[0] < EPSILON && x[1] < EPSILON)
 		return (0);
-	}
 	return (1);
 }
 
@@ -103,7 +99,7 @@ static double	cy_intersection(t_ray ray, const t_cylinder cylinder)
 {
 	double	x2[2];
 
-	if (solve_cylinder(x2, ray, cylinder) == 0)
+	if (!solve_cylinder(x2, ray, cylinder))
 		return (INFINITY);
 	double dist1 = dot_product(cylinder.dir, sub_vect(multi_vect(ray.dir, x2[0]), sub_vect(cylinder.pos, ray.pos)));
 	double dist2 = dot_product(cylinder.dir, sub_vect(multi_vect(ray.dir, x2[1]), sub_vect(cylinder.pos, ray.pos)));
@@ -119,7 +115,7 @@ double	cylinder_intersection(const t_ray ray, const t_cylinder cylinder, bool *i
 	double	caps_inter;
 
 	cylinder_inter = cy_intersection(ray, cylinder);
-	if (cylinder.is_closed)
+	if (!cylinder.is_closed)
 		caps_inter = INFINITY;
 	else
 		caps_inter = caps_intersection(ray, cylinder);
@@ -149,7 +145,7 @@ t_vect get_closest_point_from_line(t_vect A, t_vect B, t_vect P)
 	return (add_vect(A, multi_vect(AB, t)));
 }
 
-void	ray_cylinders(const t_ray ray, t_scene *scene, t_impact *impact, void **object)
+void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
 	t_list		*cylinders;
 	t_cylinder	*cylinder;
@@ -170,7 +166,7 @@ void	ray_cylinders(const t_ray ray, t_scene *scene, t_impact *impact, void **obj
 				impact->normal = sub_vect(get_closest_point_from_line(cylinder->pos, cylinder->pos2, impact->pos), impact->pos);
 			else
 				impact->normal = cylinder->dir;
-			scene->type = "cy";
+			impact->type = "cy";
 		}
 		cylinders = cylinders->next;
 	}

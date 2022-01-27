@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:35:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 10:44:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ray_spheres(const t_ray ray, const t_scene *scene, t_impact *impact, void *
 		if (intersect_sphere(ray, *sphere, impact))
 		{
 			*object = sphere;
-			ft_memcpy(scene->type, "sp\0", 3);
+			impact->type = "sp";
 		}
 		spheres = spheres->next;
 	}

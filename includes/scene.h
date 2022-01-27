@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 09:51:14 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/15 14:31:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 10:38:20 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct		s_scene
 	t_list			*squares;
 	t_list			*cylinders;
 	t_list			*triangles;
-	char			*type;
 }					t_scene;
 
 #endif

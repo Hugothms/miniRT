@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:35:35 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 10:40:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ray_planes(const t_ray ray, const t_scene *scene, t_impact *impact, void **
 		if (intersect_plane(ray, *plane, impact))
 		{
 			*object = plane;
-			ft_memcpy(scene->type, "pl\0", 3);
+			impact->type = "pl";
 		}
 		planes = planes->next;
 	}

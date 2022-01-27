@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 16:22:00 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/25 15:35:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 10:38:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_impact
 	double			dist;
 	t_vect			pos;
 	t_vect			normal;
+	char			*type;
 }					t_impact;
 
 t_rgb				*int_to_rgb(const int r, const int g, const int b);

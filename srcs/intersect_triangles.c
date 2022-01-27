@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 22:23:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 10:53:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,44 +90,118 @@
 
 // }
 
+
+
+
+// bool	intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *impact)
+// {
+// 	t_vect v0v1;
+// 	t_vect v0v2;
+// 	t_vect pvec;
+// 	t_vect tvec;
+// 	t_vect qvec;
+// 	float det;
+// 	float inv_det;
+// 	float u;
+// 	float v;
+// 	float t;
+
+// 	v0v1 = sub_vect(triangle.v1, triangle.v0);
+// 	v0v2 = sub_vect(triangle.v2, triangle.v0);
+// 	pvec = cross_product(ray.dir, v0v2);
+// 	det = dot_product(v0v1, pvec);
+// 	if (det < EPSILON)
+// 		return (false);
+// 	inv_det = 1.0 / det;
+// 	tvec = sub_vect(ray.pos, triangle.v0);
+// 	u = dot_product(tvec, pvec) * inv_det;
+// 	if (u < 0.0 || u > 1.0)
+// 		return (false);
+// 	qvec = cross_product(tvec, v0v1);
+// 	v = dot_product(ray.dir, qvec) * inv_det;
+// 	if (v < 0.0 || u + v > 1.0)
+// 		return (false);
+// 	t = dot_product(v0v2, qvec) * inv_det;
+// 	if (t > EPSILON)
+// 	{
+// 		impact->dist = t;
+// 		impact->pos = add_vect(ray.pos, multi_vect(ray.dir, t));
+// 		impact->normal = normalize(cross_product(v0v1, v0v2));
+// 		return (true);
+// 	}
+// 	return (false);
+// }
+
+
+
+
+
+
+
+
+//#define TEST_CULL
+
 bool	intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *impact)
 {
-	t_vect v0v1;
-	t_vect v0v2;
-	t_vect pvec;
-	t_vect tvec;
-	t_vect qvec;
-	float det;
-	float inv_det;
-	float u;
-	float v;
-	float t;
+	t_vect v0 = triangle.v0;
+	t_vect v1 = triangle.v1;
+	t_vect v2 = triangle.v2;
+	t_vect e1,e2,pvec,qvec,tvec;
 
-	v0v1 = sub_vect(triangle.v1, triangle.v0);
-	v0v2 = sub_vect(triangle.v2, triangle.v0);
-	pvec = cross_product(ray.dir, v0v2);
-	det = dot_product(v0v1, pvec);
-	if (det < EPSILON)
-		return (false);
-	inv_det = 1.0 / det;
-	tvec = sub_vect(ray.pos, triangle.v0);
-	u = dot_product(tvec, pvec) * inv_det;
-	if (u < 0.0 || u > 1.0)
-		return (false);
-	qvec = cross_product(tvec, v0v1);
-	v = dot_product(ray.dir, qvec) * inv_det;
-	if (v < 0.0 || u + v > 1.0)
-		return (false);
-	t = dot_product(v0v2, qvec) * inv_det;
-	if (t > EPSILON)
-	{
-		impact->dist = t;
-		impact->pos = add_vect(ray.pos, multi_vect(ray.dir, t));
-		impact->normal = normalize(cross_product(v0v1, v0v2));
-		return (true);
-	}
-	return (false);
+	e1 = sub_vect(v1,v0);
+	e2 = sub_vect(v2,v0);
+
+	pvec = cross_product(ray.dir,e2);
+
+	normalize(ray.dir); //todo commented
+	// NORMALIZE(pvec);
+	float det = dot_product(pvec,e1);
+	#ifdef TEST_CULL
+		if (det < EPSILON)
+		{
+		   return false;
+		}
+		tvec = sub_vect(ray.pos,v0);
+		float u = dot_product(tvec,pvec);
+		if (u < 0.0 || u > det)
+		{
+		   return false;
+		}
+		qvec = cross_product(tvec,e1);
+		float v = dot_product(ray.dir,qvec);
+		if (v < 0.0f || v + u > det)
+		{
+		   return false;
+		}
+	#else
+		if (det < EPSILON && det > -EPSILON )
+		{
+		    return false;
+		}
+		float invDet = 1.0f / det;
+		tvec = sub_vect(ray.pos,v0);
+		// NORMALIZE(tvec);
+		float u = invDet * dot_product(tvec,pvec);
+		if (u <0.0f || u > 1.0f)
+		{
+			return false;
+		}
+		qvec = cross_product(tvec,e1);
+		// NORMALIZE(qvec);
+		float v = invDet* dot_product(qvec,ray.dir);
+		if (v < 0.0f || u+v > 1.0f)
+		{
+			return false;
+		}
+	#endif
+	impact->dist = 4;//dot_product(e2,qvec);
+	impact->pos = add_vect(ray.pos, multi_vect(ray.dir, impact->dist));
+	impact->normal = normalize(cross_product(e1,e2));
+	return true;
 }
+
+
+
 
 void	ray_triangles(const t_ray ray, const t_scene *scene, t_impact *impact, void **object)
 {
@@ -141,7 +215,7 @@ void	ray_triangles(const t_ray ray, const t_scene *scene, t_impact *impact, void
 		if (intersect_triangle(ray, *triangle, impact))
 		{
 			*object = triangle;
-			ft_memcpy(scene->type, "sq\0", 3);
+			impact->type = "sq";
 		}
 		triangles = triangles->next;
 	}

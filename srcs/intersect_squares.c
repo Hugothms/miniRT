@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 13:38:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 10:44:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ray_squares(const t_ray ray, const t_scene *scene, t_impact *impact, void *
 		if (intersect_square(ray, *square, impact))
 		{
 			*object = square;
-			ft_memcpy(scene->type, "sq\0", 3);
+			impact->type = "sq";
 		}
 		squares = squares->next;
 	}

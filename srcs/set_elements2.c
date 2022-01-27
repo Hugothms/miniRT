@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:53:11 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/26 18:50:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:17:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	set_cylinder(t_scene *scene, char **strs)
 	if (strs[6])
 		cy->is_closed = ft_atoi_strict(strs[6]);
 	else
-		cy->is_closed = 0;
+		cy->is_closed = 1;
 	ft_lstadd_front(&(scene->cylinders), ft_lstnew(cy));
 }
 
