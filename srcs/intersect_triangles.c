@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/27 10:53:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:40:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@
 
 
 
-//#define TEST_CULL
+// #define TEST_CULL
 
 bool	intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *impact)
 {
@@ -194,7 +194,7 @@ bool	intersect_triangle(const t_ray ray, const t_triangle triangle, t_impact *im
 			return false;
 		}
 	#endif
-	impact->dist = 4;//dot_product(e2,qvec);
+	impact->dist = 40;//dot_product(e2,qvec);
 	impact->pos = add_vect(ray.pos, multi_vect(ray.dir, impact->dist));
 	impact->normal = normalize(cross_product(e1,e2));
 	return true;
