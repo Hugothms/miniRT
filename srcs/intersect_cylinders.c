@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/27 11:30:09 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:33:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	ray_cylinders(const t_ray ray, const t_scene *scene, t_impact *impact, void
 				impact->normal = sub_vect(get_closest_point_from_line(cylinder->pos, cylinder->pos2, impact->pos), impact->pos);
 			else
 				impact->normal = cylinder->dir;
+			impact->normal = normalize(impact->normal);
 			impact->type = "cy";
 		}
 		cylinders = cylinders->next;

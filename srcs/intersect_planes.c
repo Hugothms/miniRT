@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:16:38 by hthomas           #+#    #+#             */
-/*   Updated: 2022/01/27 10:40:29 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/01/27 11:35:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	intersect_plane(const t_ray ray, const t_plane plane, t_impact *impact)
 		if (x > EPSILON && x < impact->dist)
 		{
 			// printf("i");
-			impact->normal = plane.normal;
+			impact->normal = normalize(plane.normal);
 			impact->pos = add_vect(ray.pos, multi_vect(ray.dir, x));
 			impact->pos = add_vect(impact->pos, multi_vect(impact->normal, EPSILON));
 			impact->dist = x;
