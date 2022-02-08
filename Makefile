@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/27 13:45:08 by hthomas           #+#    #+#              #
-#    Updated: 2022/01/26 13:26:04 by hthomas          ###   ########.fr        #
+#    Updated: 2022/02/08 11:09:24 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,9 @@ re:			fclean all
 
 run: $(NAME)
 	./$< scenes/test.rt
+
+run_scene: $(NAME)
+	./$< scenes/$(filter-out $@, $(MAKECMDGOALS)).rt
 
 run_save: $(NAME)
 	./$< scenes/test.rt -save
