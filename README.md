@@ -20,7 +20,7 @@ Or, you can make and run more conveniently:
 
     make test
 
-[molleculles]: https://github.com/Hugothms/miniRT/blob/master/mollecules.jpg
-[cylinders]: https://github.com/Hugothms/miniRT/blob/master/cylinders.jpg
-[sphere_shadows]: https://github.com/Hugothms/miniRT/blob/master/sphere_shadows.jpg
-[spheres]: https://github.com/Hugothms/miniRT/blob/master/spheres.jpg
+[molleculles]: https://github.com/Hugothms/miniRT/blob/master/gallery/mollecules.jpg
+[cylinders]: https://github.com/Hugothms/miniRT/blob/master/gallery/cylinders.jpg
+[sphere_shadows]: https://github.com/Hugothms/miniRT/blob/master/gallery/sphere_shadows.jpg
+[spheres]: https://github.com/Hugothms/miniRT/blob/master/gallery/spheres.jpg
