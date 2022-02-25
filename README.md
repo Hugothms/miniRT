@@ -2,6 +2,7 @@
 
 This project is an introduction to the beautiful world of Raytracing.
 
+## Gallery
 ![molleculles][molleculles]
 ![cylinders][cylinders]
 ![sphere_shadows][sphere_shadows]
